@@ -1,8 +1,3 @@
----
-date updated: '2021-07-16 09:27:17'
-
----
-
 # Obsidian Image Uploader
 
 ![](https://i.loli.net/2021/07/16/fxWBeLAESNc6tK9.gif)
@@ -22,7 +17,7 @@ This plugin uploads the image in your clipboard to any image hosting automatical
 
 Take Imgur as an example. The upload request is something like this:
 
-```bash
+```shell
 curl --location --request POST 'https://api.imgur.com/3/image' \
 --header 'Authorization: Client-ID {{clientId}}' \
 --form 'image="R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"'
@@ -68,5 +63,6 @@ The response of the upload request is:
 
 All you need is the image url `http://i.imgur.com/orunSTu.gif`, so `Image Url Path` should be `data.link`.
 
-
-`<sub>`This plugin was generated by (create-obsidian-plugin)[https://www.npmjs.com/package/create-obsidian-plugin]`</sub>`
+## Thanks
+1. [obsidian-imgur-plugin](https://github.com/gavvvr/obsidian-imgur-plugin)
+2. [create-obsidian-plugin](https://www.npmjs.com/package/create-obsidian-plugin)
