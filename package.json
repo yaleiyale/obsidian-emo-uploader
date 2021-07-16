@@ -1,0 +1,23 @@
+{
+  "name": "obsidian-image-uploader",
+  "version": "0.0.1",
+  "description": "This plugin uploads images in your clipboard to any image bed you like.",
+  "main": "lib/main.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "obsidian-plugin build src/main.ts",
+    "dev": "obsidian-plugin dev src/main.ts"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.28.3",
+    "@typescript-eslint/parser": "^4.28.3",
+    "eslint": "^7.30.0",
+    "obsidian": "obsidianmd/obsidian-api",
+    "obsidian-plugin-cli": "^0.4.3",
+    "typescript": "^4.1.5"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "object-path": "^0.11.5"
+  }
+}
