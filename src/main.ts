@@ -126,7 +126,11 @@ export default class ImageUploader extends Plugin {
   }
 
   onunload(): void {
-    console.log("unloading plugin");
+    this.cmAndHandlersMap.forEach((hander, cm) => {
+      (cm as any)._handlers.paste[0] = hander.paste;
+    })
+    console.log("unloading Image Uploader");
+
   }
 
   async loadSettings(): Promise<void> {
