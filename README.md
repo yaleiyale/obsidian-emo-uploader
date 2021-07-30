@@ -23,7 +23,7 @@ curl --location --request POST 'https://api.imgur.com/3/image' \
 --form 'image="R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"'
 ```
 
-So, `Api Endpoint` should be `https://api.imgur.com/3/` and  `Upload Header` should be `{"Authorization": "Client-ID {{clientId}}"}`.
+So, `Api Endpoint` should be `https://api.imgur.com/3/image` and  `Upload Header` should be `{"Authorization": "Client-ID {{clientId}}"}`.
 
 The response of the upload request is:
 ```json
