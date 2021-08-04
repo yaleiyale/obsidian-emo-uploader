@@ -12,6 +12,8 @@ This plugin could upload the image in your clipboard to any image hosting automa
 2. Upload Header: the header of upload request in **json** format.
 3. Upload Body: the body of upload request in **json** format. Don't change it unless you know what you are doing. 
 4. Image Url Path: the path to the image url in http response.
+5. Enable Resize: whether resizing images before uploading.
+6. Max Width: images that wider than this will be resized resized by the natural aspect ratio.
 
 ### Examples
 
