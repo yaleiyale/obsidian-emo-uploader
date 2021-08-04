@@ -8,19 +8,23 @@ import {
 import axios from "axios"
 import objectPath from 'object-path'
 import ImageUploaderSettingTab from './settings-tab'
-
+import Compressor from 'compressorjs'
 interface ImageUploaderSettings {
   apiEndpoint: string;
   uploadHeader: string;
   uploadBody: string;
   imageUrlPath: string;
+  maxWidth: number;
+  enableResize: boolean;
 }
 
 const DEFAULT_SETTINGS: ImageUploaderSettings = {
   apiEndpoint: null,
   uploadHeader: null,
   uploadBody: "{\"image\": \"$FILE\"}",
-  imageUrlPath: null
+  imageUrlPath: null,
+  maxWidth: 4096,
+  enableResize: false,
 };
 
 type Handlers = {
@@ -55,23 +59,36 @@ export default class ImageUploader extends Plugin {
   setupPasteHandler(): void {
     this.registerCodeMirror((cm: any) => {
       const originalPasterHandler = this.backupOriginalHandlers(cm);
-      cm._handlers.paste[0] = (_: any, e: ClipboardEvent) => {
+      cm._handlers.paste[0] = async (_: any, e: ClipboardEvent) => {
         const { files } = e.clipboardData;
         if (files.length == 0 || !files[0].type.startsWith("image")) {
           originalPasterHandler.paste(_, e)
         }
         else if (this.settings.apiEndpoint && this.settings.uploadHeader && this.settings.imageUrlPath) {
-          for (const file of files) {
+          for (let file of files) {
 
             const randomString = (Math.random() * 10086).toString(36).substr(0, 8)
             const pastePlaceText = `![uploading...](${randomString})\n`
             this.getEditor().replaceSelection(pastePlaceText)
 
+            const maxWidth = this.settings.maxWidth
+            if (this.settings.enableResize) {
+              const compressedFile = await new Promise((resolve, reject) => {
+                new Compressor(file, {
+                  maxWidth: maxWidth,
+                  success: resolve,
+                  error: reject,
+                })
+              })
+
+              file = compressedFile as File
+            }
             const formData = new FormData()
             const uploadBody = JSON.parse(this.settings.uploadBody)
+
             for (const key in uploadBody) {
               if (uploadBody[key] == "$FILE") {
-                formData.append(key, file)
+                formData.append(key, file, file.name)
               }
               else {
                 formData.append(key, uploadBody[key])

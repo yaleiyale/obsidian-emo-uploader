@@ -2,7 +2,7 @@
  * @Author: Creling
  * @Date: 2021-07-15 23:54:03
  * @LastEditors: Creling
- * @LastEditTime: 2021-07-16 09:41:25
+ * @LastEditTime: 2021-08-04 22:52:34
  * @Description: file content
  */
 import {
@@ -79,7 +79,6 @@ export default class ImageUploaderSettingTab extends PluginSettingTab {
                 text.inputEl.cols = 40
             });
 
-
         new Setting(containerEl)
             .setName("Image Url Path")
             .setDesc("The path to the image url in http response.")
@@ -92,5 +91,31 @@ export default class ImageUploaderSettingTab extends PluginSettingTab {
                         await this.plugin.saveSettings();
                     })
             });
+        new Setting(containerEl)
+            .setName("Enable Resize")
+            .setDesc("Resize the image before uploading")
+            .addToggle((toggle) => {
+                toggle
+                    .setValue(this.plugin.settings.enableResize)
+                    .onChange(async (value) => {
+                        this.plugin.settings.enableResize = value;
+                        this.display();
+                    })
+            })
+
+        if (this.plugin.settings.enableResize) {
+            new Setting(containerEl)
+                .setName("Max Width")
+                .setDesc("The image wider than this will be resized by the natural aspect ratio")
+                .addText((text) => {
+                    text
+                        .setPlaceholder("")
+                        .setValue(this.plugin.settings.maxWidth.toString())
+                        .onChange(async (value) => {
+                            this.plugin.settings.maxWidth = parseInt(value);
+                            await this.plugin.saveSettings();
+                        })
+                });
+        }
     }
 }
