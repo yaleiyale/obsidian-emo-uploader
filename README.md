@@ -2,7 +2,7 @@
 
 ![](https://i.loli.net/2021/07/16/fxWBeLAESNc6tK9.gif)
 
-This plugin could upload the image in your clipboard to any image hosting automatically when pasting.
+This plugin could resize(optional) and upload the image in your clipboard to any image hosting automatically when pasting.
 
 ## Getting started
 
