@@ -7,24 +7,24 @@ import {
 
 import axios from "axios"
 import objectPath from 'object-path'
-import ImageUploaderSettingTab from './settings-tab'
-import Compressor from 'compressorjs'
+import CloudinaryUploaderSettingTab from './settings-tab'
+//import Compressor from 'compressorjs'
 interface ImageUploaderSettings {
-  apiEndpoint: string;
-  uploadHeader: string;
-  uploadBody: string;
-  imageUrlPath: string;
+  cloudName: string;
+  uploadPreset: string;
+  /*uploadBody: string;
+  imageUrlPath: string;*/
   maxWidth: number;
-  enableResize: boolean;
+  //enableResize: boolean;
 }
 
 const DEFAULT_SETTINGS: ImageUploaderSettings = {
-  apiEndpoint: null,
-  uploadHeader: null,
-  uploadBody: "{\"image\": \"$FILE\"}",
-  imageUrlPath: null,
+  cloudName: null,
+  uploadPreset: null,
+  /*uploadBody: "{\"image\": \"$FILE\"}",
+  imageUrlPath: null,*/
   maxWidth: 4096,
-  enableResize: false,
+  //enableResize: false,
 };
 
 type Handlers = {
@@ -64,7 +64,7 @@ export default class ImageUploader extends Plugin {
         if (files.length == 0 || !files[0].type.startsWith("image")) {
           originalPasterHandler.paste(_, e)
         }
-        else if (this.settings.apiEndpoint && this.settings.uploadHeader && this.settings.imageUrlPath) {
+        else if (this.settings.cloudName && this.settings.uploadPreference) {
           for (let file of files) {
 
             const randomString = (Math.random() * 10086).toString(36).substr(0, 8)
@@ -72,7 +72,7 @@ export default class ImageUploader extends Plugin {
             this.getEditor().replaceSelection(pastePlaceText)
 
             const maxWidth = this.settings.maxWidth
-            if (this.settings.enableResize) {
+           /*if (this.settings.enableResize) {
               const compressedFile = await new Promise((resolve, reject) => {
                 new Compressor(file, {
                   maxWidth: maxWidth,
@@ -82,23 +82,20 @@ export default class ImageUploader extends Plugin {
               })
 
               file = compressedFile as File
-            }
-            const formData = new FormData()
-            const uploadBody = JSON.parse(this.settings.uploadBody)
+            }*/
+            const formData = new FormData();
+            formData.append('file',file);
+            formData.append('upload_preset',this.settings.uploadPreset);
 
-            for (const key in uploadBody) {
-              if (uploadBody[key] == "$FILE") {
-                formData.append(key, file, file.name)
-              }
-              else {
-                formData.append(key, uploadBody[key])
-              }
-            }
-
-            axios.post(this.settings.apiEndpoint, formData, {
-              "headers": JSON.parse(this.settings.uploadHeader)
+            axios({
+              url: `https://api.cloudinary.com/v1_1/${this.settings.cloudName}/upload`,
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+              },
+              data: formData
             }).then(res => {
-              const url = objectPath.get(res.data, this.settings.imageUrlPath)
+              const url = objectPath.get(res.data, 'secure_url')
               const imgMarkdownText = `![](${url})`
               this.replaceText(this.getEditor(), pastePlaceText, imgMarkdownText)
             }, err => {
@@ -136,17 +133,17 @@ export default class ImageUploader extends Plugin {
   }
 
   async onload(): Promise<void> {
-    console.log("loading Image Uploader");
+    console.log("loading Cloudinary Uploader");
     await this.loadSettings();
     this.setupPasteHandler()
-    this.addSettingTab(new ImageUploaderSettingTab(this.app, this));
+    this.addSettingTab(new CloudinaryUploaderSettingTab(this.app, this));
   }
 
   onunload(): void {
     this.cmAndHandlersMap.forEach((hander, cm) => {
       (cm as any)._handlers.paste[0] = hander.paste;
     })
-    console.log("unloading Image Uploader");
+    console.log("unloading Cloudinary Uploader");
 
   }
 

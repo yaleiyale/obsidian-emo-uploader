@@ -1,9 +1,5 @@
 /*
- * @Author: Creling
- * @Date: 2021-07-15 23:54:03
- * @LastEditors: Creling
- * @LastEditTime: 2021-08-04 22:52:34
- * @Description: file content
+ * @Author: Jordan Handy
  */
 import {
     App,
@@ -13,7 +9,7 @@ import {
 
 import ImageUploader from './main'
 
-export default class ImageUploaderSettingTab extends PluginSettingTab {
+export default class CloudinaryUploaderSettingTab extends PluginSettingTab {
     plugin: ImageUploader;
     constructor(app: App, plugin: ImageUploader) {
         super(app, plugin);
@@ -23,32 +19,32 @@ export default class ImageUploaderSettingTab extends PluginSettingTab {
         const { containerEl } = this;
 
         containerEl.empty();
-        containerEl.createEl("h3", { text: "Image Hosting Setting" });
+        containerEl.createEl("h3", { text: "Cloudinary Settings" });
 
         new Setting(containerEl)
-            .setName("Api Endpoint")
-            .setDesc("The endpoint of the image hosting api.")
+            .setName("Cloud Name")
+            .setDesc("The name of your Cloudinary Cloud Account")
             .addText((text) => {
                 text
                     .setPlaceholder("")
-                    .setValue(this.plugin.settings.apiEndpoint)
+                    .setValue(this.plugin.settings.cloudName)
                     .onChange(async (value) => {
-                        this.plugin.settings.apiEndpoint = value;
+                        this.plugin.settings.cloudName = value;
                         await this.plugin.saveSettings();
                     })
             }
             );
 
         new Setting(containerEl)
-            .setName("Upload Header")
-            .setDesc("The header of upload request in json format.")
+            .setName("Cloudinary Upload Template")
+            .setDesc("Cloudinary Upload Preference string")
             .addTextArea((text) => {
                 text
                     .setPlaceholder("")
-                    .setValue(this.plugin.settings.uploadHeader)
+                    .setValue(this.plugin.settings.uploadPreset)
                     .onChange(async (value) => {
                         try {
-                            this.plugin.settings.uploadHeader = value;
+                            this.plugin.settings.uploadPreset = value;
                             await this.plugin.saveSettings();
                         }
                         catch (e) {
@@ -59,7 +55,7 @@ export default class ImageUploaderSettingTab extends PluginSettingTab {
                 text.inputEl.cols = 40
             });
 
-        new Setting(containerEl)
+        /*new Setting(containerEl)
             .setName("Upload Body")
             .setDesc("The body of upload request in json format. Do NOT change it unless you know what you are doing.")
             .addTextArea((text) => {
@@ -77,9 +73,9 @@ export default class ImageUploaderSettingTab extends PluginSettingTab {
                     })
                 text.inputEl.rows = 5
                 text.inputEl.cols = 40
-            });
+            });*/
 
-        new Setting(containerEl)
+        /*new Setting(containerEl)
             .setName("Image Url Path")
             .setDesc("The path to the image url in http response.")
             .addText((text) => {
@@ -90,8 +86,8 @@ export default class ImageUploaderSettingTab extends PluginSettingTab {
                         this.plugin.settings.imageUrlPath = value;
                         await this.plugin.saveSettings();
                     })
-            });
-        new Setting(containerEl)
+            });*/
+        /*new Setting(containerEl)
             .setName("Enable Resize")
             .setDesc("Resize the image before uploading")
             .addToggle((toggle) => {
@@ -116,6 +112,6 @@ export default class ImageUploaderSettingTab extends PluginSettingTab {
                             await this.plugin.saveSettings();
                         })
                 });
-        }
+        }*/
     }
 }

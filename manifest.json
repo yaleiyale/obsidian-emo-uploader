@@ -1,9 +1,9 @@
 {
-  "id": "obsidian-image-uploader",
-  "name": "Image Uploader",
-  "description": "This plugin uploads the image in your clipboard to any image hosting automatically when pasting.",
-  "author": "Creling",
+  "id": "obsidian-cloudinary-uploader",
+  "name": "Obsidian Cloudinary Uploader",
+  "description": "This plugin uploads the images in your clipboard to Cloudinary as unsigned uploads",
+  "author": "Jordan Handy",
   "isDesktopOnly": true,
   "minAppVersion": "0.11.0",
-  "version": "0.1.1"
+  "version": "0.1.0"
 }
