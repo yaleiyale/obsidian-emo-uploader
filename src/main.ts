@@ -64,7 +64,7 @@ export default class ImageUploader extends Plugin {
         if (files.length == 0 || !files[0].type.startsWith("image")) {
           originalPasterHandler.paste(_, e)
         }
-        else if (this.settings.cloudName && this.settings.uploadPreference) {
+        else if (this.settings.cloudName && this.settings.uploadPreset) {
           for (let file of files) {
 
             const randomString = (Math.random() * 10086).toString(36).substr(0, 8)

@@ -38,7 +38,7 @@ export default class CloudinaryUploaderSettingTab extends PluginSettingTab {
         new Setting(containerEl)
             .setName("Cloudinary Upload Template")
             .setDesc("Cloudinary Upload Preference string")
-            .addTextArea((text) => {
+            .addText((text) => {
                 text
                     .setPlaceholder("")
                     .setValue(this.plugin.settings.uploadPreset)
@@ -51,8 +51,6 @@ export default class CloudinaryUploaderSettingTab extends PluginSettingTab {
                             console.log(e)
                         }
                     })
-                text.inputEl.rows = 5
-                text.inputEl.cols = 40
             });
 
         /*new Setting(containerEl)
