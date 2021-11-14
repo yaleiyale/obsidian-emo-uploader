@@ -2639,7 +2639,7 @@ var DEFAULT_SETTINGS = {
   uploadPreset: null,
   maxWidth: 4096
 };
-var ImageUploader = class extends import_obsidian2.Plugin {
+var CloudinaryUploader = class extends import_obsidian2.Plugin {
   constructor() {
     super(...arguments);
     this.cmAndHandlersMap = new Map();
@@ -2681,9 +2681,6 @@ var ImageUploader = class extends import_obsidian2.Plugin {
             (0, import_axios.default)({
               url: `https://api.cloudinary.com/v1_1/${this.settings.cloudName}/upload`,
               method: "POST",
-              headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
-              },
               data: formData
             }).then((res) => {
               const url = import_object_path.default.get(res.data, "secure_url");
@@ -2739,4 +2736,4 @@ var ImageUploader = class extends import_obsidian2.Plugin {
     await this.saveData(this.settings);
   }
 };
-var main_default = ImageUploader;
+var main_default = CloudinaryUploader;

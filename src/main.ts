@@ -9,7 +9,7 @@ import axios from "axios"
 import objectPath from 'object-path'
 import CloudinaryUploaderSettingTab from './settings-tab'
 //import Compressor from 'compressorjs'
-interface ImageUploaderSettings {
+interface CloudinarySettings {
   cloudName: string;
   uploadPreset: string;
   /*uploadBody: string;
@@ -18,7 +18,7 @@ interface ImageUploaderSettings {
   //enableResize: boolean;
 }
 
-const DEFAULT_SETTINGS: ImageUploaderSettings = {
+const DEFAULT_SETTINGS: CloudinarySettings = {
   cloudName: null,
   uploadPreset: null,
   /*uploadBody: "{\"image\": \"$FILE\"}",
@@ -32,8 +32,8 @@ type Handlers = {
   paste: (cm: CodeMirror.Editor, event: ClipboardEvent) => void;
 };
 
-export default class ImageUploader extends Plugin {
-  settings: ImageUploaderSettings;
+export default class CloudinaryUploader extends Plugin {
+  settings: CloudinarySettings;
 
   private cmAndHandlersMap = new Map<CodeMirror.Editor, Handlers>();
 
@@ -90,9 +90,6 @@ export default class ImageUploader extends Plugin {
             axios({
               url: `https://api.cloudinary.com/v1_1/${this.settings.cloudName}/upload`,
               method: 'POST',
-              headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-              },
               data: formData
             }).then(res => {
               const url = objectPath.get(res.data, 'secure_url')

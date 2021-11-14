@@ -7,11 +7,11 @@ import {
     Setting,
 } from 'obsidian';
 
-import ImageUploader from './main'
+import CloudinaryUploader from './main'
 
 export default class CloudinaryUploaderSettingTab extends PluginSettingTab {
-    plugin: ImageUploader;
-    constructor(app: App, plugin: ImageUploader) {
+    plugin: CloudinaryUploader;
+    constructor(app: App, plugin: CloudinaryUploader) {
         super(app, plugin);
         this.plugin = plugin;
     }
