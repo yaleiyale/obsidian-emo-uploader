@@ -1,7 +1,7 @@
 {
   "name": "obsidian-image-uploader",
-  "version": "0.0.1",
-  "description": "This plugin uploads images in your clipboard to any image bed you like.",
+  "version": "0.1.1",
+  "description": "This plugin uploads images in your clipboard to Cloudinary",
   "main": "lib/main.js",
   "license": "MIT",
   "scripts": {
