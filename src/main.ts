@@ -12,8 +12,7 @@ import CloudinaryUploaderSettingTab from './settings-tab'
 interface CloudinarySettings {
   cloudName: string;
   uploadPreset: string;
-  /*uploadBody: string;
-  imageUrlPath: string;*/
+  folder: string;
   maxWidth: number;
   //enableResize: boolean;
 }
@@ -21,10 +20,9 @@ interface CloudinarySettings {
 const DEFAULT_SETTINGS: CloudinarySettings = {
   cloudName: null,
   uploadPreset: null,
-  /*uploadBody: "{\"image\": \"$FILE\"}",
-  imageUrlPath: null,*/
+  folder: null,
   maxWidth: 4096,
-  //enableResize: false,
+  //enableResize: false, TODO later
 };
 
 type Handlers = {
@@ -72,20 +70,10 @@ export default class CloudinaryUploader extends Plugin {
             this.getEditor().replaceSelection(pastePlaceText)
 
             const maxWidth = this.settings.maxWidth
-           /*if (this.settings.enableResize) {
-              const compressedFile = await new Promise((resolve, reject) => {
-                new Compressor(file, {
-                  maxWidth: maxWidth,
-                  success: resolve,
-                  error: reject,
-                })
-              })
-
-              file = compressedFile as File
-            }*/
             const formData = new FormData();
             formData.append('file',file);
             formData.append('upload_preset',this.settings.uploadPreset);
+            formData.append('folder',this.settings.folder);
 
             axios({
               url: `https://api.cloudinary.com/v1_1/${this.settings.cloudName}/upload`,

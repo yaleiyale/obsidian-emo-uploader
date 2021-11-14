@@ -3,7 +3,7 @@
   "name": "Obsidian Cloudinary Uploader",
   "description": "This plugin uploads the images in your clipboard to Cloudinary as unsigned uploads",
   "author": "Jordan Handy",
-  "isDesktopOnly": true,
+  "isDesktopOnly": false,
   "minAppVersion": "0.11.0",
-  "version": "0.1.0"
+  "version": "0.1.1"
 }

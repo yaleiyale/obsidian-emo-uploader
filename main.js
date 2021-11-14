@@ -2629,6 +2629,16 @@ var CloudinaryUploaderSettingTab = class extends import_obsidian.PluginSettingTa
         }
       });
     });
+    new import_obsidian.Setting(containerEl).setName("Cloudinary Upload Folder").setDesc("Folder name to use in Cloudinary.  Note, this will be ignored if you have a folder set in your Cloudinary Upload Preset").addText((text) => {
+      text.setPlaceholder("obsidian").setValue(this.plugin.settings.folder).onChange(async (value) => {
+        try {
+          this.plugin.settings.folder = value;
+          await this.plugin.saveSettings();
+        } catch (e) {
+          console.log(e);
+        }
+      });
+    });
   }
 };
 var settings_tab_default = CloudinaryUploaderSettingTab;
@@ -2637,6 +2647,7 @@ var settings_tab_default = CloudinaryUploaderSettingTab;
 var DEFAULT_SETTINGS = {
   cloudName: null,
   uploadPreset: null,
+  folder: null,
   maxWidth: 4096
 };
 var CloudinaryUploader = class extends import_obsidian2.Plugin {
@@ -2678,6 +2689,7 @@ var CloudinaryUploader = class extends import_obsidian2.Plugin {
             const formData = new FormData();
             formData.append("file", file);
             formData.append("upload_preset", this.settings.uploadPreset);
+            formData.append("folder", this.settings.folder);
             (0, import_axios.default)({
               url: `https://api.cloudinary.com/v1_1/${this.settings.cloudName}/upload`,
               method: "POST",
