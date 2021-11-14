@@ -1,4 +1,6 @@
 # Obsidian Cloudinary Uploader
+## How it Works
+![Action GIF](https://res.cloudinary.com/dakfccuv5/image/upload/v1636859613/Nov-13-2021_22-11-40_bpei0d.gif)
 ## Configuration
 1. Disable Obsidian Safe Mode
 2. Install the Plugin
