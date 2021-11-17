@@ -2647,14 +2647,9 @@ var settings_tab_default = CloudinaryUploaderSettingTab;
 var DEFAULT_SETTINGS = {
   cloudName: null,
   uploadPreset: null,
-  folder: null,
-  maxWidth: 4096
+  folder: null
 };
 var CloudinaryUploader = class extends import_obsidian2.Plugin {
-  constructor() {
-    super(...arguments);
-    this.cmAndHandlersMap = new Map();
-  }
   getEditor() {
     const mdView = this.app.workspace.getActiveViewOfType(import_obsidian2.MarkdownView);
     if (mdView) {
@@ -2663,29 +2658,18 @@ var CloudinaryUploader = class extends import_obsidian2.Plugin {
       return null;
     }
   }
-  backupOriginalHandlers(cm) {
-    if (!this.cmAndHandlersMap.has(cm)) {
-      this.cmAndHandlersMap.set(cm, {
-        drop: cm._handlers.drop[0],
-        paste: cm._handlers.paste[0]
-      });
-    }
-    return this.cmAndHandlersMap.get(cm);
-  }
   setupPasteHandler() {
     this.registerCodeMirror((cm) => {
-      const originalPasterHandler = this.backupOriginalHandlers(cm);
       cm._handlers.paste[0] = async (_, e) => {
         const {files} = e.clipboardData;
         if (files.length == 0 || !files[0].type.startsWith("image")) {
-          originalPasterHandler.paste(_, e);
+          this.getEditor().replaceSelection("Clipboard data is not an image\n");
         } else if (this.settings.cloudName && this.settings.uploadPreset) {
           for (let file of files) {
             const randomString = (Math.random() * 10086).toString(36).substr(0, 8);
             const pastePlaceText = `![uploading...](${randomString})
 `;
             this.getEditor().replaceSelection(pastePlaceText);
-            const maxWidth = this.settings.maxWidth;
             const formData = new FormData();
             formData.append("file", file);
             formData.append("upload_preset", this.settings.uploadPreset);
@@ -2706,12 +2690,10 @@ var CloudinaryUploader = class extends import_obsidian2.Plugin {
               const newEvt = new ClipboardEvent("paste", {
                 clipboardData: dataTransfer
               });
-              originalPasterHandler.paste(_, newEvt);
             });
           }
         } else {
-          new import_obsidian2.Notice("Image Uploader: Please check the image hosting settings.");
-          originalPasterHandler.paste(_, e);
+          new import_obsidian2.Notice("Cloudinary Image Uploader: Please check the image hosting settings.");
         }
       };
     });
@@ -2736,9 +2718,6 @@ var CloudinaryUploader = class extends import_obsidian2.Plugin {
     this.addSettingTab(new settings_tab_default(this.app, this));
   }
   onunload() {
-    this.cmAndHandlersMap.forEach((hander, cm) => {
-      cm._handlers.paste[0] = hander.paste;
-    });
     console.log("unloading Cloudinary Uploader");
   }
   async loadSettings() {

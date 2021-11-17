@@ -8,23 +8,23 @@ import {
 import axios from "axios"
 import objectPath from 'object-path'
 import CloudinaryUploaderSettingTab from './settings-tab'
-//import Compressor from 'compressorjs'
 interface CloudinarySettings {
   cloudName: string;
   uploadPreset: string;
   folder: string;
-  maxWidth: number;
-  //enableResize: boolean;
+  //maxWidth: number; TODO
+  // enableResize: boolean; TODO
 }
 
 const DEFAULT_SETTINGS: CloudinarySettings = {
   cloudName: null,
   uploadPreset: null,
   folder: null,
-  maxWidth: 4096,
+  //maxWidth: 4096, TODO
   //enableResize: false, TODO later
 };
 
+<<<<<<< HEAD
 type Handlers = {
   drop: (cm: CodeMirror.Editor, event: DragEvent) => void;
   paste: (cm: CodeMirror.Editor, event: ClipboardEvent) => void;
@@ -35,6 +35,11 @@ export default class CloudinaryUploader extends Plugin {
 
   private cmAndHandlersMap = new Map<CodeMirror.Editor, Handlers>();
 
+=======
+export default class CloudinaryUploader extends Plugin {
+  settings: CloudinarySettings;
+
+>>>>>>> 7c32901 (do not overwrite built in handlers.  Use stock handlers for drop and paste)
   private getEditor() {
     const mdView = this.app.workspace.getActiveViewOfType(MarkdownView);
     if (mdView) {
@@ -44,6 +49,7 @@ export default class CloudinaryUploader extends Plugin {
     }
   }
 
+<<<<<<< HEAD
   private backupOriginalHandlers(cm: CodeMirror.Editor) {
     if (!this.cmAndHandlersMap.has(cm)) {
       this.cmAndHandlersMap.set(cm, {
@@ -54,13 +60,14 @@ export default class CloudinaryUploader extends Plugin {
     return this.cmAndHandlersMap.get(cm);
   }
 
+=======
+>>>>>>> 7c32901 (do not overwrite built in handlers.  Use stock handlers for drop and paste)
   setupPasteHandler(): void {
     this.registerCodeMirror((cm: any) => {
-      const originalPasterHandler = this.backupOriginalHandlers(cm);
       cm._handlers.paste[0] = async (_: any, e: ClipboardEvent) => {
         const { files } = e.clipboardData;
         if (files.length == 0 || !files[0].type.startsWith("image")) {
-          originalPasterHandler.paste(_, e)
+          this.getEditor().replaceSelection("Clipboard data is not an image\n");
         }
         else if (this.settings.cloudName && this.settings.uploadPreset) {
           for (let file of files) {
@@ -69,7 +76,6 @@ export default class CloudinaryUploader extends Plugin {
             const pastePlaceText = `![uploading...](${randomString})\n`
             this.getEditor().replaceSelection(pastePlaceText)
 
-            const maxWidth = this.settings.maxWidth
             const formData = new FormData();
             formData.append('file',file);
             formData.append('upload_preset',this.settings.uploadPreset);
@@ -91,16 +97,15 @@ export default class CloudinaryUploader extends Plugin {
               const newEvt = new ClipboardEvent("paste", {
                 clipboardData: dataTransfer
               })
-              originalPasterHandler.paste(_, newEvt)
             })
           }
         }
         else {
-          new Notice("Image Uploader: Please check the image hosting settings.");
-          originalPasterHandler.paste(_, e);
+          new Notice("Cloudinary Image Uploader: Please check the image hosting settings.");
         }
       }
-    })
+    }
+     )
   }
 
   private replaceText(editor: Editor, target: string, replacement: string): void {
@@ -120,14 +125,11 @@ export default class CloudinaryUploader extends Plugin {
   async onload(): Promise<void> {
     console.log("loading Cloudinary Uploader");
     await this.loadSettings();
-    this.setupPasteHandler()
+    this.setupPasteHandler();
     this.addSettingTab(new CloudinaryUploaderSettingTab(this.app, this));
   }
 
   onunload(): void {
-    this.cmAndHandlersMap.forEach((hander, cm) => {
-      (cm as any)._handlers.paste[0] = hander.paste;
-    })
     console.log("unloading Cloudinary Uploader");
 
   }
