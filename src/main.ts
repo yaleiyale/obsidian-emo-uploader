@@ -38,7 +38,7 @@ export default class CloudinaryUploader extends Plugin {
 
   setupPasteHandler(): void {
     this.registerCodeMirror((cm: any) => {
-      cm._handlers.paste[0] = async (_: any, e: ClipboardEvent) => {
+      cm._handlers.paste[0] = async (_: any, e:ClipboardEvent) => {
         const { files } = e.clipboardData;
         if (files.length == 0 || !files[0].type.startsWith("image")) {
           this.getEditor().replaceSelection("Clipboard data is not an image\n");
@@ -68,9 +68,6 @@ export default class CloudinaryUploader extends Plugin {
               console.log(err)
               const dataTransfer = new DataTransfer();
               dataTransfer.items.add(file);
-              const newEvt = new ClipboardEvent("paste", {
-                clipboardData: dataTransfer
-              })
             })
           }
         }
