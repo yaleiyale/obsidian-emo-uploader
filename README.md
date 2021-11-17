@@ -1,4 +1,8 @@
 # Obsidian Cloudinary Uploader
+## What is it?
+[Cloudinary](https://cloudinary.com/) is a cloud storage platform that allows you to upload various media files to a storage account.  The media files within this storage account can then be manipulated using Cloudinary's APIs to manipulate the data properties and metadata.
+
+This plugin allows you to automatically upload images pasted to Obsidian directly into your Cloudinary account (instead of stored locally).  Note:  There is no functionality for media manipulation in this plugin.
 ## How it Works
 ![Action GIF](https://res.cloudinary.com/dakfccuv5/image/upload/v1636859613/Nov-13-2021_22-11-40_bpei0d.gif)
 ## Configuration
