@@ -24,22 +24,9 @@ const DEFAULT_SETTINGS: CloudinarySettings = {
   //enableResize: false, TODO later
 };
 
-<<<<<<< HEAD
-type Handlers = {
-  drop: (cm: CodeMirror.Editor, event: DragEvent) => void;
-  paste: (cm: CodeMirror.Editor, event: ClipboardEvent) => void;
-};
-
 export default class CloudinaryUploader extends Plugin {
   settings: CloudinarySettings;
 
-  private cmAndHandlersMap = new Map<CodeMirror.Editor, Handlers>();
-
-=======
-export default class CloudinaryUploader extends Plugin {
-  settings: CloudinarySettings;
-
->>>>>>> 7c32901 (do not overwrite built in handlers.  Use stock handlers for drop and paste)
   private getEditor() {
     const mdView = this.app.workspace.getActiveViewOfType(MarkdownView);
     if (mdView) {
@@ -49,19 +36,6 @@ export default class CloudinaryUploader extends Plugin {
     }
   }
 
-<<<<<<< HEAD
-  private backupOriginalHandlers(cm: CodeMirror.Editor) {
-    if (!this.cmAndHandlersMap.has(cm)) {
-      this.cmAndHandlersMap.set(cm, {
-        drop: (cm as any)._handlers.drop[0],
-        paste: (cm as any)._handlers.paste[0],
-      });
-    }
-    return this.cmAndHandlersMap.get(cm);
-  }
-
-=======
->>>>>>> 7c32901 (do not overwrite built in handlers.  Use stock handlers for drop and paste)
   setupPasteHandler(): void {
     this.registerCodeMirror((cm: any) => {
       cm._handlers.paste[0] = async (_: any, e: ClipboardEvent) => {
