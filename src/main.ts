@@ -44,6 +44,7 @@ export default class CloudinaryUploader extends Plugin {
       }
       else if (this.settings.cloudName && this.settings.uploadPreset) {
         for (let file of files) {
+          evt.preventDefault();
 
           const randomString = (Math.random() * 10086).toString(36).substr(0, 8)
           const pastePlaceText = `![uploading...](${randomString})\n`

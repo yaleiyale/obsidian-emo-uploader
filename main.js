@@ -2665,6 +2665,7 @@ var CloudinaryUploader = class extends import_obsidian2.Plugin {
         this.getEditor().replaceSelection("Clipboard data is not an image\n");
       } else if (this.settings.cloudName && this.settings.uploadPreset) {
         for (let file of files) {
+          evt.preventDefault();
           const randomString = (Math.random() * 10086).toString(36).substr(0, 8);
           const pastePlaceText = `![uploading...](${randomString})
 `;
