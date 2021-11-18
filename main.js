@@ -2650,26 +2650,18 @@ var DEFAULT_SETTINGS = {
   folder: null
 };
 var CloudinaryUploader = class extends import_obsidian2.Plugin {
-  getEditor() {
-    const mdView = this.app.workspace.getActiveViewOfType(import_obsidian2.MarkdownView);
-    if (mdView) {
-      return mdView.editor;
-    } else {
-      return null;
-    }
-  }
   setupPasteHandler() {
-    this.registerEvent(this.app.workspace.on("editor-paste", async (evt) => {
+    this.registerEvent(this.app.workspace.on("editor-paste", async (evt, editor) => {
       const {files} = evt.clipboardData;
       if (files.length == 0 || !files[0].type.startsWith("image")) {
-        this.getEditor().replaceSelection("Clipboard data is not an image\n");
+        editor.replaceSelection("Clipboard data is not an image\n");
       } else if (this.settings.cloudName && this.settings.uploadPreset) {
         for (let file of files) {
           evt.preventDefault();
           const randomString = (Math.random() * 10086).toString(36).substr(0, 8);
           const pastePlaceText = `![uploading...](${randomString})
 `;
-          this.getEditor().replaceSelection(pastePlaceText);
+          editor.replaceSelection(pastePlaceText);
           const formData = new FormData();
           formData.append("file", file);
           formData.append("upload_preset", this.settings.uploadPreset);
@@ -2681,7 +2673,7 @@ var CloudinaryUploader = class extends import_obsidian2.Plugin {
           }).then((res) => {
             const url = import_object_path.default.get(res.data, "secure_url");
             const imgMarkdownText = `![](${url})`;
-            this.replaceText(this.getEditor(), pastePlaceText, imgMarkdownText);
+            this.replaceText(editor, pastePlaceText, imgMarkdownText);
           }, (err) => {
             new import_obsidian2.Notice(err, 5e3);
             console.log(err);
@@ -2689,7 +2681,7 @@ var CloudinaryUploader = class extends import_obsidian2.Plugin {
         }
       } else {
         new import_obsidian2.Notice("Cloudinary Image Uploader: Please check the image hosting settings.");
-        this.getEditor().replaceSelection("Please check settings for upload");
+        editor.replaceSelection("Please check settings for upload");
       }
     }));
   }

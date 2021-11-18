@@ -1,7 +1,6 @@
 import {
   Notice,
   Plugin,
-  MarkdownView,
   Editor,
 } from "obsidian";
 
@@ -27,20 +26,12 @@ const DEFAULT_SETTINGS: CloudinarySettings = {
 export default class CloudinaryUploader extends Plugin {
   settings: CloudinarySettings;
 
-  private getEditor() {
-    const mdView = this.app.workspace.getActiveViewOfType(MarkdownView);
-    if (mdView) {
-      return mdView.editor;
-    } else {
-      return null;
-    }
-  }
 
   setupPasteHandler(): void {
-    this.registerEvent(this.app.workspace.on('editor-paste',async (evt: ClipboardEvent)=>{
+    this.registerEvent(this.app.workspace.on('editor-paste',async (evt: ClipboardEvent, editor: Editor)=>{
       const { files } = evt.clipboardData;
       if (files.length == 0 || !files[0].type.startsWith("image")) {
-        this.getEditor().replaceSelection("Clipboard data is not an image\n");
+        editor.replaceSelection("Clipboard data is not an image\n");
       }
       else if (this.settings.cloudName && this.settings.uploadPreset) {
         for (let file of files) {
@@ -48,7 +39,7 @@ export default class CloudinaryUploader extends Plugin {
 
           const randomString = (Math.random() * 10086).toString(36).substr(0, 8)
           const pastePlaceText = `![uploading...](${randomString})\n`
-          this.getEditor().replaceSelection(pastePlaceText)
+          editor.replaceSelection(pastePlaceText)
 
           const formData = new FormData();
           formData.append('file',file);
@@ -62,7 +53,7 @@ export default class CloudinaryUploader extends Plugin {
           }).then(res => {
             const url = objectPath.get(res.data, 'secure_url')
             const imgMarkdownText = `![](${url})`
-            this.replaceText(this.getEditor(), pastePlaceText, imgMarkdownText)
+            this.replaceText(editor, pastePlaceText, imgMarkdownText)
           }, err => {
             new Notice(err, 5000)
             console.log(err)
@@ -71,7 +62,7 @@ export default class CloudinaryUploader extends Plugin {
       }
       else {
         new Notice("Cloudinary Image Uploader: Please check the image hosting settings.");
-        this.getEditor().replaceSelection("Please check settings for upload");
+        editor.replaceSelection("Please check settings for upload");
       } 
 
     }))
