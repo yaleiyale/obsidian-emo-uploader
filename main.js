@@ -2659,44 +2659,37 @@ var CloudinaryUploader = class extends import_obsidian2.Plugin {
     }
   }
   setupPasteHandler() {
-    this.registerCodeMirror((cm) => {
-      cm._handlers.paste[0] = async (_, e) => {
-        const {files} = e.clipboardData;
-        if (files.length == 0 || !files[0].type.startsWith("image")) {
-          this.getEditor().replaceSelection("Clipboard data is not an image\n");
-        } else if (this.settings.cloudName && this.settings.uploadPreset) {
-          for (let file of files) {
-            const randomString = (Math.random() * 10086).toString(36).substr(0, 8);
-            const pastePlaceText = `![uploading...](${randomString})
+    this.registerEvent(this.app.workspace.on("editor-paste", async (evt) => {
+      const {files} = evt.clipboardData;
+      if (files.length == 0 || !files[0].type.startsWith("image")) {
+        this.getEditor().replaceSelection("Clipboard data is not an image\n");
+      } else if (this.settings.cloudName && this.settings.uploadPreset) {
+        for (let file of files) {
+          const randomString = (Math.random() * 10086).toString(36).substr(0, 8);
+          const pastePlaceText = `![uploading...](${randomString})
 `;
-            this.getEditor().replaceSelection(pastePlaceText);
-            const formData = new FormData();
-            formData.append("file", file);
-            formData.append("upload_preset", this.settings.uploadPreset);
-            formData.append("folder", this.settings.folder);
-            (0, import_axios.default)({
-              url: `https://api.cloudinary.com/v1_1/${this.settings.cloudName}/upload`,
-              method: "POST",
-              data: formData
-            }).then((res) => {
-              const url = import_object_path.default.get(res.data, "secure_url");
-              const imgMarkdownText = `![](${url})`;
-              this.replaceText(this.getEditor(), pastePlaceText, imgMarkdownText);
-            }, (err) => {
-              new import_obsidian2.Notice(err, 5e3);
-              console.log(err);
-              const dataTransfer = new DataTransfer();
-              dataTransfer.items.add(file);
-              const newEvt = new ClipboardEvent("paste", {
-                clipboardData: dataTransfer
-              });
-            });
-          }
-        } else {
-          new import_obsidian2.Notice("Cloudinary Image Uploader: Please check the image hosting settings.");
+          this.getEditor().replaceSelection(pastePlaceText);
+          const formData = new FormData();
+          formData.append("file", file);
+          formData.append("upload_preset", this.settings.uploadPreset);
+          formData.append("folder", this.settings.folder);
+          (0, import_axios.default)({
+            url: `https://api.cloudinary.com/v1_1/${this.settings.cloudName}/upload`,
+            method: "POST",
+            data: formData
+          }).then((res) => {
+            const url = import_object_path.default.get(res.data, "secure_url");
+            const imgMarkdownText = `![](${url})`;
+            this.replaceText(this.getEditor(), pastePlaceText, imgMarkdownText);
+          }, (err) => {
+            new import_obsidian2.Notice(err, 5e3);
+            console.log(err);
+          });
         }
-      };
-    });
+      } else {
+        new import_obsidian2.Notice("Cloudinary Image Uploader: Please check the image hosting settings.");
+      }
+    }));
   }
   replaceText(editor, target, replacement) {
     target = target.trim();
