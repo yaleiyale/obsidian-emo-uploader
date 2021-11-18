@@ -2688,6 +2688,7 @@ var CloudinaryUploader = class extends import_obsidian2.Plugin {
         }
       } else {
         new import_obsidian2.Notice("Cloudinary Image Uploader: Please check the image hosting settings.");
+        this.getEditor().replaceSelection("Please check settings for upload");
       }
     }));
   }
