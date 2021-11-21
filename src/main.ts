@@ -30,7 +30,7 @@ export default class CloudinaryUploader extends Plugin {
   setupPasteHandler(): void {
     this.registerEvent(this.app.workspace.on('editor-paste',async (evt: ClipboardEvent, editor: Editor)=>{
       const { files } = evt.clipboardData;
-      if (files.length == 0 || !files[0].type.startsWith("image")) {
+      if (files.length == 0 && !files[0].type.startsWith("text")) {
         editor.replaceSelection("Clipboard data is not an image\n");
       }
       else if (this.settings.cloudName && this.settings.uploadPreset) {
