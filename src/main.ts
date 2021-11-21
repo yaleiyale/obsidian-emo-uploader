@@ -33,7 +33,7 @@ export default class CloudinaryUploader extends Plugin {
       if (files.length == 0 && !files[0].type.startsWith("text")) {
         editor.replaceSelection("Clipboard data is not an image\n");
       }
-      else if (this.settings.cloudName && this.settings.uploadPreset) {
+      else if (this.settings.cloudName && this.settings.uploadPreset && files[0].type.startsWith("image")) {
         for (let file of files) {
           evt.preventDefault();
 
@@ -62,7 +62,7 @@ export default class CloudinaryUploader extends Plugin {
       }
       else {
         new Notice("Cloudinary Image Uploader: Please check the image hosting settings.");
-        editor.replaceSelection("Please check settings for upload");
+        editor.replaceSelection("Please check settings for upload\n This will also appear if file is not of image type");
       } 
 
     }))

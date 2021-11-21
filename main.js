@@ -2655,7 +2655,7 @@ var CloudinaryUploader = class extends import_obsidian2.Plugin {
       const {files} = evt.clipboardData;
       if (files.length == 0 && !files[0].type.startsWith("text")) {
         editor.replaceSelection("Clipboard data is not an image\n");
-      } else if (this.settings.cloudName && this.settings.uploadPreset) {
+      } else if (this.settings.cloudName && this.settings.uploadPreset && files[0].type.startsWith("image")) {
         for (let file of files) {
           evt.preventDefault();
           const randomString = (Math.random() * 10086).toString(36).substr(0, 8);
@@ -2681,7 +2681,7 @@ var CloudinaryUploader = class extends import_obsidian2.Plugin {
         }
       } else {
         new import_obsidian2.Notice("Cloudinary Image Uploader: Please check the image hosting settings.");
-        editor.replaceSelection("Please check settings for upload");
+        editor.replaceSelection("Please check settings for upload\n This will also appear if file is not of image type");
       }
     }));
   }
