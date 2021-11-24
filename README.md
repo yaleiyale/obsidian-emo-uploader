@@ -1,6 +1,9 @@
 # Obsidian Cloudinary Uploader
 
 ![Downloads](https://img.shields.io/github/downloads/jordanhandy/obsidian-cloudinary-uploader/main.js.svg)
+
+## Documentation
+[Documentation](https://jordanhandy.github.io/obsidian-cloudinary-uploader/)
 ## What is it?
 [Cloudinary](https://cloudinary.com/) is a cloud storage platform that allows you to upload various media files to a storage account.  The media files within this storage account can then be manipulated using Cloudinary's APIs to manipulate the data properties and metadata.
 
