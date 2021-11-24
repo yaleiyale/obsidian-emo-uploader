@@ -1,5 +1,5 @@
-input: .
-output: ./.retype
+input: ./docs
+output: ./docs/.retype
 url: jordanhandy.github.io/obsidian-cloudinary-uploader/
 branding:
   colors:

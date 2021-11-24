@@ -6,4 +6,3 @@ yarn.lock
 .npmrc
 dist/
 .DS_Store
-./
