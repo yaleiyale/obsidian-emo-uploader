@@ -6,7 +6,7 @@ author: Jordan Handy
 icon: gear
 ---
 ## Cloudinary Confiuration Steps
-1. Log in to Cloudinary and see find your Cloud Name here
+1. Log in to Cloudinary and find your Cloud Name here
 ![Cloudinary Dashboard](assets/cloudinary-dash.png)
 2. Enable Unsigned Uploads
 3. Obtain a Preset Name that allows unsigned uploads.  This is found under "Settings -> Uploads"
@@ -14,7 +14,7 @@ icon: gear
 ---
 
 !!! Note
-When the preset is created, it have a "name" associated with it.  Use this name in the "Upload Preset" field in Obisidan
+When the preset is created, it will have a "name" associated with it.  Use this name in the "Upload Preset" field in Obisidan
 !!!
 
 4. When configuring the upload preset folder name, you can leave this blank to have the pictures uploaded to the root of your Cloudinary Media Library.  If you do put a folder name in this field, all images will be stored in a subdirectory of that name in your Media Library.

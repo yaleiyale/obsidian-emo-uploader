@@ -13,7 +13,7 @@ edit:
   base: /docs
 links:
   - text: Home
-    link: https://jordanhandy.github.io/obsidian-cloudinary-uploader/docs
+    link: https://jordanhandy.github.io/obsidian-cloudinary-uploader/
     icon: home
   - text: Github
     link: https://github.com/jordanhandy/obsidian-cloudinary-uploader
