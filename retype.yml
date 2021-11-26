@@ -2,6 +2,8 @@ input: ./docs
 output: ./docs/.retype
 url: jordanhandy.github.io/obsidian-cloudinary-uploader/
 branding:
+  logo: assets/obsidian-logo.png
+  logoDark: assets/obsidian-logo.png
   colors:
     label:
       text: "#fff"
