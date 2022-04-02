@@ -39,13 +39,12 @@ export default class CloudinaryUploader extends Plugin {
   // if Files empty or does not contain image, throw error
     this.registerEvent(this.app.workspace.on('editor-paste',async (evt: ClipboardEvent, editor: Editor)=>{
       const { files } = evt.clipboardData;
-      if (files.length == 0 && !files[0].type.startsWith("text")) {
+      if (files.length == 0 || !files[0].type.startsWith("text")) {
         editor.replaceSelection("Clipboard data is not an image\n");
       }
       else if (this.settings.cloudName && this.settings.uploadPreset && files[0].type.startsWith("image")) {
+        evt.preventDefault(); // Prevent default paste behaviour
         for (let file of files) {
-          evt.preventDefault(); // Prevent default paste behaviour
-
           const randomString = (Math.random() * 10086).toString(36).substr(0, 8)
           const pastePlaceText = `![uploading...](${randomString})\n`
           editor.replaceSelection(pastePlaceText) // Generate random string to show on editor screen while API call completes
@@ -76,18 +75,18 @@ export default class CloudinaryUploader extends Plugin {
           })
         }
       }
-      else {
-      // If not image data, or empty files array
-        new Notice("Cloudinary Image Uploader: Please check the image hosting settings.");
-        editor.replaceSelection("Please check settings for upload\n This will also appear if file is not of image type");
-      } 
+      // else {
+      // // If not image data, or empty files array
+      //   new Notice("Cloudinary Image Uploader: Please check the image hosting settings.");
+      //   editor.replaceSelection("Please check settings for upload\n This will also appear if file is not of image type");
+      // } 
 
     }))
   }
   // Function to replace text
   private replaceText(editor: Editor, target: string, replacement: string): void {
-    target = target.trim()
-    const lines = editor.getValue().split("\n");
+    target = target.trim();
+    const lines = editor.lineCount;
     for (let i = 0; i < lines.length; i++) {
       const ch = lines[i].indexOf(target)
       if (ch !== -1) {
