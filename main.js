@@ -844,7 +844,7 @@ var require_common = __commonJS((exports2, module2) => {
         }
         namespaces = split[i].replace(/\*/g, ".*?");
         if (namespaces[0] === "-") {
-          createDebug.skips.push(new RegExp("^" + namespaces.substr(1) + "$"));
+          createDebug.skips.push(new RegExp("^" + namespaces.slice(1) + "$"));
         } else {
           createDebug.names.push(new RegExp("^" + namespaces + "$"));
         }
@@ -1304,56 +1304,56 @@ var require_follow_redirects = __commonJS((exports2, module2) => {
       });
     }
     var location = response.headers.location;
-    if (location && this._options.followRedirects !== false && statusCode >= 300 && statusCode < 400) {
-      abortRequest(this._currentRequest);
-      response.destroy();
-      if (++this._redirectCount > this._options.maxRedirects) {
-        this.emit("error", new TooManyRedirectsError());
-        return;
-      }
-      if ((statusCode === 301 || statusCode === 302) && this._options.method === "POST" || statusCode === 303 && !/^(?:GET|HEAD)$/.test(this._options.method)) {
-        this._options.method = "GET";
-        this._requestBodyBuffers = [];
-        removeMatchingHeaders(/^content-/i, this._options.headers);
-      }
-      var currentHostHeader = removeMatchingHeaders(/^host$/i, this._options.headers);
-      var currentUrlParts = url.parse(this._currentUrl);
-      var currentHost = currentHostHeader || currentUrlParts.host;
-      var currentUrl = /^\w+:/.test(location) ? this._currentUrl : url.format(Object.assign(currentUrlParts, {host: currentHost}));
-      var redirectUrl;
-      try {
-        redirectUrl = url.resolve(currentUrl, location);
-      } catch (cause) {
-        this.emit("error", new RedirectionError(cause));
-        return;
-      }
-      debug("redirecting to", redirectUrl);
-      this._isRedirect = true;
-      var redirectUrlParts = url.parse(redirectUrl);
-      Object.assign(this._options, redirectUrlParts);
-      if (!(redirectUrlParts.host === currentHost || isSubdomainOf(redirectUrlParts.host, currentHost))) {
-        removeMatchingHeaders(/^authorization$/i, this._options.headers);
-      }
-      if (typeof this._options.beforeRedirect === "function") {
-        var responseDetails = {headers: response.headers};
-        try {
-          this._options.beforeRedirect.call(null, this._options, responseDetails);
-        } catch (err) {
-          this.emit("error", err);
-          return;
-        }
-        this._sanitizeOptions(this._options);
-      }
-      try {
-        this._performRequest();
-      } catch (cause) {
-        this.emit("error", new RedirectionError(cause));
-      }
-    } else {
+    if (!location || this._options.followRedirects === false || statusCode < 300 || statusCode >= 400) {
       response.responseUrl = this._currentUrl;
       response.redirects = this._redirects;
       this.emit("response", response);
       this._requestBodyBuffers = [];
+      return;
+    }
+    abortRequest(this._currentRequest);
+    response.destroy();
+    if (++this._redirectCount > this._options.maxRedirects) {
+      this.emit("error", new TooManyRedirectsError());
+      return;
+    }
+    if ((statusCode === 301 || statusCode === 302) && this._options.method === "POST" || statusCode === 303 && !/^(?:GET|HEAD)$/.test(this._options.method)) {
+      this._options.method = "GET";
+      this._requestBodyBuffers = [];
+      removeMatchingHeaders(/^content-/i, this._options.headers);
+    }
+    var currentHostHeader = removeMatchingHeaders(/^host$/i, this._options.headers);
+    var currentUrlParts = url.parse(this._currentUrl);
+    var currentHost = currentHostHeader || currentUrlParts.host;
+    var currentUrl = /^\w+:/.test(location) ? this._currentUrl : url.format(Object.assign(currentUrlParts, {host: currentHost}));
+    var redirectUrl;
+    try {
+      redirectUrl = url.resolve(currentUrl, location);
+    } catch (cause) {
+      this.emit("error", new RedirectionError(cause));
+      return;
+    }
+    debug("redirecting to", redirectUrl);
+    this._isRedirect = true;
+    var redirectUrlParts = url.parse(redirectUrl);
+    Object.assign(this._options, redirectUrlParts);
+    if (redirectUrlParts.protocol !== currentUrlParts.protocol && redirectUrlParts.protocol !== "https:" || redirectUrlParts.host !== currentHost && !isSubdomain(redirectUrlParts.host, currentHost)) {
+      removeMatchingHeaders(/^(?:authorization|cookie)$/i, this._options.headers);
+    }
+    if (typeof this._options.beforeRedirect === "function") {
+      var responseDetails = {headers: response.headers};
+      try {
+        this._options.beforeRedirect.call(null, this._options, responseDetails);
+      } catch (err) {
+        this.emit("error", err);
+        return;
+      }
+      this._sanitizeOptions(this._options);
+    }
+    try {
+      this._performRequest();
+    } catch (cause) {
+      this.emit("error", new RedirectionError(cause));
     }
   };
   function wrap(protocols) {
@@ -1427,11 +1427,11 @@ var require_follow_redirects = __commonJS((exports2, module2) => {
     var lastValue;
     for (var header in headers) {
       if (regex.test(header)) {
-        lastValue = headers[header].toString().trim();
+        lastValue = headers[header];
         delete headers[header];
       }
     }
-    return lastValue;
+    return lastValue === null || typeof lastValue === "undefined" ? void 0 : String(lastValue).trim();
   }
   function createErrorType(code, defaultMessage) {
     function CustomError(cause) {
@@ -1456,7 +1456,7 @@ var require_follow_redirects = __commonJS((exports2, module2) => {
     request.on("error", noop);
     request.abort();
   }
-  function isSubdomainOf(subdomain, domain) {
+  function isSubdomain(subdomain, domain) {
     const dot = subdomain.length - domain.length - 1;
     return dot > 0 && subdomain[dot] === "." && subdomain.endsWith(domain);
   }
@@ -2653,41 +2653,42 @@ var CloudinaryUploader = class extends import_obsidian2.Plugin {
   setupPasteHandler() {
     this.registerEvent(this.app.workspace.on("editor-paste", async (evt, editor) => {
       const {files} = evt.clipboardData;
-      if (files.length == 0 && !files[0].type.startsWith("text")) {
-        editor.replaceSelection("Clipboard data is not an image\n");
-      } else if (this.settings.cloudName && this.settings.uploadPreset && files[0].type.startsWith("image")) {
-        for (let file of files) {
+      if (files.length > 0) {
+        if (this.settings.cloudName && this.settings.uploadPreset && files[0].type.startsWith("image")) {
           evt.preventDefault();
-          const randomString = (Math.random() * 10086).toString(36).substr(0, 8);
-          const pastePlaceText = `![uploading...](${randomString})
+          for (let file of files) {
+            const randomString = (Math.random() * 10086).toString(36).substr(0, 8);
+            const pastePlaceText = `![uploading...](${randomString})
 `;
-          editor.replaceSelection(pastePlaceText);
-          const formData = new FormData();
-          formData.append("file", file);
-          formData.append("upload_preset", this.settings.uploadPreset);
-          formData.append("folder", this.settings.folder);
-          (0, import_axios.default)({
-            url: `https://api.cloudinary.com/v1_1/${this.settings.cloudName}/upload`,
-            method: "POST",
-            data: formData
-          }).then((res) => {
-            const url = import_object_path.default.get(res.data, "secure_url");
-            const imgMarkdownText = `![](${url})`;
-            this.replaceText(editor, pastePlaceText, imgMarkdownText);
-          }, (err) => {
-            new import_obsidian2.Notice(err, 5e3);
-            console.log(err);
-          });
+            editor.replaceSelection(pastePlaceText);
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("upload_preset", this.settings.uploadPreset);
+            formData.append("folder", this.settings.folder);
+            (0, import_axios.default)({
+              url: `https://api.cloudinary.com/v1_1/${this.settings.cloudName}/auto/upload`,
+              method: "POST",
+              data: formData
+            }).then((res) => {
+              console.log(res);
+              const url = import_object_path.default.get(res.data, "secure_url");
+              const imgMarkdownText = `![](${url})`;
+              this.replaceText(editor, pastePlaceText, imgMarkdownText);
+            }, (err) => {
+              new import_obsidian2.Notice(err, 5e3);
+              console.log(err);
+            });
+          }
         }
-      } else {
-        new import_obsidian2.Notice("Cloudinary Image Uploader: Please check the image hosting settings.");
-        editor.replaceSelection("Please check settings for upload\n This will also appear if file is not of image type");
       }
     }));
   }
   replaceText(editor, target, replacement) {
     target = target.trim();
-    const lines = editor.getValue().split("\n");
+    let lines = [];
+    for (let i = 0; i < editor.lineCount(); i++) {
+      lines.push(editor.getLine(i));
+    }
     for (let i = 0; i < lines.length; i++) {
       const ch = lines[i].indexOf(target);
       if (ch !== -1) {

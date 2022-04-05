@@ -34,15 +34,13 @@ export default class CloudinaryUploader extends Plugin {
 
 
   setupPasteHandler(): void {
-  // On past event, get "files" from clipbaord data
+  // On paste event, get "files" from clipbaord data
   // If files contain image, move to API call
   // if Files empty or does not contain image, throw error
     this.registerEvent(this.app.workspace.on('editor-paste',async (evt: ClipboardEvent, editor: Editor)=>{
       const { files } = evt.clipboardData;
-      if (files.length == 0 || !files[0].type.startsWith("text")) {
-        editor.replaceSelection("Clipboard data is not an image\n");
-      }
-      else if (this.settings.cloudName && this.settings.uploadPreset && files[0].type.startsWith("image")) {
+      if(files.length > 0){
+       if (this.settings.cloudName && this.settings.uploadPreset && files[0].type.startsWith("image")) {
         evt.preventDefault(); // Prevent default paste behaviour
         for (let file of files) {
           const randomString = (Math.random() * 10086).toString(36).substr(0, 8)
@@ -59,11 +57,12 @@ export default class CloudinaryUploader extends Plugin {
 
           // Make API call
           axios({
-            url: `https://api.cloudinary.com/v1_1/${this.settings.cloudName}/upload`,
+            url: `https://api.cloudinary.com/v1_1/${this.settings.cloudName}/auto/upload`,
             method: 'POST',
             data: formData
           }).then(res => {
           // Get response public URL of uploaded image
+          console.log(res);
             const url = objectPath.get(res.data, 'secure_url')
             const imgMarkdownText = `![](${url})`
             // Show MD syntax using uploaded image URL, in Obsidian Editor
@@ -81,12 +80,16 @@ export default class CloudinaryUploader extends Plugin {
       //   editor.replaceSelection("Please check settings for upload\n This will also appear if file is not of image type");
       // } 
 
-    }))
+    }}))
   }
   // Function to replace text
   private replaceText(editor: Editor, target: string, replacement: string): void {
     target = target.trim();
-    const lines = editor.lineCount;
+    let lines = [];
+    for (let i = 0; i < editor.lineCount(); i++){
+      lines.push(editor.getLine(i));
+    }
+    //const tlines = editor.getValue().split("\n");
     for (let i = 0; i < lines.length; i++) {
       const ch = lines[i].indexOf(target)
       if (ch !== -1) {
