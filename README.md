@@ -57,11 +57,12 @@ Whether the file link can be rendered in obsidian or not depends on the support 
 
 ## About the Other
 
-[ImgURL](https://www.imgurl.org/), [SM.MS](https://smms.app/), [imgbb](https://imgbb.com/) are cloud storage platforms that allows you to upload **images** to a storage account. For users living in China, they are easier to access than Github and Cloudinary.  
+[ImgURL](https://www.imgurl.org/), [SM.MS](https://smms.app/) are cloud storage platforms that allows you to upload **images** to a storage account. For users living in China, they are easier to access than Github and Cloudinary.  
 Register an account and find parameters you need. Just put your parameters to the correct positions. Then you can use it just like the way in the video.
 
 About [Cloudinary](https://cloudinary.com/), please refer to [obsidian-cloudinary-uploader/README.md](https://github.com/jordanhandy/obsidian-cloudinary-uploader/blob/main/README.md). Of course, Cloudinary is supported here. If you find that Cloudinary is enough to meet your needs, you can just use it. ( In fact, my plugin is smaller on size. :flushed: )
 
+If you live in China, [imgbb](https://imgbb.com/) is not recommended to use. I found that the pictures uploaded to this platform could not be easily accessed in Chinese Mainland and they are usually presented as thumbnails.
 Please check the service restrictions by yourself.
 
 :warning: Images are public to see on them. Don't upload prohibited things!
