@@ -1,73 +1,59 @@
-/*
- * @Author: Jordan Handy
- */
 import {
-    App,
-    PluginSettingTab,
-    Setting,
-} from 'obsidian';
+  App,
+  PluginSettingTab,
+  Setting
+} from 'obsidian'
+import { HostingProvider, supportList } from './config'
+import Emo from './main'
+import { EmoFragment } from './fragment/emo-fragment'
+import { CloudinaryFragment } from './fragment/fragment-cloudinary'
+import { GithubFragment } from './fragment/fragment-github'
+import { ImgbbFragment } from './fragment/fragment-imgbb'
+import { ImgurlFragment } from './fragment/fragment-imgurl'
+import { SmmsFragment } from './fragment/fragment-smms'
 
-import CloudinaryUploader from './main'
+export class EmoUploaderSettingTab extends PluginSettingTab {
+  private readonly plugin: Emo
+  private readonly fragmentList: EmoFragment[] = []
+  constructor (app: App, plugin: Emo) {
+    super(app, plugin)
+    this.plugin = plugin
+  }
 
-export default class CloudinaryUploaderSettingTab extends PluginSettingTab {
-    plugin: CloudinaryUploader;
-    constructor(app: App, plugin: CloudinaryUploader) {
-        super(app, plugin);
-        this.plugin = plugin;
-    }
-    display(): void {
-        const { containerEl } = this;
+  display (): void {
+    const { containerEl } = this
+    containerEl.empty()
 
-        containerEl.empty();
-        containerEl.createEl("h3", { text: "Cloudinary Settings" });
+    containerEl.createEl('h2', { text: 'Target' })
+    const pick = new Setting(containerEl)
+      .setName('target hosting')
+      .setDesc('Choose your target. Before uploading, make sure you have completely filled in the necessary parameters of the selected platform.')
 
-        new Setting(containerEl)
-            .setName("Cloud Name")
-            .setDesc("The name of your Cloudinary Cloud Account")
-            .addText((text) => {
-                text
-                    .setPlaceholder("")
-                    .setValue(this.plugin.settings.cloudName)
-                    .onChange(async (value) => {
-                        this.plugin.settings.cloudName = value;
-                        await this.plugin.saveSettings();
-                    })
-            }
-            );
+    const githubFragment = new GithubFragment('github', HostingProvider.Github, containerEl, this.plugin)
+    this.fragmentList.push(githubFragment)
+    const cloudinaryFragment = new CloudinaryFragment('cloudinary', HostingProvider.Cloudinary, containerEl, this.plugin)
+    this.fragmentList.push(cloudinaryFragment)
+    const smmsFragment = new SmmsFragment('smms', HostingProvider.Smms, containerEl, this.plugin)
+    this.fragmentList.push(smmsFragment)
+    const imgurlFragment = new ImgurlFragment('imgurl', HostingProvider.ImgURL, containerEl, this.plugin)
+    this.fragmentList.push(imgurlFragment)
+    const imgbbFragment = new ImgbbFragment('imgbb', HostingProvider.Imgbb, containerEl, this.plugin)
+    this.fragmentList.push(imgbbFragment)
 
-        new Setting(containerEl)
-            .setName("Cloudinary Upload Template")
-            .setDesc("Cloudinary Upload Preference string")
-            .addText((text) => {
-                text
-                    .setPlaceholder("")
-                    .setValue(this.plugin.settings.uploadPreset)
-                    .onChange(async (value) => {
-                        try {
-                            this.plugin.settings.uploadPreset = value;
-                            await this.plugin.saveSettings();
-                        }
-                        catch (e) {
-                            console.log(e)
-                        }
-                    })
-            });
-            new Setting(containerEl)
-            .setName("Cloudinary Upload Folder")
-            .setDesc("Folder name to use in Cloudinary.  Note, this will be ignored if you have a folder set in your Cloudinary Upload Preset")
-            .addText((text) => {
-                text
-                    .setPlaceholder("obsidian")
-                    .setValue(this.plugin.settings.folder)
-                    .onChange(async (value) => {
-                        try {
-                            this.plugin.settings.folder = value;
-                            await this.plugin.saveSettings();
-                        }
-                        catch (e) {
-                            console.log(e)
-                        }
-                    })
-            });
-    }
+    this.fragmentList.forEach(element => {
+      element.update(this.plugin.config.choice) // which one will show at the first time
+    })
+
+    pick.addDropdown((dropdown) => {
+      supportList.forEach((record) => { dropdown.addOption(record, record) })
+      dropdown.setValue(this.plugin.config.choice)
+        .onChange(async (value) => {
+          this.plugin.config.choice = value as HostingProvider
+          await this.plugin.saveSettings()
+          this.fragmentList.forEach(element => {
+            element.update(this.plugin.config.choice) // update the tab when make a choice
+          })
+        })
+    })
+  }
 }
