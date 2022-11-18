@@ -11,12 +11,12 @@ https://user-images.githubusercontent.com/55282569/200258839-0979aa8c-7e5b-4254-
 
 Support list
 
-- GitHub
-- imgur
-- Cloudinary
-- ImgURL
-- SM.MS
-- imgbb
+- [GitHub](https://github.com/)
+- [Imgur](https://imgur.com/)
+- [SM.MS](https://smms.app/)  
+- [ImgURL](https://www.imgurl.org/)  
+- [Clouinary](https://cloudinary.com/)  
+- [imgbb](https://imgbb.com/)
 
 ## Configuration
 
