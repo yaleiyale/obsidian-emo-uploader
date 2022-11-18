@@ -66,7 +66,7 @@ About [Cloudinary](https://cloudinary.com/), please refer to [obsidian-cloudinar
 If you live in China, [imgbb](https://imgbb.com/) is not recommended to use. I found that the pictures uploaded to this platform could not be easily accessed in Chinese Mainland and they are usually presented as thumbnails.
 Please check the service restrictions by yourself.
 
-[Imgur](https://imgur.com/) is good. But in my network environment, it is not easy to access and test it. I simply  implemented anonymous upload with reference to some posts. When using imgur, deletehash will appear in the form of `![deletehash](url)`, which is used to prevent you from regretting the upload of wrong pictures. You can delete them [here]().
+[Imgur](https://imgur.com/) is good. But in my network environment, it is not easy to access and test it. I simply  implemented anonymous upload with reference to some posts. When using imgur, deletehash will appear in the form of `![deletehash](url)`, which is used to prevent you from regretting the upload of wrong pictures. You can delete them [here](https://lestua.ml/imgurdeleteimage).
 
 :warning: Images are public to see on them. Don't upload prohibited things!
 
