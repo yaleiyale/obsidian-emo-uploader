@@ -15,12 +15,14 @@ export class ImgurUploader extends EmoUploader {
     const formData = new ReqFormData(randomBoundary)
     await formData.addFile('image', file)
     const form = formData.pack()
+    let auth = 'Client-ID '
+    if (this.parms.clientid !== '') { auth += this.parms.clientid } else auth += this.parms.required.emoid
     const req: RequestUrlParam = {
       url: 'https://api.imgur.com/3/upload',
       method: 'POST',
       headers: {
         'Content-Type': 'multipart/form-data;boundary=' + randomBoundary,
-        Authorization: 'Client-ID ' + this.parms.clientid !== '' ? this.parms.clientid : this.parms.required.emoid
+        Authorization: auth
       },
       body: form
     }

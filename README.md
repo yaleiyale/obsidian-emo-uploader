@@ -12,21 +12,24 @@ https://user-images.githubusercontent.com/55282569/200258839-0979aa8c-7e5b-4254-
 Support list
 
 - GitHub
+- imgur
 - Cloudinary
 - ImgURL
 - SM.MS
 - imgbb
-- imgur
 
 ## Configuration
 
 1. Disable Obsidian Safe Mode
-2. Install the Plugin  
-    ~~- Install from the Obsidian Community Plugins tab~~ (waiting for code review)  
-    - Manual install  
-      - Clone this repo  
-      - Install dependencies with `yarn` or `npm` like `npm install`  
-      - `npm run dev` will start compilation
+2. Install the Plugin
+   - ~~Install from the Obsidian Community Plugins tab~~ (waiting for code review)
+   - use Release
+      - download **main.js manifest.json** in the latest Release
+      - move them in a folder in your obsidian vault's plugin folder
+    - Manual install
+      - Clone this repo
+      - Install dependencies with `yarn` or `npm` like `npm install`
+      - `npm run dev` will start compilation
 3. Enable the Plugin
 4. Configure the settings :point_right:  [some datails](https://lestua.ml/notes/2022/10/16/172318#english)
 5. Enjoy convenience :star2:
@@ -64,11 +67,10 @@ Register an account and find parameters you need. Just put your parameters to th
 About [Cloudinary](https://cloudinary.com/), please refer to [obsidian-cloudinary-uploader/README.md](https://github.com/jordanhandy/obsidian-cloudinary-uploader/blob/main/README.md). Of course, Cloudinary is supported here. If you find that Cloudinary is enough to meet your needs, you can just use it. ( In fact, my plugin is smaller on size. :flushed: )
 
 If you live in China, [imgbb](https://imgbb.com/) is not recommended to use. I found that the pictures uploaded to this platform could not be easily accessed in Chinese Mainland and they are usually presented as thumbnails.
-Please check the service restrictions by yourself.
 
-[Imgur](https://imgur.com/) is good. But in my network environment, it is not easy to access and test it. I simply  implemented anonymous upload with reference to some posts. When using imgur, deletehash will appear in the form of `![deletehash](url)`, which is used to prevent you from regretting the upload of wrong pictures. You can delete them [here](https://lestua.ml/imgurdeleteimage).
+[Imgur](https://imgur.com/) is good. But in my network environment, it is not easy to access and test. I simply  implemented anonymous upload with reference to some posts. When using imgur, deletehash will appear in the form of `![deletehash](url)`, which is used to prevent you from regretting the upload of wrong pictures. You can delete them [here](https://lestua.ml/imgurdeleteimage) or in the plugin.
 
-:warning: Images are public to see on them. Don't upload prohibited things!
+:warning: Images are public to see on them. Don't upload prohibited things! Please check the service restrictions by yourself.
 
 ## How to Extend
 
@@ -100,4 +102,5 @@ Trying to upload a file that the platform does not support or volume exceeds the
 [jsdelivr](https://www.jsdelivr.com/)  
 [SM.MS](https://smms.app/)  
 [ImgURL](https://www.imgurl.org/)  
-[Clouinary](https://cloudinary.com/)
+[Clouinary](https://cloudinary.com/)  
+[Imgur](https://imgur.com/)
