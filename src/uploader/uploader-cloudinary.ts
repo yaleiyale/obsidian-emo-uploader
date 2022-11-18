@@ -4,23 +4,21 @@ import { ReqFormData } from '../utils/req-formdata'
 import { EmoUploader } from './emo-uploader'
 
 export class CloudinaryUploader extends EmoUploader {
-  folder: string
-  required: CloudinaryParms['required']
-  constructor (parms: CloudinaryParms) {
+  parms!: CloudinaryParms
+  constructor (cloudinaryParms: CloudinaryParms) {
     super()
-    this.required = parms.required
-    this.folder = parms.folder
+    this.parms = cloudinaryParms
   }
 
   async upload (file: File): Promise<string> {
     const randomBoundary = Date.now().toString(16)
     const formData = new ReqFormData(randomBoundary)
-    formData.addParm('upload_preset', this.required.present)
-    formData.addParm('folder', this.folder)
+    formData.addParm('upload_preset', this.parms.required.present)
+    formData.addParm('folder', this.parms.folder)
     await formData.addFile('file', file)
     const form = formData.pack()
     const req: RequestUrlParam = {
-      url: `https://api.cloudinary.com/v1_1/${this.required.name}/auto/upload`,
+      url: `https://api.cloudinary.com/v1_1/${this.parms.required.name}/auto/upload`,
       method: 'POST',
       headers: {
         'Content-Type': 'multipart/form-data;boundary=' + randomBoundary

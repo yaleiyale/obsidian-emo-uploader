@@ -11,6 +11,7 @@ import { ImgurlUploader } from './uploader/uploader-imgurl'
 import { CloudinaryUploader } from './uploader/uploader-cloudinary'
 import { SmmsUploader } from './uploader/uploader-smms'
 import { ImgbbUploader } from './uploader/uploader-imgbb'
+import { ImgurUploader } from './uploader/uploader-imgur'
 
 export default class Emo extends Plugin {
   config!: Config
@@ -35,6 +36,9 @@ export default class Emo extends Plugin {
             break
           case HostingProvider.Imgbb:
             uploader = new ImgbbUploader(this.config.imgbb_parms)
+            break
+          case HostingProvider.Imgur:
+            uploader = new ImgurUploader(this.config.imgur_parms)
             break
           default:
             console.log(new Notice('Emo broken. Check your target', 2000))

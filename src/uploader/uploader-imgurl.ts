@@ -4,17 +4,17 @@ import { ReqFormData } from '../utils/req-formdata'
 import { EmoUploader } from './emo-uploader'
 
 export class ImgurlUploader extends EmoUploader {
-  required: ImgurlParms['required']
-  constructor (parms: ImgurlParms) {
+  parms!: ImgurlParms
+  constructor (imgurlParms: ImgurlParms) {
     super()
-    this.required = parms.required
+    this.parms = imgurlParms
   }
 
   async upload (file: File): Promise<string> {
     const randomBoundary = Date.now().toString(16)
     const formData = new ReqFormData(randomBoundary)
-    formData.addParm('uid', this.required.uid)
-    formData.addParm('token', this.required.token)
+    formData.addParm('uid', this.parms.required.uid)
+    formData.addParm('token', this.parms.required.token)
     await formData.addFile('file', file)
     const form = formData.pack()
     const req: RequestUrlParam = {

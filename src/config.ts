@@ -1,6 +1,7 @@
 import { CloudinaryParms, CLOUDINARY_DEFAULT_PARMS } from './parms/parms-cloudinary'
 import { GithubParms, GITHUB_DEFAULT_PARMS } from './parms/parms-github'
 import { ImgbbParms, IMGBB_DEFAULT_PARMS } from './parms/parms-imgbb'
+import { ImgurParms, IMGUR_DEFAULT_PARMS } from './parms/parms-imgur'
 import { ImgurlParms, IMGURL_DEFAULT_PARMS } from './parms/parms-imgurl'
 import { SmmsParms, SMMS_DEFAULT_PARMS } from './parms/parms-smms'
 
@@ -11,18 +12,20 @@ export interface Config { // data from data.json
   imgurl_parms: ImgurlParms
   cloudinary_parms: CloudinaryParms
   imgbb_parms: ImgbbParms
+  imgur_parms: ImgurParms
 }
 export enum HostingProvider { // target hosting
   Github = 'Github',
   Smms = 'SM.MS',
   ImgURL = 'ImgURL',
   Cloudinary = 'Cloudinary',
-  Imgbb = 'imgbb'
+  Imgbb = 'imgbb',
+  Imgur = 'Imgur'
 }
 
 // for dropdown
 export const supportList = [HostingProvider.Github, HostingProvider.Smms, HostingProvider.ImgURL, HostingProvider.Cloudinary,
-  HostingProvider.Imgbb]
+  HostingProvider.Imgbb, HostingProvider.Imgur]
 
 export const DEFAULT_SETTINGS: Config = {
   choice: HostingProvider.Github,
@@ -30,5 +33,6 @@ export const DEFAULT_SETTINGS: Config = {
   smms_parms: SMMS_DEFAULT_PARMS,
   imgurl_parms: IMGURL_DEFAULT_PARMS,
   cloudinary_parms: CLOUDINARY_DEFAULT_PARMS,
-  imgbb_parms: IMGBB_DEFAULT_PARMS
+  imgbb_parms: IMGBB_DEFAULT_PARMS,
+  imgur_parms: IMGUR_DEFAULT_PARMS
 }

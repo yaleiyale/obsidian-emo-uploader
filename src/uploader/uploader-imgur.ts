@@ -1,26 +1,26 @@
 import { request, RequestUrlParam } from 'obsidian'
-import { ImgbbParms } from '../parms/parms-imgbb'
+import { ImgurParms } from '../parms/parms-imgur'
 import { ReqFormData } from '../utils/req-formdata'
 import { EmoUploader } from './emo-uploader'
 
-export class ImgbbUploader extends EmoUploader {
-  parms!: ImgbbParms
-  constructor (imgbbParms: ImgbbParms) {
+export class ImgurUploader extends EmoUploader {
+  parms!: ImgurParms
+  constructor (imgurlParms: ImgurParms) {
     super()
-    this.parms = imgbbParms
+    this.parms = imgurlParms
   }
 
   async upload (file: File): Promise<string> {
     const randomBoundary = Date.now().toString(16)
     const formData = new ReqFormData(randomBoundary)
-    formData.addParm('key', this.parms.required.key)
     await formData.addFile('image', file)
     const form = formData.pack()
     const req: RequestUrlParam = {
-      url: 'https://api.imgbb.com/1/upload',
+      url: 'https://api.imgur.com/3/upload',
       method: 'POST',
       headers: {
-        'Content-Type': 'multipart/form-data;boundary=' + randomBoundary
+        'Content-Type': 'multipart/form-data;boundary=' + randomBoundary,
+        Authorization: 'Client-ID ' + this.parms.clientid !== '' ? this.parms.clientid : this.parms.required.emoid
       },
       body: form
     }
@@ -28,11 +28,12 @@ export class ImgbbUploader extends EmoUploader {
     return await new Promise((resolve, reject) => {
       request(req).then((res) => {
         const json = JSON.parse(res)
-        const url = json.data.url
-        const markdownText = `![](${url as string})`
+        const deleteurl = json.data.deletehash
+        const url = json.data.link
+        const markdownText = `![${deleteurl as string}](${url as string})`
         resolve(markdownText)
       }).catch(err => {
-        reject('imgbb')
+        reject('imgur')
         console.log(err)
       })
     })

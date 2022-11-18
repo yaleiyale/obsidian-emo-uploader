@@ -1,10 +1,10 @@
 export abstract class EmoUploader {
-  required: any // string inside
+  parms: any
   abstract upload (file: File): Promise<string>
   isValid (): boolean { // check the necessary parameters, type: string
     let result = true
-    for (const i in this.required) {
-      result &&= notEmpty(this.required[i])
+    for (const i in this.parms.required) {
+      result &&= notEmpty(this.parms.required[i])
       if (!result) return false
     }
     return true

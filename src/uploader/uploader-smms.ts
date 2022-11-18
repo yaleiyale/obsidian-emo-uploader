@@ -4,10 +4,10 @@ import { ReqFormData } from '../utils/req-formdata'
 import { EmoUploader } from './emo-uploader'
 
 export class SmmsUploader extends EmoUploader {
-  required: SmmsParms['required']
-  constructor (parms: SmmsParms) {
+  parms!: SmmsParms
+  constructor (smmsParms: SmmsParms) {
     super()
-    this.required = parms.required
+    this.parms = smmsParms
   }
 
   async upload (file: File): Promise<string> {
@@ -21,7 +21,7 @@ export class SmmsUploader extends EmoUploader {
       method: 'POST',
       headers: {
         'Content-Type': 'multipart/form-data;boundary=' + randomBoundary,
-        Authorization: this.required.token
+        Authorization: this.parms.required.token
       },
       body: form
     }
