@@ -1,6 +1,6 @@
 import { Setting } from 'obsidian'
 import Emo from '../main'
-import { EmoFragment } from './emo-fragment'
+import { EmoFragment } from '../base/emo-fragment'
 
 export class SmmsFragment extends EmoFragment {
   display (el: HTMLElement, plugin: Emo): void {

@@ -1,7 +1,7 @@
 import { request, RequestUrlParam } from 'obsidian'
 import { CloudinaryParms } from '../parms/parms-cloudinary'
 import { ReqFormData } from '../utils/req-formdata'
-import { EmoUploader } from './emo-uploader'
+import { EmoUploader } from '../base/emo-uploader'
 
 export class CloudinaryUploader extends EmoUploader {
   parms!: CloudinaryParms

@@ -1,4 +1,6 @@
-export interface CloudinaryParms {
+import { EmoParms } from '../base/emo-parms'
+
+export interface CloudinaryParms extends EmoParms {
   required: Required
   folder: string
 }

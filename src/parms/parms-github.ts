@@ -1,4 +1,6 @@
-export interface GithubParms {
+import { EmoParms } from '../base/emo-parms'
+
+export interface GithubParms extends EmoParms {
   required: Required
   path: string
   random: boolean

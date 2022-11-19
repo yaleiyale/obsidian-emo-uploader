@@ -5,7 +5,7 @@ import {
 } from 'obsidian'
 import { EmoUploaderSettingTab } from './settings-tab'
 import { Config, DEFAULT_SETTINGS, HostingProvider } from './config'
-import { EmoUploader } from './uploader/emo-uploader'
+import { EmoUploader } from './base/emo-uploader'
 import { GithubUploader } from './uploader/uploader-github'
 import { ImgurlUploader } from './uploader/uploader-imgurl'
 import { CloudinaryUploader } from './uploader/uploader-cloudinary'

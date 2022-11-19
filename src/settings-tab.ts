@@ -5,7 +5,7 @@ import {
 } from 'obsidian'
 import { HostingProvider, supportList } from './config'
 import Emo from './main'
-import { EmoFragment } from './fragment/emo-fragment'
+import { EmoFragment } from './base/emo-fragment'
 import { CloudinaryFragment } from './fragment/fragment-cloudinary'
 import { GithubFragment } from './fragment/fragment-github'
 import { ImgbbFragment } from './fragment/fragment-imgbb'

@@ -1,4 +1,6 @@
-export interface SmmsParms {
+import { EmoParms } from '../base/emo-parms'
+
+export interface SmmsParms extends EmoParms {
   required: Required
 }
 interface Required {

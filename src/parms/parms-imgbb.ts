@@ -1,4 +1,6 @@
-export interface ImgbbParms {
+import { EmoParms } from '../base/emo-parms'
+
+export interface ImgbbParms extends EmoParms {
   required: Required
 }
 interface Required {

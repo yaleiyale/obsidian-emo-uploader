@@ -1,7 +1,7 @@
 import { request, RequestUrlParam } from 'obsidian'
 import { SmmsParms } from '../parms/parms-smms'
 import { ReqFormData } from '../utils/req-formdata'
-import { EmoUploader } from './emo-uploader'
+import { EmoUploader } from '../base/emo-uploader'
 
 export class SmmsUploader extends EmoUploader {
   parms!: SmmsParms

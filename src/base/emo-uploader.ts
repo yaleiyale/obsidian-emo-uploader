@@ -1,5 +1,7 @@
+import { EmoParms } from './emo-parms'
+
 export abstract class EmoUploader {
-  parms: any
+  parms!: EmoParms
   abstract upload (file: File): Promise<string>
   isValid (): boolean { // check the necessary parameters, type: string
     let result = true

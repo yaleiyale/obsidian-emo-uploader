@@ -1,4 +1,6 @@
-export interface ImgurParms {
+import { EmoParms } from '../base/emo-parms'
+
+export interface ImgurParms extends EmoParms {
   required: Required
   clientid: string
 }

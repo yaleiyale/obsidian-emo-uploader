@@ -1,7 +1,7 @@
 import { request, RequestUrlParam } from 'obsidian'
 import { ImgurParms } from '../parms/parms-imgur'
 import { ReqFormData } from '../utils/req-formdata'
-import { EmoUploader } from './emo-uploader'
+import { EmoUploader } from '../base/emo-uploader'
 
 export class ImgurUploader extends EmoUploader {
   parms!: ImgurParms

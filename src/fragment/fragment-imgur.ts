@@ -1,11 +1,11 @@
 import { Notice, request, RequestUrlParam, Setting } from 'obsidian'
 import Emo from '../main'
-import { EmoFragment } from './emo-fragment'
+import { EmoFragment } from '../base/emo-fragment'
 
 export class ImgurFragment extends EmoFragment {
   display (el: HTMLElement, plugin: Emo): void {
     const parms = plugin.config.imgur_parms
-    el.createEl('h3', { text: 'Tips' })
+    el.createEl('h3', { text: 'Tips for Anonymous Upload' })
     el.createEl('h5', { text: 'Imgur upload will produce the link in this format: ![deletehash](url)' })
     el.createEl('h5', { text: 'deletehash is used to delete the image you just uploaded' })
     el.createEl('h5', { text: 'If your note will be used for publicity, please remember to delete it in time' })
@@ -36,7 +36,7 @@ export class ImgurFragment extends EmoFragment {
           })
       })
       .addButton((bt) => {
-        bt.setButtonText('Delete').onClick(() => {
+        bt.setButtonText('delete').onClick(() => {
           let auth = 'Client-ID '
           if (parms.clientid !== '') { auth += parms.clientid } else auth += parms.required.emoid
           const req: RequestUrlParam = {

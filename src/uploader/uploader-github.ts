@@ -1,7 +1,7 @@
 import { request, RequestUrlParam } from 'obsidian'
 import { GithubParms } from '../parms/parms-github'
 import { getBase64, getFileName } from '../utils/file-helper'
-import { EmoUploader } from './emo-uploader'
+import { EmoUploader } from '../base/emo-uploader'
 
 export class GithubUploader extends EmoUploader {
   parms!: GithubParms
