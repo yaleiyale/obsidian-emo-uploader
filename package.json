@@ -1,6 +1,6 @@
 {
   "name": "emo-uploader",
-  "version": "2.3",
+  "version": "2.1",
   "description": "Embed markdown online file/image links. This plugin is for uploading images to hosting or files to github in Obsidian.",
   "main": "dist/main.js",
   "repository": "https://github.com/yaleiyale/obsidian-emo-uploader",

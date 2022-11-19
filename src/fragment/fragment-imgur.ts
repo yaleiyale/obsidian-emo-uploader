@@ -26,7 +26,7 @@ export class ImgurFragment extends EmoFragment {
       })
     let hash = ''
     new Setting(el)
-      .setName('Delete')
+      .setName('delete')
       .setDesc('If you want to delete the image on Imgur, delete it here with the deletehash')
       .addText((text) => {
         text
@@ -36,7 +36,7 @@ export class ImgurFragment extends EmoFragment {
           })
       })
       .addButton((bt) => {
-        bt.setButtonText('delete').onClick(() => {
+        bt.setButtonText('Delete').onClick(() => {
           let auth = 'Client-ID '
           if (parms.clientid !== '') { auth += parms.clientid } else auth += parms.required.emoid
           const req: RequestUrlParam = {
