@@ -93,7 +93,7 @@ If you need to embed the file as an attachment, please close the plugin temporar
 
 In general, **Github** supports **any** file type, **Cloudinary** supports media type files such as **image(png), video(mp4) and audio(mp3)**, **SM.MS, ImgURL** (most hosting services) supports common **image** types.  
 
-Trying to upload a file that the platform does not support or volume exceeds the upper limit will result in a string like `![](undefined)`. Notice it, don't just wait. 
+Trying to upload a file that the platform does not support or volume exceeds the upper limit may result in a string like `![](undefined)`. Notice it, don't just wait. 
 
 ## Thanks
 
