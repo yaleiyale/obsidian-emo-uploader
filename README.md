@@ -3,7 +3,7 @@
 Embed markdown online file/image links.  
 This plugin is for uploading **images** to hosting platform or **files** to Github in Obsidian.  
 
-:triangular_flag_on_post: [中文](https://lestua.ml/notes/2022/10/16/172318)  
+:triangular_flag_on_post: [中文](https://lestua.eu.org/notes/2022/10/16/172318)  
 
 ## How it Works
 
@@ -31,7 +31,7 @@ Support list
       - Install dependencies with `yarn` or `npm` like `npm install`
       - `npm run dev` will start compilation
 3. Enable the Plugin
-4. Configure the settings :point_right:  [some datails](https://lestua.ml/notes/2022/10/16/172318#english)
+4. Configure the settings :point_right:  [some datails](https://lestua.eu.org/notes/2022/10/16/172318#english)
 5. Enjoy convenience :star2:
 
 ## About Uploading to Github
@@ -68,7 +68,7 @@ About [Cloudinary](https://cloudinary.com/), please refer to [obsidian-cloudinar
 
 If you live in China, [imgbb](https://imgbb.com/) is not recommended to use. I found that the pictures uploaded to this platform could not be easily accessed in Chinese Mainland and they are usually presented as thumbnails.
 
-[Imgur](https://imgur.com/) is good. But in my network environment, it is not easy to access and test. I simply  implemented anonymous upload with reference to some posts. When using imgur, deletehash will appear in the form of `![deletehash](url)`, which is used to prevent you from regretting the upload of wrong pictures. You can delete them [here](https://lestua.ml/imgurdeleteimage) or in the plugin.
+[Imgur](https://imgur.com/) is good. But in my network environment, it is not easy to access and test. I simply  implemented anonymous upload with reference to some posts. When using imgur, deletehash will appear in the form of `![deletehash](url)`, which is used to prevent you from regretting the upload of wrong pictures. You can delete them [here](https://lestua.eu.org/imgurdeleteimage) or in the plugin.
 
 :warning: Images are public to see on them. Don't upload prohibited things! Please check the service restrictions by yourself.
 
