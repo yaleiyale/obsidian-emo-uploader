@@ -8,7 +8,7 @@ export class GithubFragment extends EmoFragment {
     el.createEl('h3', { text: 'Github Settings' })
     new Setting(el)
       .setName('owner')
-      .setDesc('the account owner of the repository')
+      .setDesc('owner of the repository')
       .addText((text) => {
         text
           .setPlaceholder('')
@@ -20,7 +20,7 @@ export class GithubFragment extends EmoFragment {
       })
     new Setting(el)
       .setName('repo')
-      .setDesc('the name of the repository')
+      .setDesc('name of the repository')
       .addText((text) => {
         text
           .setPlaceholder('')

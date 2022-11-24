@@ -50,9 +50,10 @@ export default class Emo extends Plugin {
             const randomString = (Math.random() * 10086).toString(36).slice(-6)
             const pastePlaceText = `![uploading...](${randomString})\n`
             editor.replaceSelection(pastePlaceText)
-            uploader.upload(file).then((markdownText) => this.replaceText(editor, pastePlaceText, markdownText)).catch(part => {
-              this.replaceText(editor, pastePlaceText, `[${part as string} upload error]()`)
-              console.log(new Notice(part as string + ' upload error', 2000))
+            uploader.upload(file).then((markdownText) => this.replaceText(editor, pastePlaceText, markdownText)).catch(err => {
+              this.replaceText(editor, pastePlaceText, `[${this.config.choice} upload error]()`)
+              console.log(new Notice(this.config.choice + ' upload error', 2000))
+              console.log(err)
             })
           }
         } else {

@@ -6,9 +6,9 @@ export class ImgurFragment extends EmoFragment {
   display (el: HTMLElement, plugin: Emo): void {
     const parms = plugin.config.imgur_parms
     el.createEl('h3', { text: 'Tips for Anonymous Upload' })
-    el.createEl('h5', { text: 'Imgur upload will produce the link in this format: ![deletehash](url)' })
-    el.createEl('h5', { text: 'deletehash is used to delete the image you just uploaded' })
-    el.createEl('h5', { text: 'If your note will be used for publicity, please remember to delete it in time' })
+    el.createDiv().setText(`Imgur upload will produce the link in this format: ![deletehash](url).
+    [deletehash] is used to delete the image you just uploaded.
+    If your note will be used for publicity, please remember to delete it in time.`)
 
     el.createEl('h3', { text: 'Imgur Settings' })
 

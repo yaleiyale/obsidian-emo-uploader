@@ -31,8 +31,7 @@ export class CloudinaryUploader extends EmoUploader {
         const markdownText = `![](${json.secure_url as string})`
         resolve(markdownText)
       }).catch(err => {
-        reject('Cloudinary')
-        console.log(err)
+        reject(err)
       })
     })
   }

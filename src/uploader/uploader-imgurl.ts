@@ -32,8 +32,7 @@ export class ImgurlUploader extends EmoUploader {
         const markdownText = `![](${json.data.url as string})`
         resolve(markdownText)
       }).catch(err => {
-        reject('ImgURL')
-        console.log(err)
+        reject(err)
       })
     })
   }

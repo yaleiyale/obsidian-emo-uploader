@@ -32,8 +32,7 @@ export class ImgbbUploader extends EmoUploader {
         const markdownText = `![](${url as string})`
         resolve(markdownText)
       }).catch(err => {
-        reject('imgbb')
-        console.log(err)
+        reject(err)
       })
     })
   }

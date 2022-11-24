@@ -38,8 +38,7 @@ export class SmmsUploader extends EmoUploader {
         const markdownText = `![](${url})`
         resolve(markdownText)
       }).catch(err => {
-        reject('SM.MS')
-        console.log(err)
+        reject(err)
       })
     })
   }

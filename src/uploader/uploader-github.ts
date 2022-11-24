@@ -42,8 +42,7 @@ export class GithubUploader extends EmoUploader {
         const markdownText = `![](https://fastly.jsdelivr.net/gh/${this.parms.required.owner}/${this.parms.required.repo}@${this.parms.required.branch}/${filePath})`
         resolve(markdownText)
       }).catch(err => {
-        reject('Github')
-        console.log(err)
+        reject(err)
       })
     })
   }

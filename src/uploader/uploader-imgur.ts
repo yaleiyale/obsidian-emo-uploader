@@ -35,8 +35,7 @@ export class ImgurUploader extends EmoUploader {
         const markdownText = `![${deleteurl as string}](${url as string})`
         resolve(markdownText)
       }).catch(err => {
-        reject('imgur')
-        console.log(err)
+        reject(err)
       })
     })
   }

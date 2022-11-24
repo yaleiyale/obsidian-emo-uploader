@@ -25,7 +25,7 @@ export class EmoUploaderSettingTab extends PluginSettingTab {
     const { containerEl } = this
     containerEl.empty()
 
-    containerEl.createEl('h2', { text: 'Target' })
+    containerEl.createEl('h2', { text: 'Emo - Target' })
     const pick = new Setting(containerEl)
       .setName('target hosting')
       .setDesc('Choose your target. Before uploading, make sure you have completely filled in the necessary parameters of the selected platform.')
