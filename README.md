@@ -103,4 +103,5 @@ Trying to upload a file that the platform does not support or volume exceeds the
 [SM.MS](https://smms.app/)  
 [ImgURL](https://www.imgurl.org/)  
 [Clouinary](https://cloudinary.com/)  
-[Imgur](https://imgur.com/)
+[Imgur](https://imgur.com/)  
+[imgbb](https://imgbb.com/)
