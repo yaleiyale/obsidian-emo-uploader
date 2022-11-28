@@ -24,8 +24,14 @@ export enum HostingProvider { // target hosting
 }
 
 // for dropdown
-export const supportList = [HostingProvider.Github, HostingProvider.Smms, HostingProvider.ImgURL, HostingProvider.Cloudinary,
-  HostingProvider.Imgbb, HostingProvider.Imgur]
+function setSupportList (): string[] {
+  const list = []
+  for (const key in HostingProvider) {
+    list.push(HostingProvider[key as keyof typeof HostingProvider])
+  }
+  return list
+}
+export const supportList = setSupportList()
 
 export const DEFAULT_SETTINGS: Config = {
   choice: HostingProvider.Github,

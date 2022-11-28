@@ -21,7 +21,7 @@ export class ReqFormData {
     }
   }
 
-  async addFile (name: string, file: File): Promise<boolean> {
+  async addFile (name: string, file: File): Promise<void> {
     let data = this.boundary + '\r\n'
     data += 'Content-Disposition: form-data; name="' + name + '"; filename="' + file.name + '"\r\n'
     data += 'Content-Type: ' + file.type + '\r\n\r\n'
@@ -36,7 +36,6 @@ export class ReqFormData {
     for (let i = 0; i < endTag.length; i++) {
       this.result.push(endTag.charCodeAt(i))
     }
-    return true
   }
 
   pack (): ArrayBuffer {
@@ -45,7 +44,6 @@ export class ReqFormData {
       endBoundaryArray.push(this.endBoundary.charCodeAt(i))
     }
     this.result = this.result.concat(endBoundaryArray)
-    const form = new Uint8Array(this.result).buffer
-    return form
+    return new Uint8Array(this.result).buffer
   }
 }
