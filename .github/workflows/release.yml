@@ -4,7 +4,7 @@ on:
     tags:
       - "*"
 env:
-  PLUGIN_NAME: obsidian-emo-uploader
+  PLUGIN_NAME: emo-uploader
 jobs:
   build:
     runs-on: ubuntu-latest
