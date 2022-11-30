@@ -1,8 +1,13 @@
 import { Setting } from 'obsidian'
 import Emo from '../main'
 import { EmoFragment } from '../base/emo-fragment'
+import { HostingProvider } from '../config'
 
 export class GithubFragment extends EmoFragment {
+  constructor (el: HTMLElement, plugin: Emo) {
+    super(HostingProvider.Github, el, plugin)
+  }
+
   display (el: HTMLElement, plugin: Emo): void {
     const parms = plugin.config.github_parms
     el.createEl('h3', { text: 'Github Settings' })

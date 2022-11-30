@@ -3,7 +3,7 @@ import {
   PluginSettingTab,
   Setting
 } from 'obsidian'
-import { HostingProvider, supportList } from './config'
+import { HostingProvider } from './config'
 import Emo from './main'
 import { EmoFragment } from './base/emo-fragment'
 import { CloudinaryFragment } from './fragment/fragment-cloudinary'
@@ -30,22 +30,22 @@ export class EmoUploaderSettingTab extends PluginSettingTab {
       .setName('target hosting')
       .setDesc('Choose your target. Before uploading, make sure you have completely filled in the necessary parameters of the selected platform.')
 
-    const githubFragment = new GithubFragment('github', HostingProvider.Github, containerEl, this.plugin)
-    this.fragmentList.push(githubFragment)
-    const cloudinaryFragment = new CloudinaryFragment('cloudinary', HostingProvider.Cloudinary, containerEl, this.plugin)
-    this.fragmentList.push(cloudinaryFragment)
-    const smmsFragment = new SmmsFragment('smms', HostingProvider.Smms, containerEl, this.plugin)
-    this.fragmentList.push(smmsFragment)
-    const imgurlFragment = new ImgurlFragment('imgurl', HostingProvider.ImgURL, containerEl, this.plugin)
-    this.fragmentList.push(imgurlFragment)
-    const imgbbFragment = new ImgbbFragment('imgbb', HostingProvider.Imgbb, containerEl, this.plugin)
-    this.fragmentList.push(imgbbFragment)
-    const imgurFragment = new ImgurFragment('imgur', HostingProvider.Imgur, containerEl, this.plugin)
-    this.fragmentList.push(imgurFragment)
+    this.fragmentList.push(new GithubFragment(containerEl, this.plugin))
+    this.fragmentList.push(new CloudinaryFragment(containerEl, this.plugin))
+    this.fragmentList.push(new SmmsFragment(containerEl, this.plugin))
+    this.fragmentList.push(new ImgurlFragment(containerEl, this.plugin))
+    this.fragmentList.push(new ImgbbFragment(containerEl, this.plugin))
+    this.fragmentList.push(new ImgurFragment(containerEl, this.plugin))
 
+    // which one will show at the first time
     this.fragmentList.forEach(element => {
-      element.update(this.plugin.config.choice) // which one will show at the first time
+      element.update(this.plugin.config.choice)
     })
+
+    const supportList: string[] = []
+    for (const key in HostingProvider) {
+      supportList.push(HostingProvider[key as keyof typeof HostingProvider])
+    }
 
     pick.addDropdown((dropdown) => {
       supportList.forEach((record) => { dropdown.addOption(record, record) })

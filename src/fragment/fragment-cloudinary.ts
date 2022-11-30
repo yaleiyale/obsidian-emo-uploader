@@ -1,8 +1,13 @@
 import { Setting } from 'obsidian'
 import Emo from '../main'
 import { EmoFragment } from '../base/emo-fragment'
+import { HostingProvider } from '../config'
 
 export class CloudinaryFragment extends EmoFragment {
+  constructor (el: HTMLElement, plugin: Emo) {
+    super(HostingProvider.Cloudinary, el, plugin)
+  }
+
   display (el: HTMLElement, plugin: Emo): void {
     const parms = plugin.config.cloudinary_parms
     el.createEl('h3', { text: 'Cloudinary Settings' })

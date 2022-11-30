@@ -4,9 +4,9 @@ import Emo from '../main'
 export abstract class EmoFragment {
   kind: HostingProvider
   element: HTMLDivElement
-  constructor (name: string, kind: HostingProvider, el: HTMLElement, plugin: Emo) {
+  constructor (kind: HostingProvider, el: HTMLElement, plugin: Emo) {
     this.kind = kind
-    this.element = el.createDiv(name)
+    this.element = el.createDiv(kind)
     this.display(this.element, plugin)
     this.element.hide()
   }

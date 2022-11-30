@@ -36,7 +36,7 @@ export async function getBase64 (file: File): Promise<string> {
 }
 
 // get a random filename
-export function getFileName (): string {
+export function getRandomFileName (): string {
   const time = Date.parse(new Date().toString())
   return time.toString() + (Math.random() * 10086).toString(36).slice(-6)
 }

@@ -1,8 +1,13 @@
 import { Notice, request, RequestUrlParam, Setting } from 'obsidian'
 import Emo from '../main'
 import { EmoFragment } from '../base/emo-fragment'
+import { HostingProvider } from '../config'
 
 export class ImgurFragment extends EmoFragment {
+  constructor (el: HTMLElement, plugin: Emo) {
+    super(HostingProvider.Imgur, el, plugin)
+  }
+
   display (el: HTMLElement, plugin: Emo): void {
     const parms = plugin.config.imgur_parms
     el.createEl('h3', { text: 'Tips for Anonymous Upload' })

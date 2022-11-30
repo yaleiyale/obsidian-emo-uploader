@@ -1,6 +1,6 @@
 import { request, RequestUrlParam } from 'obsidian'
 import { GithubParms } from '../parms/parms-github'
-import { getBase64, getFileName } from '../utils/file-helper'
+import { getBase64, getRandomFileName } from '../utils/file-helper'
 import { EmoUploader } from '../base/emo-uploader'
 
 export class GithubUploader extends EmoUploader {
@@ -14,7 +14,7 @@ export class GithubUploader extends EmoUploader {
     let filePath = ''
     if (this.parms.random) { // use random filename
       const startSuffix = file.name.lastIndexOf('.')
-      filePath = this.parms.path + getFileName()
+      filePath = this.parms.path + getRandomFileName()
       filePath += startSuffix > 0 ? file.name.substring(startSuffix) : '' // for no suffix files
     } else {
       filePath = this.parms.path + file.name // original filename

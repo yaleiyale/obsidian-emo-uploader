@@ -14,6 +14,7 @@ export interface Config { // data from data.json
   imgbb_parms: ImgbbParms
   imgur_parms: ImgurParms
 }
+
 export enum HostingProvider { // target hosting
   Github = 'Github',
   Smms = 'SM.MS',
@@ -22,16 +23,6 @@ export enum HostingProvider { // target hosting
   Imgbb = 'imgbb',
   Imgur = 'Imgur'
 }
-
-// for dropdown
-function setSupportList (): string[] {
-  const list = []
-  for (const key in HostingProvider) {
-    list.push(HostingProvider[key as keyof typeof HostingProvider])
-  }
-  return list
-}
-export const supportList = setSupportList()
 
 export const DEFAULT_SETTINGS: Config = {
   choice: HostingProvider.Github,
