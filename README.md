@@ -3,11 +3,14 @@
 Embed markdown online file/image links.  
 This plugin is for uploading **images** to hosting platform or **files** to Github in Obsidian.  
 
-:triangular_flag_on_post: [中文](https://lestua.eu.org/notes/2022/10/16/172318)  
+🚩 [中文](https://lestua.eu.org/notes/2022/10/16/172318)  
 
 ## How it Works
 
-https://user-images.githubusercontent.com/55282569/200258839-0979aa8c-7e5b-4254-bbe3-b9eeff458a40.mp4
+![case-emo](https://user-images.githubusercontent.com/55282569/205416316-39bbde1b-0161-4067-9592-5f0a70de2c16.gif)
+
+Because of the size, I had to compress the👆 gif a lot. ( Maybe I need to find a better way to record a small and high fidelity gif. 🥴)  
+Here is the [Demo Video](https://user-images.githubusercontent.com/55282569/200258839-0979aa8c-7e5b-4254-bbe3-b9eeff458a40.mp4). ( It's smaller, clearer, and slower to play. )
 
 Support list
 
@@ -31,8 +34,8 @@ Support list
       - Install dependencies with `yarn` or `npm` like `npm install`
       - `npm run dev` will start compilation
 3. Enable the Plugin
-4. Configure the settings :point_right:  [some datails](https://lestua.eu.org/notes/2022/10/16/172318#english)
-5. Enjoy convenience :star2:
+4. Configure the settings 👉  [some datails](https://lestua.eu.org/notes/2022/10/16/172318#english)
+5. Enjoy convenience 🌟
 
 ## About Uploading to Github
 
@@ -44,33 +47,33 @@ If you need more help on hosting images, go to [the other parts](https://github.
 This plugin allows you to automatically upload **files** pasted to Obsidian directly into your Github repository ( instead of stored locally ). It's useful when you want to mention a file in your note which you think is good for sharing like script, config-file or anything.  
 Of course, it can be a simple image uploader. It does a good job of embedding images into markdown files.  
 But more than a image uploader, You can upload **various types of files**, as long as Github accepts them.  
-Whether the file link can be rendered in obsidian or not depends on the support of obsidian itself. It doesn't matter, even if they can't be rendered, they can still be used as links. :lollipop: Just remove the exclamation point at the beginning.  
+Whether the file link can be rendered in obsidian or not depends on the support of obsidian itself. It doesn't matter, even if they can't be rendered, they can still be used as links. 🍭 Just remove the exclamation point at the beginning.  
 
 ### About Use Policy
 
 [GitHub terms-of-service](https://docs.github.com/cn/site-policy/github-terms/github-terms-of-service)  
 [jsdelivr Use Policy](https://www.jsdelivr.com/terms/acceptable-use-policy-jsdelivr-net)  
 
-:warning: **Note that**
+⚠️ **Note that**
 
-1. The Github target repository must be public, which means that all files uploaded are public. Github should also be more for those who are happy to share. Please make sure that it is harmless for you to share the files you upload. Personally, I'm looking forward to the day when one of your uploads will be for selfless sharing.  :sunflower:  
+1. The Github target repository must be public, which means that all files uploaded are public. Github should also be more for those who are happy to share. Please make sure that it is harmless for you to share the files you upload. Personally, I'm looking forward to the day when one of your uploads will be for selfless sharing.  🌻  
 2. Do not upload Empty file. It's meaningless and wrong here.
 3. It is recommended to check the random filename in the panel. Duplicate file name will raise an error. Random file names will greatly avoid duplicate file names.  
 4. In general, Github is generous enough. But you need to get a sense of proportion, **don't abuse Github's services too hard**. Take it easy, normal use, such as in Github pages, is of course acceptable. But if you need to use images in large quantities, please use a professional image hosting service. ( Now it has been integrated into this plugin ). Going beyond the normal range (e.g. storing more than **1GB files in a single repository**), abusing Github, and uploading bad files with undesirable effects may cause your Github repository or even account to be affected.
-5. I use [jsdelivr](https://www.jsdelivr.com/) here. It is free. Just like above, don't abuse it. Just like what I do in the video, it's not good to use jsdelivr on transferring large video, I have deleted it. *My case is a small size video*. :smirk_cat: 
+5. I use [jsdelivr](https://www.jsdelivr.com/) here. It is free. Just like above, don't abuse it. Just like what I do in the video, it's not good to use jsdelivr on transferring large video, I have deleted it. *My case is a small size video*. 😼 
 
 ## About the Other
 
 [ImgURL](https://www.imgurl.org/), [SM.MS](https://smms.app/) are cloud storage platforms that allows you to upload **images** to a storage account. For users living in China, they are easier to access than Github and Cloudinary.  
 Register an account and find parameters you need. Just put your parameters to the correct positions. Then you can use it just like the way in the video.
 
-About [Cloudinary](https://cloudinary.com/), please refer to [obsidian-cloudinary-uploader/README.md](https://github.com/jordanhandy/obsidian-cloudinary-uploader/blob/main/README.md). Of course, Cloudinary is supported here. If you find that Cloudinary is enough to meet your needs, you can just use it. ( In fact, my plugin is smaller on size. :flushed: )
+About [Cloudinary](https://cloudinary.com/), please refer to [obsidian-cloudinary-uploader/README.md](https://github.com/jordanhandy/obsidian-cloudinary-uploader/blob/main/README.md). Of course, Cloudinary is supported here. If you find that Cloudinary is enough to meet your needs, you can just use it. ( In fact, my plugin is smaller on size. 😳 )
 
 If you live in China, [imgbb](https://imgbb.com/) is not recommended to use. I found that the pictures uploaded to this platform could not be easily accessed in Chinese Mainland and they are usually presented as thumbnails.
 
 [Imgur](https://imgur.com/) is good. But in my network environment, it is not easy to access and test. I simply  implemented anonymous upload with reference to some posts. When using imgur, deletehash will appear in the form of `![deletehash](url)`, which is used to prevent you from regretting the upload of wrong pictures. You can delete them [here](https://lestua.eu.org/imgurdeleteimage) or in the plugin.
 
-:warning: Images are public to see on them. Don't upload prohibited things! Please check the service restrictions by yourself.
+⚠️ Images are public to see on them. Don't upload prohibited things! Please check the service restrictions by yourself.
 
 ## How to Extend
 
@@ -83,7 +86,7 @@ Want to support more platforms? If you don't want to make too much effort, you c
 - Add your *uploader* to the switch judgment block in `main.ts`.
 - Test it.
 
-It's done! :kissing_cat:
+It's done! 😽
 
 ## Note
 
