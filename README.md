@@ -25,7 +25,7 @@ Support list
 
 1. Disable Obsidian Safe Mode
 2. Install the Plugin
-   - ~~Install from the Obsidian Community Plugins tab~~ (waiting for code review)
+   - Install from the Obsidian Community Plugins tab
    - use Release
       - download **main.js manifest.json** in the latest Release
       - move them in a folder in your obsidian vault's plugin folder
