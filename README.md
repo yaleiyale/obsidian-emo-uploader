@@ -1,3 +1,12 @@
+---
+title: 
+aliases: []
+tags: []
+date: 2022-12-04T22:38:54+08:00
+lastmod: 2022-12-04T22:41:45+08:00
+from: 
+---
+
 # Obsidian Emo Uploader
 
 Embed markdown online file/image links.  
@@ -7,15 +16,15 @@ This plugin is for uploading **images** to hosting platform or **files** to Gith
 
 ## How it Works
 
-<video src="https://user-images.githubusercontent.com/55282569/200258839-0979aa8c-7e5b-4254-bbe3-b9eeff458a40.mp4" controls="controls" height="400" width="600"></video>
+<video src="https://user-images.githubusercontent.com/55282569/200258839-0979aa8c-7e5b-4254-bbe3-b9eeff458a40.mp4" controls="controls"></video>
 
 Support list
 
 - [GitHub](https://github.com/)
 - [Imgur](https://imgur.com/)
-- [SM.MS](https://smms.app/)  
-- [ImgURL](https://www.imgurl.org/)  
-- [Clouinary](https://cloudinary.com/)  
+- [SM.MS](https://smms.app/)
+- [ImgURL](https://www.imgurl.org/)
+- [Clouinary](https://cloudinary.com/)
 - [imgbb](https://imgbb.com/)
 
 ## Configuration
@@ -26,12 +35,12 @@ Support list
    - use Release
       - download **main.js manifest.json** in the latest Release
       - move them in a folder in your obsidian vault's plugin folder
-    - Manual install
+   - Manual install
       - Clone this repo
       - Install dependencies with `yarn` or `npm` like `npm install`
       - `npm run dev` will start compilation
 3. Enable the Plugin
-4. Configure the settings 👉  [some datails](https://lestua.eu.org/notes/2022/10/16/172318#english)
+4. Configure the settings 👉 [some datails](https://lestua.eu.org/notes/2022/10/16/172318#english)
 5. Enjoy convenience 🌟
 
 ## About Uploading to Github
@@ -57,7 +66,7 @@ Whether the file link can be rendered in obsidian or not depends on the support 
 2. Do not upload Empty file. It's meaningless and wrong here.
 3. It is recommended to check the random filename in the panel. Duplicate file name will raise an error. Random file names will greatly avoid duplicate file names.  
 4. In general, Github is generous enough. But you need to get a sense of proportion, **don't abuse Github's services too hard**. Take it easy, normal use, such as in Github pages, is of course acceptable. But if you need to use images in large quantities, please use a professional image hosting service. ( Now it has been integrated into this plugin ). Going beyond the normal range (e.g. storing more than **1GB files in a single repository**), abusing Github, and uploading bad files with undesirable effects may cause your Github repository or even account to be affected.
-5. I use [jsdelivr](https://www.jsdelivr.com/) here. It is free. Just like above, don't abuse it. Just like what I do in the video, it's not good to use jsdelivr on transferring large video, I have deleted it. *My case is a small size video*. 😼 
+5. I use [jsdelivr](https://www.jsdelivr.com/) here. It is free. Just like above, don't abuse it. Just like what I do in the video, it's not good to use jsdelivr on transferring large video, I have deleted it. *My case is a small size video*. 😼
 
 ## About the Other
 
@@ -68,7 +77,7 @@ About [Cloudinary](https://cloudinary.com/), please refer to [obsidian-cloudinar
 
 If you live in China, [imgbb](https://imgbb.com/) is not recommended to use. I found that the pictures uploaded to this platform could not be easily accessed in Chinese Mainland and they are usually presented as thumbnails.
 
-[Imgur](https://imgur.com/) is good. But in my network environment, it is not easy to access and test. I simply  implemented anonymous upload with reference to some posts. When using imgur, deletehash will appear in the form of `![deletehash](url)`, which is used to prevent you from regretting the upload of wrong pictures. You can delete them [here](https://lestua.eu.org/imgurdeleteimage) or in the plugin.
+[Imgur](https://imgur.com/) is good. But in my network environment, it is not easy to access and test. I simply implemented anonymous upload with reference to some posts. When using imgur, deletehash will appear in the form of `![deletehash](url)`, which is used to prevent you from regretting the upload of wrong pictures. You can delete them [here](https://lestua.eu.org/imgurdeleteimage) or in the plugin.
 
 ⚠️ Images are public to see on them. Don't upload prohibited things! Please check the service restrictions by yourself.
 
@@ -76,7 +85,7 @@ If you live in China, [imgbb](https://imgbb.com/) is not recommended to use. I f
 
 Want to support more platforms? If you don't want to make too much effort, you can extend it in the following ways.  
 
-- Refer to existing files, and add the parameters required by your new *uploader*  by adding files to `src/Parms`.
+- Refer to existing files, and add the parameters required by your new *uploader* by adding files to `src/Parms`.
 - Use your *parms* interface. In `config.ts`, add parameter configurations about your *uploader* to provide choices and act as constructors for *uploader* at run time.
 - Implement your *uploader* and *settings panel* by adding files to `src/Uploader, src/Fragment`.
 - In `settings-tab.ts`,add your *fragment* to show and set parameters in the setting-tab.
@@ -93,7 +102,15 @@ If you need to embed the file as an attachment, please close the plugin temporar
 
 In general, **Github** supports **any** file type, **Cloudinary** supports media type files such as **image(png), video(mp4) and audio(mp3)**, **SM.MS, ImgURL** (most hosting services) supports common **image** types.  
 
-Trying to upload a file that the platform does not support or volume exceeds the upper limit may result in a string like `![](undefined)`. Notice it, don't just wait. 
+Trying to upload a file that the platform does not support or volume exceeds the upper limit may result in a string like `![](undefined)`. Notice it, don't just wait.  
+
+---
+
+If you are enjoying the plugin then you can support my work and enthusiasm by buying me a cola:  
+
+<a id="cola" href="https://lestua.eu.org/donate/"><img src="https://s1.ax1x.com/2022/10/30/xIMoKU.png" alt="BuyMeACola" width="180" style="margin:auto"></a>
+
+Thank you!
 
 ## Thanks
 
