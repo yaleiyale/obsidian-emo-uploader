@@ -7,10 +7,7 @@ This plugin is for uploading **images** to hosting platform or **files** to Gith
 
 ## How it Works
 
-![case-emo](https://user-images.githubusercontent.com/55282569/205416316-39bbde1b-0161-4067-9592-5f0a70de2c16.gif)
-
-Because of the size, I had to compress the👆 gif a lot. ( Maybe I need to find a better way to record a small and high fidelity gif. 🥴)  
-Here is the [Demo Video](https://user-images.githubusercontent.com/55282569/200258839-0979aa8c-7e5b-4254-bbe3-b9eeff458a40.mp4). ( It's smaller, clearer, and slower to play. )
+<video src="https://user-images.githubusercontent.com/55282569/200258839-0979aa8c-7e5b-4254-bbe3-b9eeff458a40.mp4" controls="controls" height="400" width="600"></video>
 
 Support list
 
