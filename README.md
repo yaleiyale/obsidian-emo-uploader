@@ -1,4 +1,5 @@
 # Obsidian Emo Uploader
+![GitHub Release Date](https://img.shields.io/github/release-date/yaleiyale/obsidian-emo-uploader?style=for-the-badge) ![GitHub all releases](https://img.shields.io/github/downloads/yaleiyale/obsidian-emo-uploader/total?style=for-the-badge) ![GitHub](https://img.shields.io/github/license/yaleiyale/obsidian-emo-uploader?style=for-the-badge) [![GitHub Repo stars](https://img.shields.io/github/stars/yaleiyale/obsidian-emo-uploader?style=for-the-badge)](https://github.com/yaleiyale/obsidian-emo-uploader) [![CodeFactor](https://www.codefactor.io/repository/github/yaleiyale/obsidian-emo-uploader/badge?style=for-the-badge)](https://www.codefactor.io/repository/github/yaleiyale/obsidian-emo-uploader)
 
 Embed markdown online file/image links.  
 This plugin is for uploading **images** to hosting platform or **files** to Github in Obsidian.  
