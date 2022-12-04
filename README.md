@@ -1,12 +1,3 @@
----
-title: 
-aliases: []
-tags: []
-date: 2022-12-04T22:38:54+08:00
-lastmod: 2022-12-04T22:41:45+08:00
-from: 
----
-
 # Obsidian Emo Uploader
 
 Embed markdown online file/image links.  
