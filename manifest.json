@@ -1,9 +1,10 @@
 {
-  "id": "obsidian-cloudinary-uploader",
-  "name": "Obsidian Cloudinary Uploader",
-  "description": "This plugin uploads the images in your clipboard to Cloudinary as unsigned uploads",
-  "author": "Jordan Handy",
-  "isDesktopOnly": true,
-  "minAppVersion": "0.11.0",
-  "version": "0.1.5"
+  "id": "emo-uploader",
+  "name": "Emo",
+  "version": "2.6",
+  "minAppVersion": "0.15.6",
+  "description": "Embed markdown online file/image links. This plugin is for uploading images to hosting or files to github in Obsidian.",
+  "author": "yaleiyale",
+  "authorUrl": "https://lestua.eu.org",
+  "isDesktopOnly": true
 }
