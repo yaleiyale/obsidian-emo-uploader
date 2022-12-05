@@ -39,7 +39,7 @@ export class GithubUploader extends EmoUploader {
 
     return await new Promise((resolve, reject) => {
       request(req).then(() => {
-        const markdownText = `![](https://fastly.jsdelivr.net/gh/${this.parms.required.owner}/${this.parms.required.repo}@${this.parms.required.branch}/${filePath})`
+        const markdownText = `![gh](https://fastly.jsdelivr.net/gh/${this.parms.required.owner}/${this.parms.required.repo}@${this.parms.required.branch}/${filePath})`
         resolve(markdownText)
       }).catch(err => {
         reject(err)

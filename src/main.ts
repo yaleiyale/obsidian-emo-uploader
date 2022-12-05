@@ -17,51 +17,63 @@ export default class Emo extends Plugin {
   config!: Config
   setupPasteHandler (): void {
     // On paste event, get "files" from clipbaord data
+
+    this.registerEvent(this.app.workspace.on('editor-drop', async (evt: DragEvent, editor: Editor) => {
+      const { files } = evt.dataTransfer as DataTransfer
+      this.startUpload(files, evt, editor)
+    }))
     this.registerEvent(this.app.workspace.on('editor-paste', async (evt: ClipboardEvent, editor: Editor) => {
       const { files } = evt.clipboardData as DataTransfer
-      let uploader: EmoUploader
-      if (files.length > 0) {
-        switch (this.config.choice) {
-          case HostingProvider.Github:
-            uploader = new GithubUploader(this.config.github_parms)
-            break
-          case HostingProvider.ImgURL:
-            uploader = new ImgurlUploader(this.config.imgurl_parms)
-            break
-          case HostingProvider.Cloudinary:
-            uploader = new CloudinaryUploader(this.config.cloudinary_parms)
-            break
-          case HostingProvider.Smms:
-            uploader = new SmmsUploader(this.config.smms_parms)
-            break
-          case HostingProvider.Imgbb:
-            uploader = new ImgbbUploader(this.config.imgbb_parms)
-            break
-          case HostingProvider.Imgur:
-            uploader = new ImgurUploader(this.config.imgur_parms)
-            break
-          default:
-            console.log(new Notice('Emo broken. Check your target', 2000))
-            return
-        }
-        if (uploader.isValid()) {
-          evt.preventDefault()
-          for (const file of files) {
-            const randomString = (Math.random() * 10086).toString(36).slice(-6)
-            const pastePlaceText = `![uploading...](${randomString})\n`
-            editor.replaceSelection(pastePlaceText)
-            uploader.upload(file).then((markdownText) => this.replaceText(editor, pastePlaceText, markdownText)).catch(err => {
-              this.replaceText(editor, pastePlaceText, `[${this.config.choice} upload error]()`)
-              console.log(new Notice(this.config.choice + ' upload error', 2000))
-              console.log(err)
-            })
-          }
-        } else {
-          console.log(new Notice('Emo need more prams', 2000))
-          console.log(uploader)
-        }
-      }
+      this.startUpload(files, evt, editor)
     }))
+  }
+
+  startUpload (files: FileList, evt: Event, editor: Editor): void {
+    let uploader: EmoUploader
+    if (files.length > 0) {
+      switch (this.config.choice) {
+        case HostingProvider.Github:
+          uploader = new GithubUploader(this.config.github_parms)
+          break
+        case HostingProvider.ImgURL:
+          uploader = new ImgurlUploader(this.config.imgurl_parms)
+          break
+        case HostingProvider.Cloudinary:
+          uploader = new CloudinaryUploader(this.config.cloudinary_parms)
+          break
+        case HostingProvider.Smms:
+          uploader = new SmmsUploader(this.config.smms_parms)
+          break
+        case HostingProvider.Imgbb:
+          uploader = new ImgbbUploader(this.config.imgbb_parms)
+          break
+        case HostingProvider.Imgur:
+          uploader = new ImgurUploader(this.config.imgur_parms)
+          break
+        default:
+          console.log(new Notice('Emo broken. Check your target', 2000))
+          return
+      }
+      if (uploader.isValid()) {
+        evt.preventDefault()
+        for (const file of files) {
+          const randomString = (Math.random() * 10086).toString(36).slice(-6)
+          const pastePlaceText = `![uploading...](${randomString})\n`
+          editor.replaceSelection(pastePlaceText)
+          uploader.upload(file).then((markdownText) => {
+            const showTag = file.type.startsWith('image') ? 0 : 1// whether use `!` at the beginning
+            this.replaceText(editor, pastePlaceText, markdownText.slice(showTag))
+          }).catch(err => {
+            this.replaceText(editor, pastePlaceText, `[${this.config.choice} upload error]()`)
+            console.log(new Notice(this.config.choice + ' upload error', 2000))
+            console.log(err)
+          })
+        }
+      } else {
+        console.log(new Notice('Emo need more prams', 2000))
+        console.log(uploader)
+      }
+    }
   }
 
   // Function to replace text

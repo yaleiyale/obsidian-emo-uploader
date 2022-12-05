@@ -29,7 +29,7 @@ export class ImgurlUploader extends EmoUploader {
     return await new Promise((resolve, reject) => {
       request(req).then((res) => {
         const json = JSON.parse(res)
-        const markdownText = `![](${json.data.url as string})`
+        const markdownText = `![ImgURL](${json.data.url as string})`
         resolve(markdownText)
       }).catch(err => {
         reject(err)

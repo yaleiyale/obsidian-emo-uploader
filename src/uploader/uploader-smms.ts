@@ -35,7 +35,7 @@ export class SmmsUploader extends EmoUploader {
         } catch (error) {
           url = json.images // Image upload repeated limit, this image exists at here
         }
-        const markdownText = `![](${url})`
+        const markdownText = `![SMMS](${url})`
         resolve(markdownText)
       }).catch(err => {
         reject(err)

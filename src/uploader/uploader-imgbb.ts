@@ -29,7 +29,7 @@ export class ImgbbUploader extends EmoUploader {
       request(req).then((res) => {
         const json = JSON.parse(res)
         const url = json.data.url
-        const markdownText = `![](${url as string})`
+        const markdownText = `![imgbb](${url as string})`
         resolve(markdownText)
       }).catch(err => {
         reject(err)
