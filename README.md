@@ -4,6 +4,8 @@
 Embed markdown online file/image links.  
 This plugin is for uploading **images** to hosting platform or **files** to Github in Obsidian.  
 
+Starting from version 2.6, clipboard and drag files are supported; Non-image files will appear as links without "!" at the beginning by default after being embed in markdown.
+
 🚩 [中文](https://lestua.eu.org/notes/2022/10/16/172318)  
 
 ## How it Works
