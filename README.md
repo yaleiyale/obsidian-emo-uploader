@@ -1,8 +1,17 @@
 # Obsidian Emo Uploader
-![GitHub Release Date](https://img.shields.io/github/release-date/yaleiyale/obsidian-emo-uploader?style=for-the-badge) ![GitHub all releases](https://img.shields.io/github/downloads/yaleiyale/obsidian-emo-uploader/total?style=for-the-badge) ![GitHub](https://img.shields.io/github/license/yaleiyale/obsidian-emo-uploader?style=for-the-badge) [![GitHub Repo stars](https://img.shields.io/github/stars/yaleiyale/obsidian-emo-uploader?style=for-the-badge)](https://github.com/yaleiyale/obsidian-emo-uploader) [![CodeFactor](https://www.codefactor.io/repository/github/yaleiyale/obsidian-emo-uploader/badge?style=for-the-badge)](https://www.codefactor.io/repository/github/yaleiyale/obsidian-emo-uploader)
+
+<p align="center">
+		<img src="https://img.shields.io/github/release-date/yaleiyale/obsidian-emo-uploader?style=for-the-badge">
+      <img src="https://img.shields.io/github/downloads/yaleiyale/obsidian-emo-uploader/total?style=for-the-badge">
+      <img src="https://img.shields.io/github/license/yaleiyale/obsidian-emo-uploader?style=for-the-badge">
+      <img src="https://img.shields.io/github/stars/yaleiyale/obsidian-emo-uploader?style=for-the-badge">
+      <img src="https://www.codefactor.io/repository/github/yaleiyale/obsidian-emo-uploader/badge?style=for-the-badge">
+</p>
 
 Embed markdown online file/image links.  
 This plugin is for uploading **images** to hosting platform or **files** to Github in Obsidian.  
+
+**图床聚合 & Github上传器**  
 
 Starting from version 2.6, clipboard and drag files are supported; Non-image files will appear as links without "!" at the beginning by default after being embed in markdown.
 
@@ -27,24 +36,24 @@ Support list
 2. Install the Plugin
    - Install from the Obsidian Community Plugins tab
    - use Release
-      - download **main.js manifest.json** in the latest Release
-      - move them in a folder in your obsidian vault's plugin folder
+      - download **main.js manifest.json or zip file** in the latest Release
+      - move **main.js manifest.json** in a folder in your obsidian vault's plugin folder
    - Manual install
       - Clone this repo
       - Install dependencies with `yarn` or `npm` like `npm install`
-      - `npm run dev` will start compilation
+      - `yarn run dev` will start compilation
 3. Enable the Plugin
-4. Configure the settings 👉 [some datails](https://lestua.eu.org/notes/2022/10/16/172318#english)
+4. Configure the settings 👉 [some datails: take configuring github as an example](https://lestua.eu.org/notes/2022/10/16/172318#english)
 5. Enjoy convenience 🌟
 
 ## About Uploading to Github
 
 For uninitiated visitors from outside the code world, Github is a famous internet hosting service for software development and version control using Git.  
-If you need more help on hosting images, go to [the other parts](https://github.com/yaleiyale/obsidian-emo-uploader#about-the-other).  
+If you need more help on hosting **images**, go to [the other parts](https://github.com/yaleiyale/obsidian-emo-uploader#about-the-other). These services are more focused on this.    
 
 ### What is It?
 
-This plugin allows you to automatically upload **files** pasted to Obsidian directly into your Github repository ( instead of stored locally ). It's useful when you want to mention a file in your note which you think is good for sharing like script, config-file or anything.  
+This part allows you to automatically upload **files** pasted to Obsidian directly into your Github repository ( instead of stored locally ). It's useful when you want to mention a file in your note which you think is good for sharing like script, config-file or anything.  
 Of course, it can be a simple image uploader. It does a good job of embedding images into markdown files.  
 But more than a image uploader, You can upload **various types of files**, as long as Github accepts them.  
 Whether the file link can be rendered in obsidian or not depends on the support of obsidian itself. It doesn't matter, even if they can't be rendered, they can still be used as links. 🍭 Just remove the exclamation point at the beginning.  
