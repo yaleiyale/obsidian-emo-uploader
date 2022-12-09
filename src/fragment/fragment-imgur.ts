@@ -12,7 +12,7 @@ export class ImgurFragment extends EmoFragment {
     super(HostingProvider.Imgur, el, plugin)
     if (!plugin.initDone) {
       plugin.registerObsidianProtocolHandler('emo-imgur-oauth', async (params) => {
-        if (params.error) {
+        if (params.error !== undefined) {
           console.log(new Notice(`Authentication failed with error: ${params.error}`))
           return
         }
@@ -36,7 +36,7 @@ export class ImgurFragment extends EmoFragment {
     // anonymous or authenticated
     new Setting(el)
       .setName('Anonymous Upload')
-      .setDesc('Files uploaded anonymously willnot show in your imgur account.')
+      .setDesc('Files uploaded anonymously willnot show in your Imgur account.')
       .addToggle((toggle) => {
         toggle.setValue(parms.anonymous)
         toggle.onChange(async (value) => {
@@ -53,7 +53,7 @@ export class ImgurFragment extends EmoFragment {
 
     new Setting(el)
       .setName('id')
-      .setDesc('The built-in ID has a daily usage limit, if it is temporarily invalid, you can use your own client ID to upload and delete')
+      .setDesc('The built-in ID has a daily usage limit, if it is temporarily invalid, you can use your own client ID to upload and delete.')
       .addText((text) => {
         text
           .setPlaceholder('')
@@ -66,7 +66,7 @@ export class ImgurFragment extends EmoFragment {
     let hash = ''
     new Setting(el)
       .setName('delete')
-      .setDesc('If you want to delete the image on Imgur, delete it here with the deletehash')
+      .setDesc('If you want to delete the image on Imgur, delete it here with the deletehash.')
       .addText((text) => {
         text
           .setPlaceholder('deletehash')
@@ -107,7 +107,9 @@ export class ImgurFragment extends EmoFragment {
       console.log(err)
     }
     this.loginPart = new Setting(el)
-    this.loginPart.setName(imgurStateText).addButton((bt) => {
+    this.loginPart.setName(imgurStateText)
+    .setDesc("Sometimes the auth results need to be refreshed manually before they are displayed.")
+    .addButton((bt) => {
       this.loginBtn = bt
       bt.setCta()
         .setButtonText(imgurBtnText).onClick(async () => {
@@ -130,7 +132,7 @@ export class ImgurFragment extends EmoFragment {
       headers: new Headers({ Authorization: `Bearer ${accessToken}` })
     })
     if (!r.ok) {
-      throw new Error('imgur account error')
+      throw new Error('Imgur account error')
     }
     return ((await r.json()) as AccountInfo).data.url
   }
