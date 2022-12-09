@@ -2,7 +2,7 @@ import { request, RequestUrlParam } from 'obsidian'
 import { ImgurParms } from '../parms/parms-imgur'
 import { ReqFormData } from '../utils/req-formdata'
 import { EmoUploader } from '../base/emo-uploader'
-import { IMGUR_ACCESS_TOKEN_LOCALSTORAGE_KEY, IMGUR_DEFAULT_ID } from '../base/constants'
+import { IMGUR_ACCESS_TOKEN_LOCALSTORAGE_KEY, IMGUR_DEFAULT_ID, NO_SIGN_IN } from '../base/constants'
 
 export class ImgurUploader extends EmoUploader {
   parms!: ImgurParms
@@ -31,14 +31,18 @@ export class ImgurUploader extends EmoUploader {
       }
     } else {
       const accessToken = localStorage.getItem(IMGUR_ACCESS_TOKEN_LOCALSTORAGE_KEY)
-      req = {
-        url: 'https://api.imgur.com/3/image',
-        method: 'POST',
-        headers: {
-          'Content-Type': 'multipart/form-data;boundary=' + randomBoundary,
-          Authorization: `Bearer ${accessToken as string}`
-        },
-        body: form
+      if (accessToken !== null) {
+        req = {
+          url: 'https://api.imgur.com/3/image',
+          method: 'POST',
+          headers: {
+            'Content-Type': 'multipart/form-data;boundary=' + randomBoundary,
+            Authorization: `Bearer ${accessToken}`
+          },
+          body: form
+        }
+      } else {
+        return NO_SIGN_IN
       }
     }
     return await new Promise((resolve, reject) => {

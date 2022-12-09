@@ -1,15 +1,37 @@
-import { Notice, request, RequestUrlParam, Setting } from 'obsidian'
+import { ButtonComponent, Notice, request, RequestUrlParam, Setting } from 'obsidian'
 import Emo from '../main'
 import { EmoFragment } from '../base/emo-fragment'
 import { HostingProvider } from '../config'
-import { IMGUR_DEFAULT_ID } from '../base/constants'
+import { IMGUR_ACCESS_TOKEN_LOCALSTORAGE_KEY, IMGUR_DEFAULT_ID, NO_SIGN_IN } from '../base/constants'
 
 export class ImgurFragment extends EmoFragment {
+  loginPart!: Setting
+  loginBtn!: ButtonComponent
+  authenticated = false
   constructor (el: HTMLElement, plugin: Emo) {
     super(HostingProvider.Imgur, el, plugin)
+    if (!plugin.initDone) {
+      plugin.registerObsidianProtocolHandler('emo-imgur-oauth', async (params) => {
+        if (params.error) {
+          console.log(new Notice(`Authentication failed with error: ${params.error}`))
+          return
+        }
+        const mappedData = params.hash.split('&').map((p) => {
+          const sp = p.split('=')
+          return [sp[0], sp[1]] as [string, string]
+        })
+        const map = new Map<string, string>(mappedData)
+        localStorage.setItem(
+          IMGUR_ACCESS_TOKEN_LOCALSTORAGE_KEY,
+          map.get('access_token') as string
+        )
+        this.authenticated = await this.updateAccountState()
+      })
+      plugin.initDone = true
+    }
   }
 
-  display (el: HTMLElement, plugin: Emo): void {
+  async display (el: HTMLElement, plugin: Emo): Promise<void> {
     const parms = plugin.config.imgur_parms
     // anonymous or authenticated
     new Setting(el)
@@ -22,7 +44,7 @@ export class ImgurFragment extends EmoFragment {
           await plugin.saveSettings()
         })
       })
-    el.createEl('h3', { text: 'Tips for Anonymous Upload' })
+    el.createEl('h3', { text: 'Tips' })
     el.createDiv().setText(`Imgur upload will produce the link in this format: ![deletehash](url).
     [deletehash] is used to delete the image you just uploaded.
     If your note will be used for publicity, please remember to delete it in time.`)
@@ -71,15 +93,90 @@ export class ImgurFragment extends EmoFragment {
             })
           })
       })
-    new Setting(el)
-      .setName('authenticate')
-      .setDesc('sign in')
-      .addButton((bt) =>
-        bt.setCta()
-          .setButtonText('Authenticate').onClick(() => {
+
+    let imgurStateText = 'authenticate'
+    let imgurBtnText = 'sign in'
+    try {
+      const currentUserName = await this.getAccountName()
+      if (currentUserName !== NO_SIGN_IN) {
+        imgurStateText = `Authenticated as: ${currentUserName} ✅`
+        imgurBtnText = 'Sign Out'
+        this.authenticated = true
+      }
+    } catch (err) {
+      console.log(err)
+    }
+    this.loginPart = new Setting(el)
+    this.loginPart.setName(imgurStateText).addButton((bt) => {
+      this.loginBtn = bt
+      bt.setCta()
+        .setButtonText(imgurBtnText).onClick(async () => {
+          if (this.authenticated) {
+            localStorage.removeItem(IMGUR_ACCESS_TOKEN_LOCALSTORAGE_KEY)
+            this.authenticated = await this.updateAccountState()
+          } else {
             let id = ''
             if (parms.clientid !== '') { id += parms.clientid } else id += IMGUR_DEFAULT_ID
             window.open(`https://api.imgur.com/oauth2/authorize?client_id=${id}&response_type=token`)
-          }))
+          }
+        })
+    })
+  }
+
+  async getAccountName (): Promise<string> {
+    const accessToken = localStorage.getItem(IMGUR_ACCESS_TOKEN_LOCALSTORAGE_KEY)
+    if (accessToken === null) { return NO_SIGN_IN }
+    const r = await fetch('https://api.imgur.com/3/account/me', {
+      headers: new Headers({ Authorization: `Bearer ${accessToken}` })
+    })
+    if (!r.ok) {
+      throw new Error('imgur account error')
+    }
+    return ((await r.json()) as AccountInfo).data.url
+  }
+
+  async updateAccountState (): Promise<boolean> {
+    let imgurStateText = 'authenticate'
+    let imgurBtnText = 'sign in'
+    let authenticated = false
+    try {
+      const currentUserName = (await this.getAccountName())
+      if (currentUserName !== NO_SIGN_IN) {
+        imgurStateText = `Authenticated as: ${currentUserName} ✅`
+        imgurBtnText = 'Sign Out'
+        authenticated = true
+      }
+    } catch (err) {
+      console.log(err)
+    }
+    this.loginPart.setName(imgurStateText)
+    this.loginBtn.setButtonText(imgurBtnText)
+    return authenticated
+  }
+}
+
+interface AccountInfo {
+  success: boolean
+  status: number
+  data: {
+    id: number
+    created: number
+
+    url: string
+    bio: string
+    avatar: string
+    avatar_name: string
+    cover: string
+    cover_name: string
+    reputation: number
+    reputation_name: string
+
+    pro_expiration: boolean
+
+    user_flow: {
+      status: boolean
+    }
+
+    is_blocked: boolean
   }
 }
