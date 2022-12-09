@@ -12,12 +12,12 @@ import { CloudinaryUploader } from './uploader/uploader-cloudinary'
 import { SmmsUploader } from './uploader/uploader-smms'
 import { ImgbbUploader } from './uploader/uploader-imgbb'
 import { ImgurUploader } from './uploader/uploader-imgur'
+import { IMGUR_ACCESS_TOKEN_LOCALSTORAGE_KEY } from './base/constants'
 
 export default class Emo extends Plugin {
   config!: Config
   setupPasteHandler (): void {
     // On paste event, get "files" from clipbaord data
-
     this.registerEvent(this.app.workspace.on('editor-drop', async (evt: DragEvent, editor: Editor) => {
       const { files } = evt.dataTransfer as DataTransfer
       this.startUpload(files, evt, editor)
@@ -99,6 +99,21 @@ export default class Emo extends Plugin {
     console.log('loading  Emo uploader')
     await this.loadSettings()
     this.setupPasteHandler()
+    this.registerObsidianProtocolHandler('emo-imgur-oauth', (params) => {
+      if (params.error !== '') {
+        console.log(new Notice(`Authentication failed with error: ${params.error}`))
+        return
+      }
+      const mappedData = params.hash.split('&').map((p) => {
+        const sp = p.split('=')
+        return [sp[0], sp[1]] as [string, string]
+      })
+      const map = new Map<string, string>(mappedData)
+      localStorage.setItem(
+        IMGUR_ACCESS_TOKEN_LOCALSTORAGE_KEY,
+        map.get('access_token') as string
+      )
+    })
     this.addSettingTab(new EmoUploaderSettingTab(this.app, this))
   }
 

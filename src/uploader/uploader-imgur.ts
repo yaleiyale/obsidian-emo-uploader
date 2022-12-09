@@ -2,6 +2,7 @@ import { request, RequestUrlParam } from 'obsidian'
 import { ImgurParms } from '../parms/parms-imgur'
 import { ReqFormData } from '../utils/req-formdata'
 import { EmoUploader } from '../base/emo-uploader'
+import { IMGUR_ACCESS_TOKEN_LOCALSTORAGE_KEY, IMGUR_DEFAULT_ID } from '../base/constants'
 
 export class ImgurUploader extends EmoUploader {
   parms!: ImgurParms
@@ -15,18 +16,31 @@ export class ImgurUploader extends EmoUploader {
     const formData = new ReqFormData(randomBoundary)
     await formData.addFile('image', file)
     const form = formData.pack()
-    let auth = 'Client-ID '
-    if (this.parms.clientid !== '') { auth += this.parms.clientid } else auth += this.parms.required.emoid
-    const req: RequestUrlParam = {
-      url: 'https://api.imgur.com/3/upload',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'multipart/form-data;boundary=' + randomBoundary,
-        Authorization: auth
-      },
-      body: form
+    let req: RequestUrlParam
+    if (this.parms.anonymous) {
+      let auth = 'Client-ID '
+      if (this.parms.clientid !== '') { auth += this.parms.clientid } else auth += IMGUR_DEFAULT_ID
+      req = {
+        url: 'https://api.imgur.com/3/upload',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'multipart/form-data;boundary=' + randomBoundary,
+          Authorization: auth
+        },
+        body: form
+      }
+    } else {
+      const accessToken = localStorage.getItem(IMGUR_ACCESS_TOKEN_LOCALSTORAGE_KEY)
+      req = {
+        url: 'https://api.imgur.com/3/image',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'multipart/form-data;boundary=' + randomBoundary,
+          Authorization: `Bearer ${accessToken as string}`
+        },
+        body: form
+      }
     }
-
     return await new Promise((resolve, reject) => {
       request(req).then((res) => {
         const json = JSON.parse(res)
