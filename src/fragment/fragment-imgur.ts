@@ -108,21 +108,21 @@ export class ImgurFragment extends EmoFragment {
     }
     this.loginPart = new Setting(el)
     this.loginPart.setName(imgurStateText)
-    .setDesc("Sometimes the auth results need to be refreshed manually before they are displayed.")
-    .addButton((bt) => {
-      this.loginBtn = bt
-      bt.setCta()
-        .setButtonText(imgurBtnText).onClick(async () => {
-          if (this.authenticated) {
-            localStorage.removeItem(IMGUR_ACCESS_TOKEN_LOCALSTORAGE_KEY)
-            this.authenticated = await this.updateAccountState()
-          } else {
-            let id = ''
-            if (parms.clientid !== '') { id += parms.clientid } else id += IMGUR_DEFAULT_ID
-            window.open(`https://api.imgur.com/oauth2/authorize?client_id=${id}&response_type=token`)
-          }
-        })
-    })
+      .setDesc('Sometimes the auth results need to be refreshed manually before they are displayed.')
+      .addButton((bt) => {
+        this.loginBtn = bt
+        bt.setCta()
+          .setButtonText(imgurBtnText).onClick(async () => {
+            if (this.authenticated) {
+              localStorage.removeItem(IMGUR_ACCESS_TOKEN_LOCALSTORAGE_KEY)
+              this.authenticated = await this.updateAccountState()
+            } else {
+              let id = ''
+              if (parms.clientid !== '') { id += parms.clientid } else id += IMGUR_DEFAULT_ID
+              window.open(`https://api.imgur.com/oauth2/authorize?client_id=${id}&response_type=token`)
+            }
+          })
+      })
   }
 
   async getAccountName (): Promise<string> {
