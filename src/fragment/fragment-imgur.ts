@@ -36,7 +36,7 @@ export class ImgurFragment extends EmoFragment {
     // anonymous or authenticated
     new Setting(el)
       .setName('Anonymous Upload')
-      .setDesc('Files uploaded anonymously willnot show in your Imgur account.')
+      .setDesc('Files uploaded anonymously will not show in your Imgur account.')
       .addToggle((toggle) => {
         toggle.setValue(parms.anonymous)
         toggle.onChange(async (value) => {
