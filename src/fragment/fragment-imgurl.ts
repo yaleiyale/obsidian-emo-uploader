@@ -2,6 +2,7 @@ import { Setting } from 'obsidian'
 import Emo from '../main'
 import { EmoFragment } from '../base/emo-fragment'
 import { HostingProvider } from '../config'
+import { t } from '../lang/helpers'
 
 export class ImgurlFragment extends EmoFragment {
   constructor (el: HTMLElement, plugin: Emo) {
@@ -10,11 +11,10 @@ export class ImgurlFragment extends EmoFragment {
 
   display (el: HTMLElement, plugin: Emo): void {
     const parms = plugin.config.imgurl_parms
-    el.createEl('h3', { text: 'ImgURL Settings' })
+    el.createEl('h3', { text: t('ImgURL Settings') })
 
     new Setting(el)
       .setName('uid')
-      .setDesc('ImgURL uid')
       .addText((text) => {
         text
           .setPlaceholder('')
@@ -26,7 +26,6 @@ export class ImgurlFragment extends EmoFragment {
       })
     new Setting(el)
       .setName('token')
-      .setDesc('ImgURL token')
       .addText((text) => {
         text
           .setPlaceholder('')

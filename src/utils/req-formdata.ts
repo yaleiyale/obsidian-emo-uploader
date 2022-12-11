@@ -1,13 +1,13 @@
+import { RANDOM_BOUNDARY } from '../base/constants'
 import { getArrayBuffer } from './file-helper'
 
 export class ReqFormData {
   private result: any[]
-  private readonly randomBoundary: string
+  private readonly randomBoundary = RANDOM_BOUNDARY
   private readonly boundary: string
   private readonly endBoundary: string
-  constructor (random: string) {
+  constructor () {
     this.result = []
-    this.randomBoundary = random
     this.boundary = '--' + this.randomBoundary
     this.endBoundary = this.boundary + '--'
   }

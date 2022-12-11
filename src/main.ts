@@ -12,16 +12,18 @@ import { CloudinaryUploader } from './uploader/uploader-cloudinary'
 import { SmmsUploader } from './uploader/uploader-smms'
 import { ImgbbUploader } from './uploader/uploader-imgbb'
 import { ImgurUploader } from './uploader/uploader-imgur'
+import { t } from './lang/helpers'
 
 export default class Emo extends Plugin {
   initDone = false
   config!: Config
   setupPasteHandler (): void {
-    // On paste event, get "files" from clipbaord data
+    // get files from drag or drop
     this.registerEvent(this.app.workspace.on('editor-drop', async (evt: DragEvent, editor: Editor) => {
       const { files } = evt.dataTransfer as DataTransfer
       this.startUpload(files, evt, editor)
     }))
+    // get files from clipboard
     this.registerEvent(this.app.workspace.on('editor-paste', async (evt: ClipboardEvent, editor: Editor) => {
       const { files } = evt.clipboardData as DataTransfer
       this.startUpload(files, evt, editor)
@@ -51,26 +53,26 @@ export default class Emo extends Plugin {
           uploader = new ImgurUploader(this.config.imgur_parms)
           break
         default:
-          console.log(new Notice('Emo broken. Check your target', 2000))
+          console.log(new Notice(t('broken'), 2000))
           return
       }
-      if (uploader.isValid()) {
+      if (uploader.isValid()) { // check the necessary parameters
         evt.preventDefault()
         for (const file of files) {
           const randomString = (Math.random() * 10086).toString(36).slice(-6)
           const pastePlaceText = `![uploading...](${randomString})\n`
-          editor.replaceSelection(pastePlaceText)
+          editor.replaceSelection(pastePlaceText) // mark the uploading
           uploader.upload(file).then((markdownText) => {
             const showTag = file.type.startsWith('image') ? 0 : 1// whether use `!` at the beginning
-            this.replaceText(editor, pastePlaceText, markdownText.slice(showTag))
+            this.replaceText(editor, pastePlaceText, markdownText.slice(showTag)) // use image/file link
           }).catch(err => {
             this.replaceText(editor, pastePlaceText, `[${this.config.choice} upload error]()`)
-            console.log(new Notice(this.config.choice + ' upload error', 2000))
+            console.log(new Notice(this.config.choice + t('upload error'), 2000))
             console.log(err)
           })
         }
       } else {
-        console.log(new Notice('Emo need more prams', 2000))
+        console.log(new Notice(t('parms error'), 2000))
         console.log(uploader)
       }
     }

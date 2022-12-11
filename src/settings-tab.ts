@@ -12,6 +12,7 @@ import { ImgbbFragment } from './fragment/fragment-imgbb'
 import { ImgurlFragment } from './fragment/fragment-imgurl'
 import { SmmsFragment } from './fragment/fragment-smms'
 import { ImgurFragment } from './fragment/fragment-imgur'
+import { t } from './lang/helpers'
 
 export class EmoUploaderSettingTab extends PluginSettingTab {
   private readonly plugin: Emo
@@ -25,10 +26,10 @@ export class EmoUploaderSettingTab extends PluginSettingTab {
     const { containerEl } = this
     containerEl.empty()
 
-    containerEl.createEl('h2', { text: 'Emo - Target' })
+    containerEl.createEl('h2', { text: 'Emo' })
     const pick = new Setting(containerEl)
-      .setName('target hosting')
-      .setDesc('Choose your target. Before uploading, make sure you have completely filled in the necessary parameters of the selected platform.')
+      .setName(t('target hosting'))
+      .setDesc(t('target hosting desc'))
 
     this.fragmentList.push(new GithubFragment(containerEl, this.plugin))
     this.fragmentList.push(new CloudinaryFragment(containerEl, this.plugin))

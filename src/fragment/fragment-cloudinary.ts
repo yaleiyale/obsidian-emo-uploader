@@ -2,6 +2,7 @@ import { Setting } from 'obsidian'
 import Emo from '../main'
 import { EmoFragment } from '../base/emo-fragment'
 import { HostingProvider } from '../config'
+import { t } from '../lang/helpers'
 
 export class CloudinaryFragment extends EmoFragment {
   constructor (el: HTMLElement, plugin: Emo) {
@@ -10,11 +11,10 @@ export class CloudinaryFragment extends EmoFragment {
 
   display (el: HTMLElement, plugin: Emo): void {
     const parms = plugin.config.cloudinary_parms
-    el.createEl('h3', { text: 'Cloudinary Settings' })
+    el.createEl('h3', { text: t('Cloudinary Settings') })
 
     new Setting(el)
       .setName('Cloud Name')
-      .setDesc('The name of your Cloudinary Cloud Account')
       .addText((text) => {
         text
           .setPlaceholder('')
@@ -26,8 +26,7 @@ export class CloudinaryFragment extends EmoFragment {
       })
 
     new Setting(el)
-      .setName('Cloudinary Upload Template')
-      .setDesc('Cloudinary Upload Preference string')
+      .setName('Upload Presets')
       .addText((text) => {
         text
           .setPlaceholder('')
@@ -38,8 +37,8 @@ export class CloudinaryFragment extends EmoFragment {
           })
       })
     new Setting(el)
-      .setName('Cloudinary Upload Folder')
-      .setDesc('Folder name to use in Cloudinary.  Note, this will be ignored if you have a folder set in your Cloudinary Upload Preset')
+      .setName('Upload Folder')
+      .setDesc(t('Upload Folder desc'))
       .addText((text) => {
         text
           .setPlaceholder('obsidian -> obsidian/pic.png')

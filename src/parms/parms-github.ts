@@ -18,7 +18,7 @@ export const GITHUB_DEFAULT_PARMS: GithubParms = {
     repo: '',
     branch: 'main',
     token: '',
-    message: 'upload from emo-uploader·Github'
+    message: 'from emo-uploader·Github'
   },
   path: '',
   random: true

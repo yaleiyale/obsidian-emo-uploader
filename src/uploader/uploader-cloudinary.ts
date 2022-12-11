@@ -2,6 +2,7 @@ import { request, RequestUrlParam } from 'obsidian'
 import { CloudinaryParms } from '../parms/parms-cloudinary'
 import { ReqFormData } from '../utils/req-formdata'
 import { EmoUploader } from '../base/emo-uploader'
+import { CONTENT_TYPE_FORMDATA } from '../base/constants'
 
 export class CloudinaryUploader extends EmoUploader {
   parms!: CloudinaryParms
@@ -11,8 +12,7 @@ export class CloudinaryUploader extends EmoUploader {
   }
 
   async upload (file: File): Promise<string> {
-    const randomBoundary = Date.now().toString(16)
-    const formData = new ReqFormData(randomBoundary)
+    const formData = new ReqFormData()
     formData.addParm('upload_preset', this.parms.required.present)
     formData.addParm('folder', this.parms.folder)
     await formData.addFile('file', file)
@@ -21,7 +21,7 @@ export class CloudinaryUploader extends EmoUploader {
       url: `https://api.cloudinary.com/v1_1/${this.parms.required.name}/auto/upload`,
       method: 'POST',
       headers: {
-        'Content-Type': 'multipart/form-data;boundary=' + randomBoundary
+        'Content-Type': CONTENT_TYPE_FORMDATA
       },
       body: form
     }

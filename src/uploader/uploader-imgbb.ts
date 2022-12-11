@@ -2,6 +2,7 @@ import { request, RequestUrlParam } from 'obsidian'
 import { ImgbbParms } from '../parms/parms-imgbb'
 import { ReqFormData } from '../utils/req-formdata'
 import { EmoUploader } from '../base/emo-uploader'
+import { CONTENT_TYPE_FORMDATA } from '../base/constants'
 
 export class ImgbbUploader extends EmoUploader {
   parms!: ImgbbParms
@@ -11,8 +12,7 @@ export class ImgbbUploader extends EmoUploader {
   }
 
   async upload (file: File): Promise<string> {
-    const randomBoundary = Date.now().toString(16)
-    const formData = new ReqFormData(randomBoundary)
+    const formData = new ReqFormData()
     formData.addParm('key', this.parms.required.key)
     await formData.addFile('image', file)
     const form = formData.pack()
@@ -20,7 +20,7 @@ export class ImgbbUploader extends EmoUploader {
       url: 'https://api.imgbb.com/1/upload',
       method: 'POST',
       headers: {
-        'Content-Type': 'multipart/form-data;boundary=' + randomBoundary
+        'Content-Type': CONTENT_TYPE_FORMDATA
       },
       body: form
     }

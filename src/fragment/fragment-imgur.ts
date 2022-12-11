@@ -3,6 +3,7 @@ import Emo from '../main'
 import { EmoFragment } from '../base/emo-fragment'
 import { HostingProvider } from '../config'
 import { IMGUR_ACCESS_TOKEN_LOCALSTORAGE_KEY, IMGUR_DEFAULT_ID, NO_SIGN_IN } from '../base/constants'
+import { t } from '../lang/helpers'
 
 export class ImgurFragment extends EmoFragment {
   loginPart!: Setting
@@ -13,7 +14,7 @@ export class ImgurFragment extends EmoFragment {
     if (!plugin.initDone) {
       plugin.registerObsidianProtocolHandler('emo-imgur-oauth', async (params) => {
         if (params.error !== undefined) {
-          console.log(new Notice(`Authentication failed with error: ${params.error}`))
+          console.log(new Notice(t('auth error') + `${params.error}`))
           return
         }
         const mappedData = params.hash.split('&').map((p) => {
@@ -33,10 +34,13 @@ export class ImgurFragment extends EmoFragment {
 
   async display (el: HTMLElement, plugin: Emo): Promise<void> {
     const parms = plugin.config.imgur_parms
+    el.createEl('h3', { text: t('tips') })
+    el.createDiv().setText(t('tips text'))
     // anonymous or authenticated
+    el.createEl('h3', { text: t('Imgur Settings') })
     new Setting(el)
-      .setName('Anonymous Upload')
-      .setDesc('Files uploaded anonymously will not show in your Imgur account.')
+      .setName(t('Anonymous Upload'))
+      .setDesc(t('Anonymous Upload desc'))
       .addToggle((toggle) => {
         toggle.setValue(parms.anonymous)
         toggle.onChange(async (value) => {
@@ -44,16 +48,10 @@ export class ImgurFragment extends EmoFragment {
           await plugin.saveSettings()
         })
       })
-    el.createEl('h3', { text: 'Tips' })
-    el.createDiv().setText(`Imgur upload will produce the link in this format: ![deletehash](url).
-    [deletehash] is used to delete the image you just uploaded.
-    If your note will be used for publicity, please remember to delete it in time.`)
-
-    el.createEl('h3', { text: 'Imgur Settings' })
 
     new Setting(el)
-      .setName('id')
-      .setDesc('The built-in ID has a daily usage limit, if it is temporarily invalid, you can use your own client ID to upload and delete.')
+      .setName(t('imgurid'))
+      .setDesc(t('built-in id desc'))
       .addText((text) => {
         text
           .setPlaceholder('')
@@ -65,8 +63,8 @@ export class ImgurFragment extends EmoFragment {
       })
     let hash = ''
     new Setting(el)
-      .setName('delete')
-      .setDesc('If you want to delete the image on Imgur, delete it here with the deletehash.')
+      .setName(t('delete'))
+      .setDesc(t('delete desc'))
       .addText((text) => {
         text
           .setPlaceholder('deletehash')
@@ -76,7 +74,7 @@ export class ImgurFragment extends EmoFragment {
       })
       .addButton((bt) => {
         bt.setCta()
-          .setButtonText('Delete').onClick(() => {
+          .setButtonText(t('delete btn')).onClick(() => {
             let auth = 'Client-ID '
             if (parms.clientid !== '') { auth += parms.clientid } else auth += IMGUR_DEFAULT_ID
             const req: RequestUrlParam = {
@@ -87,20 +85,20 @@ export class ImgurFragment extends EmoFragment {
               }
             }
             request(req).then(() => {
-              console.log(new Notice('delete done', 2000))
+              console.log(new Notice(t('delete done'), 2000))
             }).catch(() => {
-              console.log(new Notice('delete fail', 2000))
+              console.log(new Notice(t('delete fail'), 2000))
             })
           })
       })
 
-    let imgurStateText = 'authenticate'
-    let imgurBtnText = 'sign in'
+    let imgurStateText = t('authenticate')
+    let imgurBtnText = t('sign in')
     try {
       const currentUserName = await this.getAccountName()
       if (currentUserName !== NO_SIGN_IN) {
-        imgurStateText = `Authenticated as: ${currentUserName} ✅`
-        imgurBtnText = 'Sign Out'
+        imgurStateText = t('imgur account') + `${currentUserName} ✅`
+        imgurBtnText = t('Sign Out')
         this.authenticated = true
       }
     } catch (err) {
@@ -108,7 +106,7 @@ export class ImgurFragment extends EmoFragment {
     }
     this.loginPart = new Setting(el)
     this.loginPart.setName(imgurStateText)
-      .setDesc('Sometimes the auth results need to be refreshed manually before they are displayed.')
+      .setDesc(t('auth desc'))
       .addButton((bt) => {
         this.loginBtn = bt
         bt.setCta()
@@ -138,14 +136,14 @@ export class ImgurFragment extends EmoFragment {
   }
 
   async updateAccountState (): Promise<boolean> {
-    let imgurStateText = 'authenticate'
-    let imgurBtnText = 'sign in'
+    let imgurStateText = t('authenticate')
+    let imgurBtnText = t('sign in')
     let authenticated = false
     try {
       const currentUserName = (await this.getAccountName())
       if (currentUserName !== NO_SIGN_IN) {
-        imgurStateText = `Authenticated as: ${currentUserName} ✅`
-        imgurBtnText = 'Sign Out'
+        imgurStateText = t('imgur account') + `${currentUserName} ✅`
+        imgurBtnText = t('Sign Out')
         authenticated = true
       }
     } catch (err) {

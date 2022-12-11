@@ -2,6 +2,7 @@ import { Setting } from 'obsidian'
 import Emo from '../main'
 import { EmoFragment } from '../base/emo-fragment'
 import { HostingProvider } from '../config'
+import { t } from '../lang/helpers'
 
 export class SmmsFragment extends EmoFragment {
   constructor (el: HTMLElement, plugin: Emo) {
@@ -10,11 +11,10 @@ export class SmmsFragment extends EmoFragment {
 
   display (el: HTMLElement, plugin: Emo): void {
     const parms = plugin.config.smms_parms
-    el.createEl('h3', { text: 'SM.MS Settings' })
+    el.createEl('h3', { text: t('SM.MS Settings') })
 
     new Setting(el)
       .setName('token')
-      .setDesc('SM.MS token')
       .addText((text) => {
         text
           .setPlaceholder('')

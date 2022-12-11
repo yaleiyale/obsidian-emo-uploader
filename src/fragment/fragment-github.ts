@@ -2,6 +2,7 @@ import { Setting } from 'obsidian'
 import Emo from '../main'
 import { EmoFragment } from '../base/emo-fragment'
 import { HostingProvider } from '../config'
+import { t } from '../lang/helpers'
 
 export class GithubFragment extends EmoFragment {
   constructor (el: HTMLElement, plugin: Emo) {
@@ -10,10 +11,9 @@ export class GithubFragment extends EmoFragment {
 
   display (el: HTMLElement, plugin: Emo): void {
     const parms = plugin.config.github_parms
-    el.createEl('h3', { text: 'Github Settings' })
+    el.createEl('h3', { text: t('Github Settings') })
     new Setting(el)
-      .setName('owner')
-      .setDesc('owner of the repository')
+      .setName(t('owner'))
       .addText((text) => {
         text
           .setPlaceholder('')
@@ -24,8 +24,7 @@ export class GithubFragment extends EmoFragment {
           })
       })
     new Setting(el)
-      .setName('repo')
-      .setDesc('name of the repository')
+      .setName(t('repo'))
       .addText((text) => {
         text
           .setPlaceholder('')
@@ -36,8 +35,7 @@ export class GithubFragment extends EmoFragment {
           })
       })
     new Setting(el)
-      .setName('branch')
-      .setDesc('target branch')
+      .setName(t('branch'))
       .addText((text) => {
         text
           .setPlaceholder('')
@@ -48,8 +46,7 @@ export class GithubFragment extends EmoFragment {
           })
       })
     new Setting(el)
-      .setName('token')
-      .setDesc('Github token')
+      .setName(t('token'))
       .addText((text) => {
         text
           .setPlaceholder('')
@@ -60,8 +57,7 @@ export class GithubFragment extends EmoFragment {
           })
       })
     new Setting(el)
-      .setName('message')
-      .setDesc('commit message')
+      .setName(t('message'))
       .addText((text) => {
         text
           .setPlaceholder('')
@@ -72,8 +68,7 @@ export class GithubFragment extends EmoFragment {
           })
       })
     new Setting(el)
-      .setName('path')
-      .setDesc('target path')
+      .setName(t('path'))
       .addText((text) => {
         text
           .setPlaceholder('obsidian/ -> obsidian/pic.png')
@@ -84,8 +79,8 @@ export class GithubFragment extends EmoFragment {
           })
       })
     new Setting(el)
-      .setName('random filename')
-      .setDesc('Random file names will greatly avoid duplicate file names. If you are sure that you need to use the original file name during this upload, make sure that no duplicate naming will occur under the path you choose.')
+      .setName(t('random filename'))
+      .setDesc(t('random filename desc'))
       .addToggle((toggle) => {
         toggle.setValue(parms.random)
         toggle.onChange(async (value) => {
