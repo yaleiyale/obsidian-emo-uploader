@@ -5,12 +5,14 @@ export default {
   broken: 'Emo broken. Check your target',
   'upload error': ' upload error',
   'parms error': 'Emo need more prams',
+  donate: 'appreciate',
+  'donate desc': "Huh? This is an open-source plugin I made for fun. It's completely free. However, if you absolutely have to send me money because you like it that much, feel free to throw some coins in my hat. Thank you.",
   // settings-tab.ts
   'target hosting': 'target hosting',
   'target hosting desc': 'Choose your target. Before uploading, make sure you have completely filled in the necessary parameters of the selected platform.',
   // fragment-cloudinary.ts
   'Cloudinary Settings': 'Cloudinary Settings',
-  'Upload Folder desc': 'Folder name to use in Cloudinary.  Note, this will be ignored if you have a folder set in your Cloudinary Upload Preset',
+  'Upload Folder desc': 'Folder name to use in Cloudinary.  Note, this will be ignored if you have a folder set in your Cloudinary Upload Preset.',
   // fragment-github.ts
   'Github Settings': 'Github Settings',
   owner: 'owner',

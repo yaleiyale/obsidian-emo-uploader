@@ -3,8 +3,6 @@
 <p align="center">
 		<img src="https://img.shields.io/github/release-date/yaleiyale/obsidian-emo-uploader?style=for-the-badge">
       <img src="https://img.shields.io/github/downloads/yaleiyale/obsidian-emo-uploader/total?style=for-the-badge">
-      <img src="https://img.shields.io/github/license/yaleiyale/obsidian-emo-uploader?style=for-the-badge">
-      <img src="https://img.shields.io/github/stars/yaleiyale/obsidian-emo-uploader?style=for-the-badge">
       <img src="https://www.codefactor.io/repository/github/yaleiyale/obsidian-emo-uploader/badge?style=for-the-badge">
 </p>
 

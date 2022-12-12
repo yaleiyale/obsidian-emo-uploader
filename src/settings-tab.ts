@@ -30,6 +30,12 @@ export class EmoUploaderSettingTab extends PluginSettingTab {
     const pick = new Setting(containerEl)
       .setName(t('target hosting'))
       .setDesc(t('target hosting desc'))
+    new Setting(containerEl)
+      .setName(t('donate'))
+      .setDesc(t('donate desc'))
+      .addButton((bt) => {
+        bt.buttonEl.outerHTML = '<a id="buymeacola" href="https://lestua.eu.org/donate/"><svg class="icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v12"></path><path d="M15 5.88 14 10h5.83a2 2 0 011.92 2.56l-2.33 8A2 2 0 0117.5 22H4a2 2 0 01-2-2v-8a2 2 0 012-2h2.76a2 2 0 001.79-1.11L12 2h0a3.13 3.13.0 013 3.88z"></path></svg></a>'
+      })
 
     this.fragmentList.push(new GithubFragment(containerEl, this.plugin))
     this.fragmentList.push(new CloudinaryFragment(containerEl, this.plugin))
