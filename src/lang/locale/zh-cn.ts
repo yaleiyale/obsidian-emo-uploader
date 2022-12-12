@@ -3,8 +3,6 @@
 export default {
   // main.ts
   broken: 'Emo工作异常，检视你的目标平台选择',
-  donate: '赞赏',
-  'donate desc': '哈?这是我出于乐趣而制作的开源插件。它是完全免费的。然而，如果你真的因为那么喜欢就一定要寄钱给我，那就随便往我帽子里扔些硬币吧。谢谢。',
   'upload error': '上传失败',
   'parms error': '当前平台所需必要参数未填写完全',
   // settings-tab.ts

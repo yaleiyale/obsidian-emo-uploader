@@ -5,8 +5,6 @@ export default {
   broken: 'Emo broken. Check your target',
   'upload error': ' upload error',
   'parms error': 'Emo need more prams',
-  donate: 'appreciate',
-  'donate desc': "Huh? This is an open-source plugin I made for fun. It's completely free. However, if you absolutely have to send me money because you like it that much, feel free to throw some coins in my hat. Thank you.",
   // settings-tab.ts
   'target hosting': 'target hosting',
   'target hosting desc': 'Choose your target. Before uploading, make sure you have completely filled in the necessary parameters of the selected platform.',
