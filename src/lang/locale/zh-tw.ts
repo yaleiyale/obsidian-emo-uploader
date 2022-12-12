@@ -3,8 +3,6 @@
 export default {
   // main.ts
   broken: 'Emo工作異常，檢視你的目標平台選擇',
-  donate: '讚賞',
-  'donate desc': '哈？這是我出於樂趣而製作的開源外掛。它是完全免費的。然而，如果你真的因為那麼喜歡就一定要寄錢給我，那就隨便往我帽子里扔些硬幣吧。謝謝。',
   'upload error': '上傳失敗',
   'parms error': '目前平台所需必要參數未填寫完全',
   // settings-tab.ts
