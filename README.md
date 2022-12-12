@@ -11,6 +11,11 @@ This plugin is for uploading **images** to hosting platform or **files** to Gith
 
 **图床聚合 & Github上传器**  
 
+配置界面多語言支持
+ - 简体中文
+ - 繁體中文
+ - English
+
 Starting from version 2.6, clipboard and drag files are supported; Non-image files will appear as links without "!" at the beginning by default after being embed in markdown.
 
 🚩 [中文](https://lestua.eu.org/notes/2022/10/16/172318)  
