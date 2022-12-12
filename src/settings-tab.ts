@@ -34,7 +34,7 @@ export class EmoUploaderSettingTab extends PluginSettingTab {
       .setName(t('donate'))
       .setDesc(t('donate desc'))
       .addButton((bt) => {
-        bt.buttonEl.outerHTML = '<a id="buymeacola" href="https://lestua.eu.org/donate/"><svg class="icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v12"></path><path d="M15 5.88 14 10h5.83a2 2 0 011.92 2.56l-2.33 8A2 2 0 0117.5 22H4a2 2 0 01-2-2v-8a2 2 0 012-2h2.76a2 2 0 001.79-1.11L12 2h0a3.13 3.13.0 013 3.88z"></path></svg></a>'
+        bt.buttonEl.outerHTML = '<a id="buymeacola" href="https://lestua.eu.org/donate/"><?xml version="1.0" encoding="UTF-8"?><svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 10C10.5 13 11 14.5 11.5 18C11.9 20.8 12 25.1667 12 27C9.83333 28 5 30 5 34C5 38 10 43 24 43C38 43 43 38 43 34C43 30 36 27 36 27C36 27 36 21.5 36.5 18C37 14.5 37.5 13 38 10" stroke="currentcolor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M36 27C36 31 35 35 23.5 35" stroke="currentcolor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="24" cy="10" rx="14" ry="5" stroke="currentcolor" stroke-width="4"/></svg></a>'
       })
 
     this.fragmentList.push(new GithubFragment(containerEl, this.plugin))
