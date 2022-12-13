@@ -11,7 +11,7 @@ This plugin is for uploading **images** to hosting platform or **files** to Gith
 
 **图床聚合 & Github上传器**  
 
-配置界面多語言支持
+Multi language support of configuration interface
  - 简体中文
  - 繁體中文
  - English
