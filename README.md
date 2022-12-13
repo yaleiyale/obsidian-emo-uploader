@@ -26,12 +26,17 @@ Starting from version 2.6, clipboard and drag files are supported; Non-image fil
 
 Support list
 
-- [GitHub](https://github.com/)
-- [Imgur](https://imgur.com/)
-- [SM.MS](https://smms.app/)
-- [ImgURL](https://www.imgurl.org/)
-- [Clouinary](https://cloudinary.com/)
-- [imgbb](https://imgbb.com/)
+- file hosting
+  - [GitHub](https://github.com/)
+  - [Clouinary](https://cloudinary.com/)
+  - [Catbox](https://catbox.moe/) 
+- image hosting
+  - [Imgur](https://imgur.com/)
+  - [SM.MS](https://smms.app/)
+  - [ImgURL](https://www.imgurl.org/)
+  - [imgbb](https://imgbb.com/)
+
+Remember your username when registering **catbox**.🤨
 
 ## Configuration
 
@@ -76,8 +81,10 @@ Whether the file link can be rendered in obsidian or not depends on the support 
 
 ## About the Other
 
+Except for github, all the others here are purely hosting platforms. Register an account and find parameters you need. Just put your parameters to the correct positions. Then you can use it just like the way in the video.  
+
 [ImgURL](https://www.imgurl.org/), [SM.MS](https://smms.app/) are cloud storage platforms that allows you to upload **images** to a storage account. For users living in China, they are easier to access than Github and Cloudinary.  
-Register an account and find parameters you need. Just put your parameters to the correct positions. Then you can use it just like the way in the video.
+
 
 About [Cloudinary](https://cloudinary.com/), please refer to [obsidian-cloudinary-uploader/README.md](https://github.com/jordanhandy/obsidian-cloudinary-uploader/blob/main/README.md). Of course, Cloudinary is supported here. If you find that Cloudinary is enough to meet your needs, you can just use it. ( In fact, my plugin is smaller on size. 😳 )
 
@@ -85,7 +92,9 @@ If you live in China, [imgbb](https://imgbb.com/) is not recommended to use. I f
 
 ~~[Imgur](https://imgur.com/) is good. But in my network environment, it is not easy to access and test. I simply implemented anonymous upload with reference to some posts.~~ Thanks for this [reference](https://github.com/gavvvr/obsidian-imgur-plugin). When using imgur, deletehash will appear in the form of `![deletehash](url)`, which is used to prevent you from regretting the upload of wrong pictures. You can delete them [here](https://lestua.eu.org/imgurdeleteimage) or in the plugin.
 
-⚠️ Images are public to see on them. Don't upload prohibited things! Please check the service restrictions by yourself.
+[Catbox](https://catbox.moe/) originally supports anonymous uploads. But I didn't find out how to delete anonymously uploaded files. To avoid accidents, anonymous uploads of catbox are not provided here.
+
+⚠️ Files are public to see on them. Don't upload prohibited things! Please check the service restrictions by yourself.
 
 ## How to Extend
 
@@ -106,7 +115,7 @@ Due to the different range of files supported by different platforms, there are 
 
 If you need to embed the file as an attachment, please close the plugin temporarily.
 
-In general, **Github** supports **any** file type, **Cloudinary** supports media type files such as **image(png), video(mp4) and audio(mp3)**, **SM.MS, ImgURL** (most hosting services) supports common **image** types.  
+In general, **Github, Cloudinary, Catbox** supports **any** file type,  **SM.MS, ImgURL** supports common **image** types.  
 
 Trying to upload a file that the platform does not support or volume exceeds the upper limit may result in a string like `![](undefined)`. Notice it, don't just wait.  
 
@@ -128,4 +137,5 @@ Thank you!
 [Clouinary](https://cloudinary.com/)  
 [Imgur](https://imgur.com/)  
 [imgbb](https://imgbb.com/)  
-[obsidian-imgur-plugin](https://github.com/gavvvr/obsidian-imgur-plugin)
+[obsidian-imgur-plugin](https://github.com/gavvvr/obsidian-imgur-plugin)  
+[Catbox](https://catbox.moe/)

@@ -3,6 +3,7 @@ import {
   Editor,
   Notice
 } from 'obsidian'
+import { t } from './lang/helpers'
 import { EmoUploaderSettingTab } from './settings-tab'
 import { Config, DEFAULT_SETTINGS, HostingProvider } from './config'
 import { EmoUploader } from './base/emo-uploader'
@@ -12,7 +13,7 @@ import { CloudinaryUploader } from './uploader/uploader-cloudinary'
 import { SmmsUploader } from './uploader/uploader-smms'
 import { ImgbbUploader } from './uploader/uploader-imgbb'
 import { ImgurUploader } from './uploader/uploader-imgur'
-import { t } from './lang/helpers'
+import { CatboxUploader } from './uploader/uploader-catbox'
 
 export default class Emo extends Plugin {
   initDone = false
@@ -51,6 +52,9 @@ export default class Emo extends Plugin {
           break
         case HostingProvider.Imgur:
           uploader = new ImgurUploader(this.config.imgur_parms)
+          break
+        case HostingProvider.Catbox:
+          uploader = new CatboxUploader(this.config.catbox_parms)
           break
         default:
           console.log(new Notice(t('broken'), 2000))

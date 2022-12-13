@@ -47,5 +47,7 @@ export default {
   // fragment-imgurl.ts
   'ImgURL Settings': 'ImgURL配置',
   // fragment-smms.ts
-  'SM.MS Settings': 'SM.MS配置'
+  'SM.MS Settings': 'SM.MS配置',
+  // fragment-catbox.ts
+  'Catbox Settings': 'Catbox配置'
 }
