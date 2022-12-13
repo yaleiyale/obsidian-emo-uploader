@@ -19,11 +19,6 @@ This plugin is for uploading **images** to hosting platform or **files** to Gith
 
 ## State
 
-Multi language support of configuration interface
- - 简体中文
- - 繁體中文 [@emisjerry](https://github.com/emisjerry)
- - English
-
 Support list
 
 - file hosting
@@ -39,6 +34,11 @@ Support list
 Remember your username when registering **catbox**.🤨
 
 Starting from version 2.6, clipboard and drag files are supported; Non-image files will appear as links without "!" at the beginning by default after being embed in markdown.
+
+Multi language support of configuration interface
+ - 简体中文
+ - 繁體中文 [@emisjerry](https://github.com/emisjerry)
+ - English
 
 ## Configuration
 
