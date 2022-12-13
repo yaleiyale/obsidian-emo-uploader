@@ -7,7 +7,7 @@
 </p>
 
 Embed markdown online file/image links.  
-This plugin is for uploading **images** to hosting platform or **files** to Github in Obsidian.  
+This plugin is for uploading **images** to hosting platform or **files** to Github(more, now) in Obsidian.  
 
 **图床聚合 & 文件上传器**  : *Imgur SM.MS Github Cloudinary Catbox ……*
 
