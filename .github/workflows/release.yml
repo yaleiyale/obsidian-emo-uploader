@@ -12,17 +12,19 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Install modules
-        run: yarn
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
 
-      - name: Run build
-        run: yarn run build
-
-      - name: Package
+      - name: Build
+        id: build
         run: |
+          yarn
+          yarn run build
           mkdir ${{ env.PLUGIN_NAME }}
           cp ./dist/main.js ./dist/manifest.json ./dist/styles.css ${{ env.PLUGIN_NAME }}
-          zip -r ${{ env.PLUGIN_NAME}}.zip ${{ env.PLUGIN_NAME }}
+          zip -r ${{ env.PLUGIN_NAME }}.zip ${{ env.PLUGIN_NAME }}
           echo "name=tag_name::$(git tag --sort version:refname | tail -n 1)"
 
       - name: Create Release
@@ -34,7 +36,7 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: ${{ github.ref }}
-          draft: true
+          draft: false
           prerelease: false
 
       - name: Upload artifacts
@@ -45,7 +47,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./${{ env.PLUGIN_NAME }}.zip
-          asset_name: ${{ env.PLUGIN_NAME }}-${{ github.ref }}.zip
+          asset_name: ${{ env.PLUGIN_NAME }}-${{ steps.build.outputs.tag_name }}.zip
           asset_content_type: application/zip
 
       - name: Upload main.js
