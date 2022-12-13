@@ -9,13 +9,19 @@
 Embed markdown online file/image links.  
 This plugin is for uploading **images** to hosting platform or **files** to Github in Obsidian.  
 
-**图床聚合 & Github上传器**  
+**图床聚合 & 文件上传器**  : *Imgur SM.MS Github Cloudinary Catbox ……*
 
 🚩[中文](https://lestua.eu.org/notes/2022/10/16/172318)  
 
+## How it Works
+
+<video src="https://user-images.githubusercontent.com/55282569/200258839-0979aa8c-7e5b-4254-bbe3-b9eeff458a40.mp4" controls="controls"></video>
+
+## State
+
 Multi language support of configuration interface
  - 简体中文
- - 繁體中文
+ - 繁體中文 [@emisjerry](https://github.com/emisjerry)
  - English
 
 Support list
@@ -33,10 +39,6 @@ Support list
 Remember your username when registering **catbox**.🤨
 
 Starting from version 2.6, clipboard and drag files are supported; Non-image files will appear as links without "!" at the beginning by default after being embed in markdown.
-
-## How it Works
-
-<video src="https://user-images.githubusercontent.com/55282569/200258839-0979aa8c-7e5b-4254-bbe3-b9eeff458a40.mp4" controls="controls"></video>
 
 ## Configuration
 
