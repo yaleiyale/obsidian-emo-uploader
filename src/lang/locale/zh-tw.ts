@@ -25,9 +25,10 @@ export default {
   'imgbb Settings': 'imgbb配置',
   // fragment-imgur.ts
   tips: '小技巧',
-  'tips text': `Imgur上傳將產生以下格式的鏈接：![deletehash](url)。
+  'tips text': `Imgur匿名上傳將產生以下格式的鏈接：![deletehash](url)。
   [deletehash]用於刪除剛剛上傳的影像。
-  如果您的筆記會被公開，請及時在筆記中刪除deletehash。`,
+  如果您的筆記會被公開，請及時在筆記中刪除deletehash。
+  認證上傳可在Imgur上刪除`,
   'Imgur Settings': 'Imgur配置',
   'Anonymous Upload': '匿名上傳',
   'Anonymous Upload desc': '匿名上傳的檔案不會顯示在Imgur帳戶中。',

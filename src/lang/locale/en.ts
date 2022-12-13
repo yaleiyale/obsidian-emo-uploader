@@ -25,9 +25,10 @@ export default {
   'imgbb Settings': 'imgbb Settings',
   // fragment-imgur.ts
   tips: 'Tips',
-  'tips text': `Imgur upload will produce the link in this format: ![deletehash](url).
+  'tips text': `Imgur anonymous upload will produce the link in this format: ![deletehash](url).
  [deletehash] is used to delete the image you just uploaded.
- If your note will be used for publicity, please remember to delete it in time.`,
+ If your note will be used for publicity, please remember to delete it in time.
+ Authentication upload can be deleted on Imgur.`,
   'Imgur Settings': 'Imgur Settings',
   'Anonymous Upload': 'Anonymous Upload',
   'Anonymous Upload desc': 'Files uploaded anonymously will not show in your Imgur account.',

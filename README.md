@@ -92,7 +92,7 @@ About [Cloudinary](https://cloudinary.com/), please refer to [obsidian-cloudinar
 
 If you live in China, [imgbb](https://imgbb.com/) is not recommended to use. I found that the pictures uploaded to this platform could not be easily accessed in Chinese Mainland and they are usually presented as thumbnails.
 
-~~[Imgur](https://imgur.com/) is good. But in my network environment, it is not easy to access and test. I simply implemented anonymous upload with reference to some posts.~~ Thanks for this [reference](https://github.com/gavvvr/obsidian-imgur-plugin). When using imgur, deletehash will appear in the form of `![deletehash](url)`, which is used to prevent you from regretting the upload of wrong pictures. You can delete them [here](https://lestua.eu.org/imgurdeleteimage) or in the plugin.
+~~[Imgur](https://imgur.com/) is good. But in my network environment, it is not easy to access and test. I simply implemented anonymous upload with reference to some posts.~~ Thanks for this [reference](https://github.com/gavvvr/obsidian-imgur-plugin). When using imgur anonymous upload, deletehash will appear in the form of `![deletehash](url)`, which is used to prevent you from regretting the upload of wrong pictures. You can delete them [here](https://lestua.eu.org/imgurdeleteimage) or in the plugin.
 
 [Catbox](https://catbox.moe/) originally supports anonymous uploads. But I didn't find out how to delete anonymously uploaded files. To avoid accidents, anonymous uploads of catbox are not provided here.
 
@@ -100,9 +100,9 @@ If you live in China, [imgbb](https://imgbb.com/) is not recommended to use. I f
 
 ## How to Extend
 
-Want to support more platforms? If you don't want to make too much effort, you can extend it in the following ways.  
+Want to support more platforms? If you want to contribute and don't want to make too much effort on reading old code, you can extend it in the following ways.  
 
-- Refer to existing files, and add the parameters required by your new *uploader* by adding files to `src/Parms`.
+- Refer to existing *parms* files, and add the parameters required by your new *uploader* by adding files to `src/Parms`.
 - Use your *parms* interface. In `config.ts`, add parameter configurations about your *uploader* to provide choices and act as constructors for *uploader* at run time.
 - Implement your *uploader* and *settings panel* by adding files to `src/Uploader, src/Fragment`.
 - In `settings-tab.ts`,add your *fragment* to show and set parameters in the setting-tab.

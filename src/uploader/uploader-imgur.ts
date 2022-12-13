@@ -49,7 +49,8 @@ export class ImgurUploader extends EmoUploader {
         const json = JSON.parse(res)
         const hash = json.data.deletehash
         const url = json.data.link
-        const markdownText = `![${hash as string}](${url as string})`
+        let markdownText: string
+        if (this.parms.anonymous) { markdownText = `![${hash as string}](${url as string})` } else markdownText = `![Imgur](${url as string})`
         resolve(markdownText)
       }).catch(err => {
         reject(err)
