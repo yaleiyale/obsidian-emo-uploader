@@ -34,7 +34,7 @@ This plugin is for uploading **images** to hosting platform or **files** to Gith
   - 繁體中文 [@emisjerry](https://github.com/emisjerry)
   - English
   
-In Imgur part, authentication upload, change id need to re-authentication.  
+In Imgur part, authentication upload, change id need to re-authentication. Redirect: `obsidian://emo-imgur-oauth`  
 Remember your username when registering **catbox**.🤨
 
 Starting from version 2.6, clipboard and drag files are supported; Non-image files will appear as links without "!" at the beginning by default after being embed in markdown.
