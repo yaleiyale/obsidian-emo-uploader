@@ -34,7 +34,7 @@ This plugin is for uploading **images** to hosting platform or **files** to Gith
   - 繁體中文 [@emisjerry](https://github.com/emisjerry)
   - English
   
-In Imgur part, authentication upload, change id need to re-authentication. Redirect: `obsidian://emo-imgur-oauth`  
+In Imgur part authentication upload, Redirect: `obsidian://emo-imgur-oauth`. Change id needs to re-authentication.   
 Remember your username when registering **catbox**.🤨
 
 Starting from version 2.6, clipboard and drag files are supported; Non-image files will appear as links without "!" at the beginning by default after being embed in markdown.
@@ -126,7 +126,7 @@ Trying to upload a file that the platform does not support or volume exceeds the
 
 If you are enjoying the plugin then you can support my work and enthusiasm by buying me a cola:  
 
-<a id="cola" href="https://lestua.eu.org/donate/"><img src="https://s1.ax1x.com/2022/10/30/xIMoKU.png" alt="BuyMeACola" width="180" style="margin:auto"></a>
+<a id="cola" href="https://lestua.eu.org/donate/"><img src="https://i.imgur.com/9kSi9ER.png" alt="BuyMeACola" width="180" style="margin:auto"></a>
 
 Thank you!
 
