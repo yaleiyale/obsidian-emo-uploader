@@ -17,7 +17,6 @@ export class ImgbbFragment extends EmoFragment {
       .setName('key')
       .addText((text) => {
         text
-          .setPlaceholder('')
           .setValue(parms.required.key)
           .onChange(async (value) => {
             parms.required.key = value

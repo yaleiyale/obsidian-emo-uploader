@@ -17,18 +17,17 @@ export class ImgurlFragment extends EmoFragment {
       .setName('uid')
       .addText((text) => {
         text
-          .setPlaceholder('')
           .setValue(parms.required.uid)
           .onChange(async (value) => {
             parms.required.uid = value
             await plugin.saveSettings()
           })
       })
+
     new Setting(el)
       .setName('token')
       .addText((text) => {
         text
-          .setPlaceholder('')
           .setValue(parms.required.token)
           .onChange(async (value) => {
             parms.required.token = value

@@ -1,5 +1,6 @@
 import {
   App,
+  Notice,
   PluginSettingTab,
   Setting
 } from 'obsidian'
@@ -14,13 +15,14 @@ import { ImgurlFragment } from './fragment/fragment-imgurl'
 import { SmmsFragment } from './fragment/fragment-smms'
 import { ImgurFragment } from './fragment/fragment-imgur'
 import { CatboxFragment } from './fragment/fragment-catbox'
+import { IMGUR_ACCESS_TOKEN_LOCALSTORAGE_KEY } from './base/constants'
 
 export class EmoUploaderSettingTab extends PluginSettingTab {
   private readonly plugin: Emo
-  private readonly fragmentList: EmoFragment[] = []
   constructor (app: App, plugin: Emo) {
     super(app, plugin)
     this.plugin = plugin
+    this.setUpHandler()
   }
 
   display (): void {
@@ -42,16 +44,17 @@ export class EmoUploaderSettingTab extends PluginSettingTab {
       .setName(t('target hosting'))
       .setDesc(t('target hosting desc'))
 
-    this.fragmentList.push(new GithubFragment(containerEl, this.plugin))
-    this.fragmentList.push(new ImgurFragment(containerEl, this.plugin))
-    this.fragmentList.push(new CloudinaryFragment(containerEl, this.plugin))
-    this.fragmentList.push(new SmmsFragment(containerEl, this.plugin))
-    this.fragmentList.push(new ImgurlFragment(containerEl, this.plugin))
-    this.fragmentList.push(new ImgbbFragment(containerEl, this.plugin))
-    this.fragmentList.push(new CatboxFragment(containerEl, this.plugin))
+    const fragmentList: EmoFragment[] = []
+    fragmentList.push(new GithubFragment(containerEl, this.plugin))
+    fragmentList.push(new ImgurFragment(containerEl, this.plugin))
+    fragmentList.push(new CloudinaryFragment(containerEl, this.plugin))
+    fragmentList.push(new SmmsFragment(containerEl, this.plugin))
+    fragmentList.push(new ImgurlFragment(containerEl, this.plugin))
+    fragmentList.push(new ImgbbFragment(containerEl, this.plugin))
+    fragmentList.push(new CatboxFragment(containerEl, this.plugin))
 
     // which one will show at the first time
-    this.fragmentList.forEach(element => {
+    fragmentList.forEach(element => {
       element.update(this.plugin.config.choice)
     })
 
@@ -66,10 +69,30 @@ export class EmoUploaderSettingTab extends PluginSettingTab {
         .onChange(async (value) => {
           this.plugin.config.choice = value as HostingProvider
           await this.plugin.saveSettings()
-          this.fragmentList.forEach(element => {
+          fragmentList.forEach(element => {
             element.update(this.plugin.config.choice) // update the tab when make a choice
           })
         })
+    })
+  }
+
+  setUpHandler (): void {
+    // handle Imgur auth
+    this.plugin.registerObsidianProtocolHandler('emo-imgur-oauth', async (params) => {
+      if (params.error !== undefined) {
+        console.log(new Notice(t('auth error') + `${params.error}`))
+        return
+      }
+      const mappedData = params.hash.split('&').map((p) => {
+        const sp = p.split('=')
+        return [sp[0], sp[1]] as [string, string]
+      })
+      const map = new Map<string, string>(mappedData)
+      localStorage.setItem(
+        IMGUR_ACCESS_TOKEN_LOCALSTORAGE_KEY,
+        map.get('access_token') as string
+      )
+      this.display()
     })
   }
 }

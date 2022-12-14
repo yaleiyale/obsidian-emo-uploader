@@ -28,11 +28,11 @@ export default {
   'tips text': `Imgur匿名上傳將產生以下格式的鏈接：![deletehash](url)。
   [deletehash]用於刪除剛剛上傳的影像。
   如果您的筆記會被公開，請及時在筆記中刪除deletehash。
-  認證上傳可在Imgur上刪除`,
+  認證上傳可在Imgur上刪除。`,
   'Imgur Settings': 'Imgur配置',
   'Anonymous Upload': '匿名上傳',
   'Anonymous Upload desc': '匿名上傳的檔案不會顯示在Imgur帳戶中。',
-  imgurid: '客戶端id',
+  imgurid: '客戶端ID',
   'built-in id desc': '內建ID有每日使用限制，如果暫時失效，可以使用自己的客戶端ID以進行上傳和刪除。',
   delete: '刪除',
   'delete desc': '如果需要刪除Imgur上的影像，請在此處使用deletehash將其刪除。',
@@ -40,7 +40,7 @@ export default {
   'delete done': '刪除成功',
   'delete fail': '刪除失敗',
   authenticate: '認證',
-  'auth desc': '有時需要手動重新整理以顯示認證結果。',
+  'auth desc': '更改ID需要注銷才能生效。',
   'imgur account': '目前使用者： ',
   'auth error': '認證錯誤: ',
   'sign in': '登錄',

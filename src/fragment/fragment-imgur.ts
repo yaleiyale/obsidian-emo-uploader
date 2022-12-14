@@ -6,30 +6,13 @@ import { IMGUR_ACCESS_TOKEN_LOCALSTORAGE_KEY, IMGUR_DEFAULT_ID, NO_SIGN_IN } fro
 import { t } from '../lang/helpers'
 
 export class ImgurFragment extends EmoFragment {
-  loginPart!: Setting
+  loginState!: Setting
   loginBtn!: ButtonComponent
+  imgurStateText = t('authenticate')
+  imgurBtnText = t('sign in')
   authenticated = false
   constructor (el: HTMLElement, plugin: Emo) {
     super(HostingProvider.Imgur, el, plugin)
-    if (!plugin.initDone) {
-      plugin.registerObsidianProtocolHandler('emo-imgur-oauth', async (params) => {
-        if (params.error !== undefined) {
-          console.log(new Notice(t('auth error') + `${params.error}`))
-          return
-        }
-        const mappedData = params.hash.split('&').map((p) => {
-          const sp = p.split('=')
-          return [sp[0], sp[1]] as [string, string]
-        })
-        const map = new Map<string, string>(mappedData)
-        localStorage.setItem(
-          IMGUR_ACCESS_TOKEN_LOCALSTORAGE_KEY,
-          map.get('access_token') as string
-        )
-        this.authenticated = await this.updateAccountState()
-      })
-      plugin.initDone = true
-    }
   }
 
   async display (el: HTMLElement, plugin: Emo): Promise<void> {
@@ -38,6 +21,7 @@ export class ImgurFragment extends EmoFragment {
     el.createDiv().setText(t('tips text'))
     // anonymous or authenticated
     el.createEl('h3', { text: t('Imgur Settings') })
+
     new Setting(el)
       .setName(t('Anonymous Upload'))
       .setDesc(t('Anonymous Upload desc'))
@@ -54,13 +38,13 @@ export class ImgurFragment extends EmoFragment {
       .setDesc(t('built-in id desc'))
       .addText((text) => {
         text
-          .setPlaceholder('')
           .setValue(parms.clientid)
           .onChange(async (value) => {
             parms.clientid = value
             await plugin.saveSettings()
           })
       })
+
     let hash = ''
     new Setting(el)
       .setName(t('delete'))
@@ -92,35 +76,39 @@ export class ImgurFragment extends EmoFragment {
           })
       })
 
-    let imgurStateText = t('authenticate')
-    let imgurBtnText = t('sign in')
-    try {
-      const currentUserName = await this.getAccountName()
-      if (currentUserName !== NO_SIGN_IN) {
-        imgurStateText = t('imgur account') + `${currentUserName} ✅`
-        imgurBtnText = t('Sign Out')
-        this.authenticated = true
-      }
-    } catch (err) {
-      console.log(err)
-    }
-    this.loginPart = new Setting(el)
-    this.loginPart.setName(imgurStateText)
+    // auth part
+    await this.checkState()
+    this.loginState = new Setting(el)
+    this.loginState.setName(this.imgurStateText)
       .setDesc(t('auth desc'))
       .addButton((bt) => {
         this.loginBtn = bt
-        bt.setCta()
-          .setButtonText(imgurBtnText).onClick(async () => {
-            if (this.authenticated) {
+        this.loginBtn.setCta()
+          .setButtonText(this.imgurBtnText).onClick(async () => {
+            if (this.authenticated) { // log out
               localStorage.removeItem(IMGUR_ACCESS_TOKEN_LOCALSTORAGE_KEY)
-              this.authenticated = await this.updateAccountState()
-            } else {
+              this.authenticated = this.drawLogin()
+            } else { // log in
               let id = ''
               if (parms.clientid !== '') { id += parms.clientid } else id += IMGUR_DEFAULT_ID
               window.open(`https://api.imgur.com/oauth2/authorize?client_id=${id}&response_type=token`)
             }
           })
       })
+  }
+
+  // influence imgurStateText imgurBtnText authenticated
+  async checkState (): Promise<void> {
+    try {
+      const currentUserName = await this.getAccountName()
+      if (currentUserName !== NO_SIGN_IN) {
+        this.imgurStateText = t('imgur account') + `${currentUserName} ✅`
+        this.imgurBtnText = t('Sign Out')
+        this.authenticated = true
+      }
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   async getAccountName (): Promise<string> {
@@ -135,23 +123,12 @@ export class ImgurFragment extends EmoFragment {
     return ((await r.json()) as AccountInfo).data.url
   }
 
-  async updateAccountState (): Promise<boolean> {
-    let imgurStateText = t('authenticate')
-    let imgurBtnText = t('sign in')
-    let authenticated = false
-    try {
-      const currentUserName = (await this.getAccountName())
-      if (currentUserName !== NO_SIGN_IN) {
-        imgurStateText = t('imgur account') + `${currentUserName} ✅`
-        imgurBtnText = t('Sign Out')
-        authenticated = true
-      }
-    } catch (err) {
-      console.log(err)
-    }
-    this.loginPart.setName(imgurStateText)
-    this.loginBtn.setButtonText(imgurBtnText)
-    return authenticated
+  drawLogin (): boolean {
+    this.imgurStateText = t('authenticate')
+    this.imgurBtnText = t('sign in')
+    this.loginState.setName(this.imgurStateText)
+    this.loginBtn.setButtonText(this.imgurBtnText)
+    return false
   }
 }
 

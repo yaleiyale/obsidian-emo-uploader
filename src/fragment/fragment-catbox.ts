@@ -17,7 +17,6 @@ export class CatboxFragment extends EmoFragment {
       .setName('userhash')
       .addText((text) => {
         text
-          .setPlaceholder('')
           .setValue(parms.required.userhash)
           .onChange(async (value) => {
             parms.required.userhash = value

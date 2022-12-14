@@ -16,8 +16,31 @@ import { ImgurUploader } from './uploader/uploader-imgur'
 import { CatboxUploader } from './uploader/uploader-catbox'
 
 export default class Emo extends Plugin {
-  initDone = false
   config!: Config
+
+  // Plugin load steps
+  async onload (): Promise<void> {
+    console.log('loading  Emo uploader')
+    await this.loadSettings()
+    this.setupPasteHandler()
+    this.addSettingTab(new EmoUploaderSettingTab(this.app, this))
+  }
+
+  // Plugin shutdown steps
+  onunload (): void {
+    console.log('unloading Emo uploader')
+  }
+
+  // Load settings infromation
+  async loadSettings (): Promise<void> {
+    this.config = Object.assign({}, DEFAULT_SETTINGS, await this.loadData())
+  }
+
+  // When saving settings
+  async saveSettings (): Promise<void> {
+    await this.saveData(this.config)
+  }
+
   setupPasteHandler (): void {
     // get files from drag or drop
     this.registerEvent(this.app.workspace.on('editor-drop', async (evt: DragEvent, editor: Editor) => {
@@ -98,28 +121,5 @@ export default class Emo extends Plugin {
         break
       }
     }
-  }
-
-  // Plugin load steps
-  async onload (): Promise<void> {
-    console.log('loading  Emo uploader')
-    await this.loadSettings()
-    this.setupPasteHandler()
-    this.addSettingTab(new EmoUploaderSettingTab(this.app, this))
-  }
-
-  // Plugin shutdown steps
-  onunload (): void {
-    console.log('unloading Emo uploader')
-  }
-
-  // Load settings infromation
-  async loadSettings (): Promise<void> {
-    this.config = Object.assign({}, DEFAULT_SETTINGS, await this.loadData())
-  }
-
-  // When saving settings
-  async saveSettings (): Promise<void> {
-    await this.saveData(this.config)
   }
 }

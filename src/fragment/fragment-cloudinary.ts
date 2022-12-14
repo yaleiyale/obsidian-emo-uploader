@@ -17,7 +17,6 @@ export class CloudinaryFragment extends EmoFragment {
       .setName('Cloud Name')
       .addText((text) => {
         text
-          .setPlaceholder('')
           .setValue(parms.required.name)
           .onChange(async (value) => {
             parms.required.name = value
@@ -29,13 +28,13 @@ export class CloudinaryFragment extends EmoFragment {
       .setName('Upload Presets')
       .addText((text) => {
         text
-          .setPlaceholder('')
           .setValue(parms.required.present)
           .onChange(async (value) => {
             parms.required.present = value
             await plugin.saveSettings()
           })
       })
+
     new Setting(el)
       .setName('Upload Folder')
       .setDesc(t('Upload Folder desc'))

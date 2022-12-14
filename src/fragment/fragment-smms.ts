@@ -17,7 +17,6 @@ export class SmmsFragment extends EmoFragment {
       .setName('token')
       .addText((text) => {
         text
-          .setPlaceholder('')
           .setValue(parms.required.token)
           .onChange(async (value) => {
             parms.required.token = value
