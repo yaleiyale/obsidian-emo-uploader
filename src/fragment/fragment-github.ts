@@ -70,6 +70,7 @@ export class GithubFragment extends EmoFragment {
 
     new Setting(el)
       .setName(t('path'))
+      .setDesc(t('not required'))
       .addText((text) => {
         text
           .setPlaceholder('obsidian/ -> obsidian/pic.png')
