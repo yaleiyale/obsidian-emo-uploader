@@ -1,7 +1,7 @@
 // English
 
 export default {
-  'no sign in' : 'Imgur no sign in!',
+  'no sign in': 'Imgur no sign in!',
   // not required
   'not required': 'not required',
   // main.ts

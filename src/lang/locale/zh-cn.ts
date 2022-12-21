@@ -1,7 +1,7 @@
 // 简体中文
 
 export default {
-  'no sign in' : 'Imgur未登录！',
+  'no sign in': 'Imgur未登录！',
   // not required
   'not required': '可不填',
   // main.ts
