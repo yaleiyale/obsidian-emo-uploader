@@ -2,7 +2,7 @@ import { ButtonComponent, Notice, request, RequestUrlParam, Setting } from 'obsi
 import Emo from '../main'
 import { EmoFragment } from '../base/emo-fragment'
 import { HostingProvider } from '../config'
-import { IMGUR_ACCESS_TOKEN_LOCALSTORAGE_KEY, IMGUR_DEFAULT_ID, NO_SIGN_IN } from '../base/constants'
+import { IMGUR_ACCESS_TOKEN_LOCALSTORAGE_KEY, IMGUR_DEFAULT_ID } from '../base/constants'
 import { t } from '../lang/helpers'
 
 export class ImgurFragment extends EmoFragment {
@@ -101,7 +101,7 @@ export class ImgurFragment extends EmoFragment {
   async checkState (): Promise<void> {
     try {
       const currentUserName = await this.getAccountName()
-      if (currentUserName !== NO_SIGN_IN) {
+      if (currentUserName !== t('no sign in')) {
         this.imgurStateText = t('imgur account') + `${currentUserName} ✅`
         this.imgurBtnText = t('Sign Out')
         this.authenticated = true
@@ -113,7 +113,7 @@ export class ImgurFragment extends EmoFragment {
 
   async getAccountName (): Promise<string> {
     const accessToken = localStorage.getItem(IMGUR_ACCESS_TOKEN_LOCALSTORAGE_KEY)
-    if (accessToken === null) { return NO_SIGN_IN }
+    if (accessToken === null) { return t('no sign in') }
     const r = await fetch('https://api.imgur.com/3/account/me', {
       headers: new Headers({ Authorization: `Bearer ${accessToken}` })
     })

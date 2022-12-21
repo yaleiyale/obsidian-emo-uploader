@@ -2,7 +2,8 @@ import { request, RequestUrlParam } from 'obsidian'
 import { ImgurParms } from '../parms/parms-imgur'
 import { ReqFormData } from '../utils/req-formdata'
 import { EmoUploader } from '../base/emo-uploader'
-import { CONTENT_TYPE_FORMDATA, IMGUR_ACCESS_TOKEN_LOCALSTORAGE_KEY, IMGUR_DEFAULT_ID, NO_SIGN_IN } from '../base/constants'
+import { CONTENT_TYPE_FORMDATA, IMGUR_ACCESS_TOKEN_LOCALSTORAGE_KEY, IMGUR_DEFAULT_ID } from '../base/constants'
+import { t } from '../lang/helpers'
 
 export class ImgurUploader extends EmoUploader {
   parms!: ImgurParms
@@ -41,7 +42,7 @@ export class ImgurUploader extends EmoUploader {
           body: form
         }
       } else {
-        return NO_SIGN_IN
+        return t('no sign in')
       }
     }
     return await new Promise((resolve, reject) => {

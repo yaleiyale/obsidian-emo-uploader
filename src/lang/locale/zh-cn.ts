@@ -1,6 +1,7 @@
 // 简体中文
 
 export default {
+  'no sign in' : 'Imgur未登录！',
   // not required
   'not required': '可不填',
   // main.ts
@@ -39,7 +40,7 @@ export default {
   'delete done': '删除成功',
   'delete fail': '删除失败',
   authenticate: '认证',
-  'auth desc': '更改ID需要重写认证才能生效。',
+  'auth desc': '更改ID需要重新认证才能生效。',
   'imgur account': '当前用户： ',
   'auth error': '认证错误: ',
   'sign in': '登录',

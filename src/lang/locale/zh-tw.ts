@@ -1,6 +1,7 @@
 // 繁體中文
 
 export default {
+  'no sign in' : 'Imgur未登錄！',
   // not required
   'not required': '可不填',
   // main.ts
