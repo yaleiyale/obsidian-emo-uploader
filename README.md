@@ -3,7 +3,6 @@
 <p align="center">
 		<img src="https://img.shields.io/github/release-date/yaleiyale/obsidian-emo-uploader?style=for-the-badge">
       <img src="https://img.shields.io/github/downloads/yaleiyale/obsidian-emo-uploader/total?style=for-the-badge">
-      <img src="https://www.codefactor.io/repository/github/yaleiyale/obsidian-emo-uploader/badge?style=for-the-badge">
 </p>
 
 Embed markdown online file/image links.  
@@ -39,7 +38,18 @@ Remember your username when registering **catbox**.🤨
 
 Starting from version 2.6, clipboard and drag files are supported; Non-image files will appear as links without "!" at the beginning by default after being embed in markdown.
 
+## How to Extend
 
+Want to support more platforms? If you want to contribute and don't want to make too much effort on reading old code, you can extend it in the following ways.  
+
+- Refer to existing *parms* files, and add the parameters required by your new *uploader* by adding files to `src/Parms`.
+- Use your *parms* interface. In `config.ts`, add parameter configurations about your *uploader* to provide choices and act as constructors for *uploader* at run time.
+- Implement your *uploader* and *settings panel* by adding files to `src/Uploader, src/Fragment`.
+- In `settings-tab.ts`,add your *fragment* to show and set parameters in the setting-tab.
+- Add your *uploader* to the switch judgment block in `main.ts`.
+- Test it.
+
+It's done! 😽
 
 ## Configuration
 
@@ -98,19 +108,6 @@ If you live in China, [imgbb](https://imgbb.com/) is not recommended to use. I f
 [Catbox](https://catbox.moe/) originally supports anonymous uploads. But I didn't find out how to delete anonymously uploaded files. To avoid accidents, anonymous uploads of catbox are not provided here.
 
 ⚠️ Files are public to see on them. Don't upload prohibited things! Please check the service restrictions by yourself.
-
-## How to Extend
-
-Want to support more platforms? If you want to contribute and don't want to make too much effort on reading old code, you can extend it in the following ways.  
-
-- Refer to existing *parms* files, and add the parameters required by your new *uploader* by adding files to `src/Parms`.
-- Use your *parms* interface. In `config.ts`, add parameter configurations about your *uploader* to provide choices and act as constructors for *uploader* at run time.
-- Implement your *uploader* and *settings panel* by adding files to `src/Uploader, src/Fragment`.
-- In `settings-tab.ts`,add your *fragment* to show and set parameters in the setting-tab.
-- Add your *uploader* to the switch judgment block in `main.ts`.
-- Test it.
-
-It's done! 😽
 
 ## Note
 
