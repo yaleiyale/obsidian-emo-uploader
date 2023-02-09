@@ -18,20 +18,12 @@ This plugin is for uploading **images** to hosting platform or **files** to Gith
 
 ## State
 
-- Support list
-  - file hosting
-    - [GitHub](https://github.com/)
-    - [Clouinary](https://cloudinary.com/)
-    - [Catbox](https://catbox.moe/) 
-  - image hosting
-    - [Imgur](https://imgur.com/) 
-    - [SM.MS](https://smms.app/)
-    - [ImgURL](https://www.imgurl.org/)
-    - [imgbb](https://imgbb.com/)
-- Multi language support of configuration interface
-  - 简体中文
-  - 繁體中文 [@emisjerry](https://github.com/emisjerry)
-  - English
+| file hosting                         | image hosting                     | Multi language support                              |
+| ------------------------------------ | --------------------------------- | --------------------------------------------------- |
+| [GitHub](https://github.com/)        | [Imgur](https://imgur.com/)       | 简体中文                                            |
+| [Clouinary](https://cloudinary.com/) | [SM.MS](https://smms.app/)        | 繁體中文 [@emisjerry](https://github.com/emisjerry) |
+| [Catbox](https://catbox.moe/)        | [ImgURL](https://www.imgurl.org/) | English                                             |
+|                                      | [imgbb](https://imgbb.com/)       |                                                     |
   
 If you want to create your own client-ID In Imgur, Redirect: `obsidian://emo-imgur-oauth`.   
 Remember your username when registering **catbox**.🤨
@@ -129,13 +121,9 @@ Thank you!
 
 ## Thanks
 
-[obsidian-cloudinary-uploader](https://github.com/jordanhandy/obsidian-cloudinary-uploader)  
-[Github REST API](https://docs.github.com/cn/rest)  
-[jsdelivr](https://www.jsdelivr.com/)  
-[SM.MS](https://smms.app/)  
-[ImgURL](https://www.imgurl.org/)  
-[Clouinary](https://cloudinary.com/)  
-[Imgur](https://imgur.com/)  
-[imgbb](https://imgbb.com/)  
-[obsidian-imgur-plugin](https://github.com/gavvvr/obsidian-imgur-plugin)  
-[Catbox](https://catbox.moe/)
+|                                                                                             | Thanks                                              |                                                                          |
+| ------------------------------------------------------------------------------------------- | -------------------------------------------------- | ------------------------------------------------------------------------ |
+| [obsidian-cloudinary-uploader](https://github.com/jordanhandy/obsidian-cloudinary-uploader) | [Github REST API](https://docs.github.com/cn/rest) | [jsdelivr](https://www.jsdelivr.com/)                                    |
+| [SM.MS](https://smms.app/)                                                                  | [ImgURL](https://www.imgurl.org/)                  | [Clouinary](https://cloudinary.com/)                                     |
+| [Imgur](https://imgur.com/)                                                                 | [imgbb](https://imgbb.com/)                        | [obsidian-imgur-plugin](https://github.com/gavvvr/obsidian-imgur-plugin) |
+| [Catbox](https://catbox.moe/)                                                               |                                                    |                                                                          |
