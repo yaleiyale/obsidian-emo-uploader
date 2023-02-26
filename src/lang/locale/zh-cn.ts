@@ -22,6 +22,7 @@ export default {
   token: '令牌',
   message: '提交信息',
   path: '路径',
+  cdn: 'CDN',
   'random filename': '随机文件名',
   'random filename desc': '采用随机文件名将极大避免重名。如果确定在上传过程中需要使用原文件名，请确保所选路径下不会出现重名问题。',
   // fragment-imgbb.ts

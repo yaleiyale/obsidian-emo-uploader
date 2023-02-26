@@ -3,6 +3,7 @@ import Emo from '../main'
 import { EmoFragment } from '../base/emo-fragment'
 import { HostingProvider } from '../config'
 import { t } from '../lang/helpers'
+import { CDNprovider } from '../parms/parms-github'
 
 export class GithubFragment extends EmoFragment {
   constructor (el: HTMLElement, plugin: Emo) {
@@ -90,6 +91,22 @@ export class GithubFragment extends EmoFragment {
           parms.random = value
           await plugin.saveSettings()
         })
+      })
+
+    const supportList: string[] = []
+    for (const key in CDNprovider) {
+      supportList.push(CDNprovider[key as keyof typeof CDNprovider])
+    }
+
+    new Setting(el)
+      .setName(t('cdn'))
+      .addDropdown((dropdown) => {
+        supportList.forEach((record) => { dropdown.addOption(record, record) })
+        dropdown.setValue(parms.cdn)
+          .onChange(async (value) => {
+            parms.cdn = value as CDNprovider
+            await plugin.saveSettings()
+          })
       })
   }
 }

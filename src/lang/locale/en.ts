@@ -22,6 +22,7 @@ export default {
   token: 'token',
   message: 'message',
   path: 'path',
+  cdn: 'CDN',
   'random filename': 'random filename',
   'random filename desc': 'Random file names will greatly avoid duplicate file names. If you are sure that you need to use the original file name during this upload, make sure that no duplicate naming will occur under the path you choose.',
   // fragment-imgbb.ts

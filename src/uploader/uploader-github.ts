@@ -1,5 +1,5 @@
 import { request, RequestUrlParam } from 'obsidian'
-import { GithubParms } from '../parms/parms-github'
+import { CDNprovider, GithubParms } from '../parms/parms-github'
 import { getBase64, getRandomFileName } from '../utils/file-helper'
 import { EmoUploader } from '../base/emo-uploader'
 
@@ -39,7 +39,23 @@ export class GithubUploader extends EmoUploader {
 
     return await new Promise((resolve, reject) => {
       request(req).then(() => {
-        const markdownText = `![gh](https://fastly.jsdelivr.net/gh/${this.parms.required.owner}/${this.parms.required.repo}@${this.parms.required.branch}/${filePath})`
+        let markdownText: string
+        console.log(this.parms.cdn)
+        switch (this.parms.cdn) {
+          case CDNprovider.jsdelivr:
+            markdownText = `![gh](https://cdn.jsdelivr.net/gh/${this.parms.required.owner}/${this.parms.required.repo}@${this.parms.required.branch}/${filePath})`
+            break
+          case CDNprovider.statically:
+            markdownText = `![gh](https://cdn.statically.io/gh/${this.parms.required.owner}/${this.parms.required.repo}/${this.parms.required.branch}/${filePath})`
+            break
+          case CDNprovider.raw:
+            markdownText = `![gh](https://raw.githubusercontent.com/${this.parms.required.owner}/${this.parms.required.repo}/${this.parms.required.branch}/${filePath})`
+            break
+          default:
+            // use raw
+            markdownText = `![gh](https://raw.githubusercontent.com/${this.parms.required.owner}/${this.parms.required.repo}/${this.parms.required.branch}/${filePath})`
+            break
+        }
         resolve(markdownText)
       }).catch(err => {
         reject(err)

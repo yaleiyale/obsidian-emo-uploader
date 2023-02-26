@@ -1,10 +1,16 @@
 import { EmoParms } from '../base/emo-parms'
-
+export enum CDNprovider { // Github CDN
+  jsdelivr = 'jsdelivr',
+  statically = 'statically',
+  raw = 'raw'
+}
 export interface GithubParms extends EmoParms {
   required: Required
   path: string
   random: boolean
+  cdn: CDNprovider
 }
+
 interface Required {
   owner: string
   repo: string
@@ -21,5 +27,6 @@ export const GITHUB_DEFAULT_PARMS: GithubParms = {
     message: 'from emo-uploader·Github'
   },
   path: '',
-  random: true
+  random: true,
+  cdn: CDNprovider.raw
 }
