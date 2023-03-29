@@ -115,7 +115,7 @@ Trying to upload a file that the platform does not support or volume exceeds the
 
 If you are enjoying the plugin then you can support my work and enthusiasm by buying me a cola:  
 
-<a id="cola" href="https://lestua.eu.org/donate/"><img src="https://i.imgur.com/9kSi9ER.png" alt="BuyMeACola" width="180" style="margin:auto"></a>
+<a id="cola" href="https://lestua.eu.org/donate/"><img src="https://i.imgur.com/lEvIedR.png" alt="BuyMeACola" width="180" style="margin:auto"></a>
 
 Thank you!
 
