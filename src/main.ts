@@ -70,7 +70,7 @@ export default class CloudinaryUploader extends Plugin {
             if(this.settings.f_auto){
               const splitURL = url.split("/upload/",2);
               let modifiedURL='';
-              modifiedURL = splitURL[0]+="f_auto/"+splitURL[1];
+              modifiedURL = splitURL[0]+="/upload/f_auto/"+splitURL[1];
               imgMarkdownText = `![](${modifiedURL})`;
             }else{
             imgMarkdownText = `![](${url})`;
