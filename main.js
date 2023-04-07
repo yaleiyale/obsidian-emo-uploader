@@ -1091,6 +1091,7 @@ var require_follow_redirects = __commonJS((exports2, module2) => {
       this._redirectable.emit(event, arg1, arg2, arg3);
     };
   });
+  var InvalidUrlError = createErrorType("ERR_INVALID_URL", "Invalid URL", TypeError);
   var RedirectionError = createErrorType("ERR_FR_REDIRECTION_FAILURE", "Redirected request failed");
   var TooManyRedirectsError = createErrorType("ERR_FR_TOO_MANY_REDIRECTS", "Maximum number of redirects exceeded");
   var MaxBodyLengthExceededError = createErrorType("ERR_FR_MAX_BODY_LENGTH_EXCEEDED", "Request body larger than maxBodyLength limit");
@@ -1123,10 +1124,10 @@ var require_follow_redirects = __commonJS((exports2, module2) => {
     if (this._ending) {
       throw new WriteAfterEndError();
     }
-    if (!(typeof data === "string" || typeof data === "object" && "length" in data)) {
+    if (!isString(data) && !isBuffer(data)) {
       throw new TypeError("data should be a string, Buffer or Uint8Array");
     }
-    if (typeof encoding === "function") {
+    if (isFunction(encoding)) {
       callback = encoding;
       encoding = null;
     }
@@ -1146,10 +1147,10 @@ var require_follow_redirects = __commonJS((exports2, module2) => {
     }
   };
   RedirectableRequest.prototype.end = function(data, encoding, callback) {
-    if (typeof data === "function") {
+    if (isFunction(data)) {
       callback = data;
       data = encoding = null;
-    } else if (typeof encoding === "function") {
+    } else if (isFunction(encoding)) {
       callback = encoding;
       encoding = null;
     }
@@ -1265,15 +1266,15 @@ var require_follow_redirects = __commonJS((exports2, module2) => {
       return;
     }
     if (this._options.agents) {
-      var scheme = protocol.substr(0, protocol.length - 1);
+      var scheme = protocol.slice(0, -1);
       this._options.agent = this._options.agents[scheme];
     }
     var request = this._currentRequest = nativeProtocol.request(this._options, this._onNativeResponse);
-    this._currentUrl = url.format(this._options);
     request._redirectable = this;
-    for (var e = 0; e < events.length; e++) {
-      request.on(events[e], eventHandlers[events[e]]);
+    for (var event of events) {
+      request.on(event, eventHandlers[event]);
     }
+    this._currentUrl = /^\//.test(this._options.path) ? url.format(this._options) : this._options.path;
     if (this._isRedirect) {
       var i = 0;
       var self = this;
@@ -1317,6 +1318,14 @@ var require_follow_redirects = __commonJS((exports2, module2) => {
       this.emit("error", new TooManyRedirectsError());
       return;
     }
+    var requestHeaders;
+    var beforeRedirect = this._options.beforeRedirect;
+    if (beforeRedirect) {
+      requestHeaders = Object.assign({
+        Host: response.req.getHeader("host")
+      }, this._options.headers);
+    }
+    var method = this._options.method;
     if ((statusCode === 301 || statusCode === 302) && this._options.method === "POST" || statusCode === 303 && !/^(?:GET|HEAD)$/.test(this._options.method)) {
       this._options.method = "GET";
       this._requestBodyBuffers = [];
@@ -1330,7 +1339,7 @@ var require_follow_redirects = __commonJS((exports2, module2) => {
     try {
       redirectUrl = url.resolve(currentUrl, location);
     } catch (cause) {
-      this.emit("error", new RedirectionError(cause));
+      this.emit("error", new RedirectionError({cause}));
       return;
     }
     debug("redirecting to", redirectUrl);
@@ -1340,10 +1349,18 @@ var require_follow_redirects = __commonJS((exports2, module2) => {
     if (redirectUrlParts.protocol !== currentUrlParts.protocol && redirectUrlParts.protocol !== "https:" || redirectUrlParts.host !== currentHost && !isSubdomain(redirectUrlParts.host, currentHost)) {
       removeMatchingHeaders(/^(?:authorization|cookie)$/i, this._options.headers);
     }
-    if (typeof this._options.beforeRedirect === "function") {
-      var responseDetails = {headers: response.headers};
+    if (isFunction(beforeRedirect)) {
+      var responseDetails = {
+        headers: response.headers,
+        statusCode
+      };
+      var requestDetails = {
+        url: currentUrl,
+        method,
+        headers: requestHeaders
+      };
       try {
-        this._options.beforeRedirect.call(null, this._options, responseDetails);
+        beforeRedirect(this._options, responseDetails, requestDetails);
       } catch (err) {
         this.emit("error", err);
         return;
@@ -1353,7 +1370,7 @@ var require_follow_redirects = __commonJS((exports2, module2) => {
     try {
       this._performRequest();
     } catch (cause) {
-      this.emit("error", new RedirectionError(cause));
+      this.emit("error", new RedirectionError({cause}));
     }
   };
   function wrap(protocols) {
@@ -1367,13 +1384,17 @@ var require_follow_redirects = __commonJS((exports2, module2) => {
       var nativeProtocol = nativeProtocols[protocol] = protocols[scheme];
       var wrappedProtocol = exports3[scheme] = Object.create(nativeProtocol);
       function request(input, options, callback) {
-        if (typeof input === "string") {
-          var urlStr = input;
+        if (isString(input)) {
+          var parsed;
           try {
-            input = urlToOptions(new URL(urlStr));
+            parsed = urlToOptions(new URL(input));
           } catch (err) {
-            input = url.parse(urlStr);
+            parsed = url.parse(input);
           }
+          if (!isString(parsed.protocol)) {
+            throw new InvalidUrlError({input});
+          }
+          input = parsed;
         } else if (URL && input instanceof URL) {
           input = urlToOptions(input);
         } else {
@@ -1381,7 +1402,7 @@ var require_follow_redirects = __commonJS((exports2, module2) => {
           options = input;
           input = {protocol};
         }
-        if (typeof options === "function") {
+        if (isFunction(options)) {
           callback = options;
           options = null;
         }
@@ -1390,6 +1411,9 @@ var require_follow_redirects = __commonJS((exports2, module2) => {
           maxBodyLength: exports3.maxBodyLength
         }, input, options);
         options.nativeProtocols = nativeProtocols;
+        if (!isString(options.host) && !isString(options.hostname)) {
+          options.hostname = "::1";
+        }
         assert.equal(options.protocol, protocol, "protocol mismatch");
         debug("options", options);
         return new RedirectableRequest(options, callback);
@@ -1433,32 +1457,38 @@ var require_follow_redirects = __commonJS((exports2, module2) => {
     }
     return lastValue === null || typeof lastValue === "undefined" ? void 0 : String(lastValue).trim();
   }
-  function createErrorType(code, defaultMessage) {
-    function CustomError(cause) {
+  function createErrorType(code, message, baseClass) {
+    function CustomError(properties) {
       Error.captureStackTrace(this, this.constructor);
-      if (!cause) {
-        this.message = defaultMessage;
-      } else {
-        this.message = defaultMessage + ": " + cause.message;
-        this.cause = cause;
-      }
+      Object.assign(this, properties || {});
+      this.code = code;
+      this.message = this.cause ? message + ": " + this.cause.message : message;
     }
-    CustomError.prototype = new Error();
+    CustomError.prototype = new (baseClass || Error)();
     CustomError.prototype.constructor = CustomError;
     CustomError.prototype.name = "Error [" + code + "]";
-    CustomError.prototype.code = code;
     return CustomError;
   }
   function abortRequest(request) {
-    for (var e = 0; e < events.length; e++) {
-      request.removeListener(events[e], eventHandlers[events[e]]);
+    for (var event of events) {
+      request.removeListener(event, eventHandlers[event]);
     }
     request.on("error", noop);
     request.abort();
   }
   function isSubdomain(subdomain, domain) {
-    const dot = subdomain.length - domain.length - 1;
+    assert(isString(subdomain) && isString(domain));
+    var dot = subdomain.length - domain.length - 1;
     return dot > 0 && subdomain[dot] === "." && subdomain.endsWith(domain);
+  }
+  function isString(value) {
+    return typeof value === "string" || value instanceof String;
+  }
+  function isFunction(value) {
+    return typeof value === "function";
+  }
+  function isBuffer(value) {
+    return typeof value === "object" && "length" in value;
   }
   module2.exports = wrap({http, https});
   module2.exports.wrap = wrap;
@@ -2639,6 +2669,16 @@ var CloudinaryUploaderSettingTab = class extends import_obsidian.PluginSettingTa
         }
       });
     });
+    new import_obsidian.Setting(containerEl).setName("f_auto Option").setDesc("Enable f_auto option for image uploads").addToggle((toggle) => {
+      toggle.setValue(this.plugin.settings.f_auto).onChange(async (value) => {
+        try {
+          this.plugin.settings.f_auto = value;
+          await this.plugin.saveSettings();
+        } catch (e) {
+          console.log(e);
+        }
+      });
+    });
   }
 };
 var settings_tab_default = CloudinaryUploaderSettingTab;
@@ -2647,7 +2687,8 @@ var settings_tab_default = CloudinaryUploaderSettingTab;
 var DEFAULT_SETTINGS = {
   cloudName: null,
   uploadPreset: null,
-  folder: null
+  folder: null,
+  f_auto: false
 };
 var CloudinaryUploader = class extends import_obsidian2.Plugin {
   setupPasteHandler() {
@@ -2672,7 +2713,15 @@ var CloudinaryUploader = class extends import_obsidian2.Plugin {
             }).then((res) => {
               console.log(res);
               const url = import_object_path.default.get(res.data, "secure_url");
-              const imgMarkdownText = `![](${url})`;
+              let imgMarkdownText = "";
+              if (this.settings.f_auto) {
+                const splitURL = url.split("/upload/", 2);
+                let modifiedURL = "";
+                modifiedURL = splitURL[0] += "/upload/f_auto/" + splitURL[1];
+                imgMarkdownText = `![](${modifiedURL})`;
+              } else {
+                imgMarkdownText = `![](${url})`;
+              }
               this.replaceText(editor, pastePlaceText, imgMarkdownText);
             }, (err) => {
               new import_obsidian2.Notice(err, 5e3);
