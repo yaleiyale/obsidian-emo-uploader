@@ -17,6 +17,7 @@ interface CloudinarySettings {
   cloudName: string;
   uploadPreset: string;
   folder: string;
+  f_auto: boolean;
   //maxWidth: number; TODO
   // enableResize: boolean; TODO
 }
@@ -26,6 +27,7 @@ const DEFAULT_SETTINGS: CloudinarySettings = {
   cloudName: null,
   uploadPreset: null,
   folder: null,
+  f_auto: false,
   //maxWidth: 4096, TODO
   //enableResize: false, TODO later
 };
@@ -64,7 +66,15 @@ export default class CloudinaryUploader extends Plugin {
           // Get response public URL of uploaded image
           console.log(res);
             const url = objectPath.get(res.data, 'secure_url')
-            const imgMarkdownText = `![](${url})`
+            let imgMarkdownText ="";
+            if(this.settings.f_auto){
+              const splitURL = url.split("/upload/",2);
+              let modifiedURL='';
+              modifiedURL = splitURL[0]+="/upload/f_auto/"+splitURL[1];
+              imgMarkdownText = `![](${modifiedURL})`;
+            }else{
+            imgMarkdownText = `![](${url})`;
+            }
             // Show MD syntax using uploaded image URL, in Obsidian Editor
             this.replaceText(editor, pastePlaceText, imgMarkdownText)
           }, err => {
