@@ -69,5 +69,21 @@ export default class CloudinaryUploaderSettingTab extends PluginSettingTab {
                         }
                     })
             });
+            new Setting(containerEl)
+            .setName("f_auto Option")
+            .setDesc("Enable f_auto option for image uploads")
+            .addToggle((toggle) => {
+                toggle
+                    .setValue(this.plugin.settings.folder)
+                    .onChange(async (value) => {
+                        try {
+                            this.plugin.settings.folder = value;
+                            await this.plugin.saveSettings();
+                        }
+                        catch (e) {
+                            console.log(e)
+                        }
+                    })
+            });
     }
 }
