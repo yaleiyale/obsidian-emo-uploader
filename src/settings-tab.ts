@@ -74,10 +74,10 @@ export default class CloudinaryUploaderSettingTab extends PluginSettingTab {
             .setDesc("Enable f_auto option for image uploads")
             .addToggle((toggle) => {
                 toggle
-                    .setValue(this.plugin.settings.folder)
+                    .setValue(this.plugin.settings.f_auto)
                     .onChange(async (value) => {
                         try {
-                            this.plugin.settings.folder = value;
+                            this.plugin.settings.f_auto = value;
                             await this.plugin.saveSettings();
                         }
                         catch (e) {
