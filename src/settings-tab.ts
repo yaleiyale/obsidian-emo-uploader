@@ -85,5 +85,27 @@ export default class CloudinaryUploaderSettingTab extends PluginSettingTab {
                         }
                     })
             });
+            const textFragment = document.createDocumentFragment();
+            const link = document.createElement("a");
+            link.href="https://cloudinary.com/documentation/transformation_reference";
+            link.text="View Cloudinary's transformation reference for guidance.";
+            textFragment.append("Add a comma-delimited default set of transformations to your uploads.  ");
+            textFragment.append(link);
+            new Setting(containerEl)
+            .setName("Default Transformation Parameters")
+            .setDesc(textFragment);
+            .addText((text) => {
+                text
+                    .setValue(this.plugin.settings.transformParams)
+                    .onChange(async (value) => {
+                        try {
+                            this.plugin.settings.transformParams = value;
+                            await this.plugin.saveSettings();
+                        }
+                        catch (e) {
+                            console.log(e)
+                        }
+                    })
+            });
     }
 }
