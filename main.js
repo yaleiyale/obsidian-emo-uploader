@@ -2679,6 +2679,22 @@ var CloudinaryUploaderSettingTab = class extends import_obsidian.PluginSettingTa
         }
       });
     });
+    const textFragment = document.createDocumentFragment();
+    const link = document.createElement("a");
+    link.href = "https://cloudinary.com/documentation/transformation_reference";
+    link.text = "View Cloudinary's transformation reference for guidance.";
+    textFragment.append("Add a comma-delimited default set of transformations to your uploads.  ");
+    textFragment.append(link);
+    new import_obsidian.Setting(containerEl).setName("Default Transformation Parameters").setDesc(textFragment).addText((text) => {
+      text.setValue(this.plugin.settings.transformParams).onChange(async (value) => {
+        try {
+          this.plugin.settings.transformParams = value;
+          await this.plugin.saveSettings();
+        } catch (e) {
+          console.log(e);
+        }
+      });
+    });
   }
 };
 var settings_tab_default = CloudinaryUploaderSettingTab;
@@ -2688,7 +2704,8 @@ var DEFAULT_SETTINGS = {
   cloudName: null,
   uploadPreset: null,
   folder: null,
-  f_auto: false
+  f_auto: false,
+  transformParams: null
 };
 var CloudinaryUploader = class extends import_obsidian2.Plugin {
   setupPasteHandler() {
@@ -2712,8 +2729,15 @@ var CloudinaryUploader = class extends import_obsidian2.Plugin {
               data: formData
             }).then((res) => {
               console.log(res);
-              const url = import_object_path.default.get(res.data, "secure_url");
+              let url = import_object_path.default.get(res.data, "secure_url");
               let imgMarkdownText = "";
+              if (this.settings.transformParams) {
+                const splitURL = url.split("/upload/", 2);
+                let modifiedURL = "";
+                modifiedURL = splitURL[0] += "/upload/" + this.settings.transformParams + "/" + splitURL[1];
+                imgMarkdownText = `![](${modifiedURL})`;
+                url = modifiedURL;
+              }
               if (this.settings.f_auto) {
                 const splitURL = url.split("/upload/", 2);
                 let modifiedURL = "";

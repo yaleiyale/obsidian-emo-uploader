@@ -93,7 +93,7 @@ export default class CloudinaryUploaderSettingTab extends PluginSettingTab {
             textFragment.append(link);
             new Setting(containerEl)
             .setName("Default Transformation Parameters")
-            .setDesc(textFragment);
+            .setDesc(textFragment)
             .addText((text) => {
                 text
                     .setValue(this.plugin.settings.transformParams)
