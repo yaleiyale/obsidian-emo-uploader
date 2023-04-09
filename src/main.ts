@@ -18,6 +18,7 @@ interface CloudinarySettings {
   uploadPreset: string;
   folder: string;
   f_auto: boolean;
+  transformParams: string;
   //maxWidth: number; TODO
   // enableResize: boolean; TODO
 }
@@ -28,6 +29,7 @@ const DEFAULT_SETTINGS: CloudinarySettings = {
   uploadPreset: null,
   folder: null,
   f_auto: false,
+  transformParams: null,
   //maxWidth: 4096, TODO
   //enableResize: false, TODO later
 };
@@ -65,13 +67,24 @@ export default class CloudinaryUploader extends Plugin {
           }).then(res => {
           // Get response public URL of uploaded image
           console.log(res);
-            const url = objectPath.get(res.data, 'secure_url')
+            let url = objectPath.get(res.data, 'secure_url')
             let imgMarkdownText ="";
+
+            // Split URL to allow for appending transformations
+            if(this.settings.transformParams){
+              const splitURL = url.split("/upload/",2);
+              let modifiedURL='';
+              modifiedURL = splitURL[0]+="/upload/"+this.settings.transformParams+"/"+splitURL[1];
+              imgMarkdownText = `![](${modifiedURL})`;
+              url = modifiedURL
+            }
             if(this.settings.f_auto){
               const splitURL = url.split("/upload/",2);
               let modifiedURL='';
               modifiedURL = splitURL[0]+="/upload/f_auto/"+splitURL[1];
               imgMarkdownText = `![](${modifiedURL})`;
+            
+            // leave stamdard of no transformations added
             }else{
             imgMarkdownText = `![](${url})`;
             }
