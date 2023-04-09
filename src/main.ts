@@ -69,6 +69,8 @@ export default class CloudinaryUploader extends Plugin {
           console.log(res);
             let url = objectPath.get(res.data, 'secure_url')
             let imgMarkdownText ="";
+
+            // Split URL to allow for appending transformations
             if(this.settings.transformParams){
               const splitURL = url.split("/upload/",2);
               let modifiedURL='';
@@ -81,6 +83,8 @@ export default class CloudinaryUploader extends Plugin {
               let modifiedURL='';
               modifiedURL = splitURL[0]+="/upload/f_auto/"+splitURL[1];
               imgMarkdownText = `![](${modifiedURL})`;
+            
+            // leave stamdard of no transformations added
             }else{
             imgMarkdownText = `![](${url})`;
             }

@@ -70,14 +70,19 @@ export default class CloudinaryUploaderSettingTab extends PluginSettingTab {
                     })
             });
             containerEl.createEl("h4", { text: "URL Manipulations / Transformation" });
+            
+            // Allow for inline hyperlinks with anchor tags
             let textFragment = document.createDocumentFragment();
             let link = document.createElement("a"); 
+
             const linkTransformation = document.createElement("a"); 
             linkTransformation.text="transformation limits ";
             linkTransformation.href="https://cloudinary.com/documentation/transformation_counts";
+            
             textFragment.append("The settings below are meant for default image transformations.  As they only touch the resulting URL, this should not cause any upload errors, however, if syntax is incorrect, your images will not be referenced correctly (won't render).  Be mindful of your Cloudinary ");
             textFragment.append(linkTransformation);
             textFragment.append(" and use the ");
+            
             link.href = "https://cloudinary.com/documentation/transformation_reference";
             link.text = " Cloudinary documentation"
             textFragment.append(link);
@@ -113,7 +118,7 @@ export default class CloudinaryUploaderSettingTab extends PluginSettingTab {
             link = document.createElement("a");
             link.href="https://cloudinary.com/documentation/transformation_reference";
             link.text="View Cloudinary's transformation reference for guidance.";
-            textFragment.append("Add a comma-delimited default set of transformations to your uploads.  You do NOT need to include f_auto here if already enabled above.");
+            textFragment.append("Add a comma-delimited default set of transformations to your uploads.  You do NOT need to include f_auto here if already enabled above.  ");
             textFragment.append(link);
             new Setting(containerEl)
             .setName("Default Transformation Parameters")
