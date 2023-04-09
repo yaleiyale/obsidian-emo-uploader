@@ -11,12 +11,15 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+
     steps:
       - uses: actions/checkout@v2
 
-      - uses: retypeapp/action-build@v1
+      - uses: retypeapp/action-build@latest
 
-      - uses: retypeapp/action-github-pages@v1
+      - uses: retypeapp/action-github-pages@latest
         with:
           branch: retype
           update-branch: true
