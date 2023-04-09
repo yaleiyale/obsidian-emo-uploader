@@ -10,7 +10,7 @@ To get started with this plugin, do either of the following:
 - From Github
     - Clone the repo
     - Run `npm run build`
-    - Enaable the plugin in your Obidian instance
+    - Enable the plugin in your Obidian instance
 - From the Obsidian Plugins Tab:
     - Disable Obsidian safe mode
     - Search for "Obsidian Cloudinary Uploader" and install
