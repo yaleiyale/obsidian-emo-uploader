@@ -23,6 +23,8 @@ This plugin allows you to automatically upload images pasted to Obsidian directl
     - Cloud Name
     - Upload Preset Name ([Set that here](https://cloudinary.com/documentation/upload_presets))
     - Set a Folder Name
+5. Optional configuration
+    - Cloudinary default transformation parameters
 
 ## Unsigned vs. Signed Uploads to Cloudinary
 The uploads to Cloudinary are unsigned.  [You can read more about that here](https://cloudinary.com/documentation/upload_images#unsigned_upload).  A signed upload would require the use of an API key and secret, and I opted against asking for that in the plugin configuration, as a choice for security reasons.
