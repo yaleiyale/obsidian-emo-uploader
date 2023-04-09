@@ -2669,7 +2669,23 @@ var CloudinaryUploaderSettingTab = class extends import_obsidian.PluginSettingTa
         }
       });
     });
-    new import_obsidian.Setting(containerEl).setName("f_auto Option").setDesc("Enable f_auto option for image uploads").addToggle((toggle) => {
+    containerEl.createEl("h4", {text: "URL Manipulations / Transformation"});
+    let textFragment = document.createDocumentFragment();
+    let link = document.createElement("a");
+    link.href = "https://cloudinary.com/documentation/transformation_reference";
+    link.text = " Cloudinary documentation";
+    textFragment.append("The settings below are meant for default image transformations.  As they only touch the resulting URL, this should not cause any upload errors, however, if syntax is incorrect, your images will not be referenced correctly (won't render).  Be mindful of your Cloudinary transformation limits and use the");
+    textFragment.append(link);
+    textFragment.append(" for guidance.");
+    containerEl.createEl("p", {text: textFragment});
+    textFragment = document.createDocumentFragment();
+    link = document.createElement("a");
+    link.href = "https://cloudinary.com/documentation/image_optimization#automatic_format_selection_f_auto";
+    link.text = "f_auto option";
+    textFragment.append("Enable the ");
+    textFragment.append(link);
+    textFragment.append(" for uploads");
+    new import_obsidian.Setting(containerEl).setName("f_auto Option").setDesc(textFragment).addToggle((toggle) => {
       toggle.setValue(this.plugin.settings.f_auto).onChange(async (value) => {
         try {
           this.plugin.settings.f_auto = value;
@@ -2679,14 +2695,14 @@ var CloudinaryUploaderSettingTab = class extends import_obsidian.PluginSettingTa
         }
       });
     });
-    const textFragment = document.createDocumentFragment();
-    const link = document.createElement("a");
+    textFragment = document.createDocumentFragment();
+    link = document.createElement("a");
     link.href = "https://cloudinary.com/documentation/transformation_reference";
     link.text = "View Cloudinary's transformation reference for guidance.";
     textFragment.append("Add a comma-delimited default set of transformations to your uploads.  ");
     textFragment.append(link);
     new import_obsidian.Setting(containerEl).setName("Default Transformation Parameters").setDesc(textFragment).addText((text) => {
-      text.setValue(this.plugin.settings.transformParams).onChange(async (value) => {
+      text.setPlaceholder("w_150,h_150").setValue(this.plugin.settings.transformParams).onChange(async (value) => {
         try {
           this.plugin.settings.transformParams = value;
           await this.plugin.saveSettings();
