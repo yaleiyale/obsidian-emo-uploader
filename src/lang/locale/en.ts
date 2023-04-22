@@ -1,6 +1,7 @@
 // English
 
 export default {
+  domain: 'dmain',
   'no sign in': 'Imgur no sign in!',
   // not required
   'not required': 'not required',
@@ -51,5 +52,7 @@ export default {
   // fragment-smms.ts
   'SM.MS Settings': 'SM.MS Settings',
   // fragment-catbox.ts
-  'Catbox Settings': 'Catbox Settings'
+  'Catbox Settings': 'Catbox Settings',
+  // fragment-chevereto.ts
+  'Chevereto Settings': 'Chevereto Settings'
 }

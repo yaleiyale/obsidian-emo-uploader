@@ -14,6 +14,7 @@ import { SmmsUploader } from './uploader/uploader-smms'
 import { ImgbbUploader } from './uploader/uploader-imgbb'
 import { ImgurUploader } from './uploader/uploader-imgur'
 import { CatboxUploader } from './uploader/uploader-catbox'
+import { CheveretoUploader } from './uploader/uploader-chevereto'
 
 export default class Emo extends Plugin {
   config!: Config
@@ -78,6 +79,9 @@ export default class Emo extends Plugin {
           break
         case HostingProvider.Catbox:
           uploader = new CatboxUploader(this.config.catbox_parms)
+          break
+        case HostingProvider.Chevereto:
+          uploader = new CheveretoUploader(this.config.chevereto_parms)
           break
         default:
           console.log(new Notice(t('broken'), 2000))

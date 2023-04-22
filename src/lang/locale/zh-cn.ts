@@ -1,6 +1,7 @@
 // 简体中文
 
 export default {
+  domain: '域名',
   'no sign in': 'Imgur未登录！',
   // not required
   'not required': '可不填',
@@ -51,5 +52,7 @@ export default {
   // fragment-smms.ts
   'SM.MS Settings': 'SM.MS配置',
   // fragment-catbox.ts
-  'Catbox Settings': 'Catbox配置'
+  'Catbox Settings': 'Catbox配置',
+  // fragment-chevereto.ts
+  'Chevereto Settings': 'Chevereto配置'
 }

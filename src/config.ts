@@ -1,4 +1,5 @@
 import { CatboxParms, CATBOX_DEFAULT_PARMS } from './parms/parms-catbox'
+import { CHEVERETO_DEFAULT_PARMS, CheveretoParms } from './parms/parms-chevereto'
 import { CloudinaryParms, CLOUDINARY_DEFAULT_PARMS } from './parms/parms-cloudinary'
 import { GithubParms, GITHUB_DEFAULT_PARMS } from './parms/parms-github'
 import { ImgbbParms, IMGBB_DEFAULT_PARMS } from './parms/parms-imgbb'
@@ -15,6 +16,7 @@ export interface Config { // data from data.json
   imgbb_parms: ImgbbParms
   imgur_parms: ImgurParms
   catbox_parms: CatboxParms
+  chevereto_parms: CheveretoParms
 }
 
 export enum HostingProvider { // target hosting
@@ -25,6 +27,7 @@ export enum HostingProvider { // target hosting
   Smms = 'SM.MS',
   ImgURL = 'ImgURL',
   Imgbb = 'imgbb',
+  Chevereto = 'chevereto'
 }
 
 export const DEFAULT_SETTINGS: Config = {
@@ -35,5 +38,6 @@ export const DEFAULT_SETTINGS: Config = {
   smms_parms: SMMS_DEFAULT_PARMS,
   imgurl_parms: IMGURL_DEFAULT_PARMS,
   imgbb_parms: IMGBB_DEFAULT_PARMS,
-  catbox_parms: CATBOX_DEFAULT_PARMS
+  catbox_parms: CATBOX_DEFAULT_PARMS,
+  chevereto_parms: CHEVERETO_DEFAULT_PARMS
 }
