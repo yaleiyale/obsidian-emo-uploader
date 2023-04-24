@@ -11,7 +11,7 @@ export class CheveretoUploader extends EmoUploader {
     this.parms = cheveretoParms
   }
 
-  // here chevereto API should be look like this: https://imgloc.com/api/1/upload
+  // here chevereto API should be look like this: https://mysite.com/api/1/upload
   formatUrl (str: string): string {
     if (!str.startsWith('https://') && !str.startsWith('http://')) {
       str = 'https://' + str
