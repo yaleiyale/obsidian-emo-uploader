@@ -8,7 +8,7 @@
 Embed markdown online file/image links.  
 This plugin is for uploading **images** to hosting platform or **files** to Github(more, now) in Obsidian.  
 
-**图床聚合 & 文件上传器**  : *Imgur SM.MS Github Cloudinary Catbox ……*
+**图床聚合 & 文件上传器** : *Imgur SM.MS Github Cloudinary Catbox ……*
 
 🚩[中文](https://lestua.eu.org/notes/2022/10/16/172318)  
 
@@ -24,8 +24,19 @@ This plugin is for uploading **images** to hosting platform or **files** to Gith
 | [Clouinary](https://cloudinary.com/) | [SM.MS](https://smms.app/)        | 繁體中文 [@emisjerry](https://github.com/emisjerry) |
 | [Catbox](https://catbox.moe/)        | [ImgURL](https://www.imgurl.org/) | English                                             |
 |                                      | [imgbb](https://imgbb.com/)       |                                                     |
-  
-If you want to create your own client-ID In Imgur, Redirect: `obsidian://emo-imgur-oauth`.   
+|                                      | [chevereto](https://chevereto.com/)   |                                                     |  
+
+### V2.15
+
+support [chevereto](https://chevereto.com/)
+
+### V2.14
+
+Add Github cdn switch
+
+## Tips
+
+If you want to create your own client-ID In Imgur, Redirect: `obsidian://emo-imgur-oauth`.  
 Remember your username when registering **catbox**.🤨
 
 Starting from version 2.6, clipboard and drag files are supported; Non-image files will appear as links without "!" at the beginning by default after being embed in markdown.
@@ -62,7 +73,7 @@ It's done! 😽
 ## About Uploading to Github
 
 For uninitiated visitors from outside the code world, Github is a famous internet hosting service for software development and version control using Git.  
-If you need more help on hosting **images**, go to [the other parts](https://github.com/yaleiyale/obsidian-emo-uploader#about-the-other). These services are more focused on this.    
+If you need more help on hosting **images**, go to [the other parts](https://github.com/yaleiyale/obsidian-emo-uploader#about-the-other). These services are more focused on this.
 
 ### What is It?
 
@@ -90,7 +101,6 @@ Except for github, all the others here are purely hosting platforms. Register an
 
 [ImgURL](https://www.imgurl.org/), [SM.MS](https://smms.app/) are cloud storage platforms that allows you to upload **images** to a storage account. For users living in China, they are easier to access than Github and Cloudinary.  
 
-
 About [Cloudinary](https://cloudinary.com/), please refer to [obsidian-cloudinary-uploader/README.md](https://github.com/jordanhandy/obsidian-cloudinary-uploader/blob/main/README.md). Of course, Cloudinary is supported here. If you find that Cloudinary is enough to meet your needs, you can just use it. ( In fact, my plugin is smaller on size. 😳 )
 
 If you live in China, [imgbb](https://imgbb.com/) is not recommended to use. I found that the pictures uploaded to this platform could not be easily accessed in Chinese Mainland and they are usually presented as thumbnails.
@@ -107,7 +117,7 @@ Due to the different range of files supported by different platforms, there are 
 
 If you need to embed the file as an attachment, please close the plugin temporarily.
 
-In general, **Github, Cloudinary, Catbox** supports **any** file type,  **SM.MS, ImgURL** supports common **image** types.  
+In general, **Github, Cloudinary, Catbox** supports **any** file type, **SM.MS, ImgURL** supports common **image** types.  
 
 Trying to upload a file that the platform does not support or volume exceeds the upper limit may result in a string like `![](undefined)`. Notice it, don't just wait.  
 
@@ -126,4 +136,4 @@ Thank you!
 | [obsidian-cloudinary-uploader](https://github.com/jordanhandy/obsidian-cloudinary-uploader) | [Github REST API](https://docs.github.com/cn/rest) | [jsdelivr](https://www.jsdelivr.com/)                                    |
 | [SM.MS](https://smms.app/)                                                                  | [ImgURL](https://www.imgurl.org/)                  | [Clouinary](https://cloudinary.com/)                                     |
 | [Imgur](https://imgur.com/)                                                                 | [imgbb](https://imgbb.com/)                        | [obsidian-imgur-plugin](https://github.com/gavvvr/obsidian-imgur-plugin) |
-| [Catbox](https://catbox.moe/)                                                               |                                                    |                                                                          |
+| [Catbox](https://catbox.moe/)                                                               | [chevereto](https://chevereto.com/)                                                   |                                                                          |
