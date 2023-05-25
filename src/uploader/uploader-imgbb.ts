@@ -13,8 +13,8 @@ export class ImgbbUploader extends EmoUploader {
 
   async upload (file: File): Promise<string> {
     const formData = new ReqFormData()
-    formData.addParm('key', this.parms.required.key)
-    await formData.addFile('image', file)
+    await formData.add('key', this.parms.required.key)
+    await formData.add('image', file)
     const form = formData.pack()
     const req: RequestUrlParam = {
       url: 'https://api.imgbb.com/1/upload',

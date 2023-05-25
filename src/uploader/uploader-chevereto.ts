@@ -25,7 +25,7 @@ export class CheveretoUploader extends EmoUploader {
   async upload (file: File): Promise<string> {
     const domain = this.formatUrl(this.parms.required.domain)
     const formData = new ReqFormData()
-    await formData.addFile('source', file)
+    await formData.add('source', file)
     const form = formData.pack()
     const req: RequestUrlParam = {
       url: domain,

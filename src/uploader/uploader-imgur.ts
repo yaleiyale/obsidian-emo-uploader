@@ -14,7 +14,7 @@ export class ImgurUploader extends EmoUploader {
 
   async upload (file: File): Promise<string> {
     const formData = new ReqFormData()
-    await formData.addFile('image', file)
+    await formData.add('image', file)
     const form = formData.pack()
     let req: RequestUrlParam
     if (this.parms.anonymous) { // anonymous upload

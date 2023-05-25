@@ -13,8 +13,8 @@ export class SmmsUploader extends EmoUploader {
 
   async upload (file: File): Promise<string> {
     const formData = new ReqFormData()
-    formData.addParm('format', 'json')
-    await formData.addFile('smfile', file)
+    await formData.add('format', 'json')
+    await formData.add('smfile', file)
     const form = formData.pack()
     const req: RequestUrlParam = {
       url: 'https://sm.ms/api/v2/upload',

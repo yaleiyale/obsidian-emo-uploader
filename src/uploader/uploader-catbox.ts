@@ -13,9 +13,9 @@ export class CatboxUploader extends EmoUploader {
 
   async upload (file: File): Promise<string> {
     const formData = new ReqFormData()
-    formData.addParm('reqtype', 'fileupload')
-    formData.addParm('userhash', this.parms.required.userhash)
-    await formData.addFile('fileToUpload', file)
+    await formData.add('reqtype', 'fileupload')
+    await formData.add('userhash', this.parms.required.userhash)
+    await formData.add('fileToUpload', file)
     const form = formData.pack()
     const req: RequestUrlParam = {
       url: 'https://catbox.moe/user/api.php',

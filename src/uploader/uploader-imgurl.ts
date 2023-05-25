@@ -13,9 +13,9 @@ export class ImgurlUploader extends EmoUploader {
 
   async upload (file: File): Promise<string> {
     const formData = new ReqFormData()
-    formData.addParm('uid', this.parms.required.uid)
-    formData.addParm('token', this.parms.required.token)
-    await formData.addFile('file', file)
+    await formData.add('uid', this.parms.required.uid)
+    await formData.add('token', this.parms.required.token)
+    await formData.add('file', file)
     const form = formData.pack()
     const req: RequestUrlParam = {
       url: 'https://www.imgurl.org/api/v2/upload',

@@ -13,9 +13,9 @@ export class CloudinaryUploader extends EmoUploader {
 
   async upload (file: File): Promise<string> {
     const formData = new ReqFormData()
-    formData.addParm('upload_preset', this.parms.required.present)
-    formData.addParm('folder', this.parms.folder)
-    await formData.addFile('file', file)
+    await formData.add('upload_preset', this.parms.required.present)
+    await formData.add('folder', this.parms.folder)
+    await formData.add('file', file)
     const form = formData.pack()
     const req: RequestUrlParam = {
       url: `https://api.cloudinary.com/v1_1/${this.parms.required.name}/auto/upload`,
