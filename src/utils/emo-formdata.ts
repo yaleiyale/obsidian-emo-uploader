@@ -4,7 +4,7 @@ import { getArrayBuffer } from './file-helper'
 export class EmoFormData {
   private body: any[]
   // Now I'm using a fixed string, it works well. So let it go.
-  private readonly randomBoundary = RANDOM_BOUNDARY 
+  private readonly randomBoundary = RANDOM_BOUNDARY
   private readonly boundary: string
   private readonly endBoundary: string
   constructor () {
@@ -38,8 +38,8 @@ export class EmoFormData {
     }
   }
 
-  getContentType() { // this is required when using real random character Boundary.
-    return 'multipart/form-data; boundary=' + this.randomBoundary;
+  getContentType (): string { // this is required when using real random character Boundary.
+    return 'multipart/form-data; boundary=' + this.randomBoundary
   }
 
   getBody (): ArrayBuffer {
