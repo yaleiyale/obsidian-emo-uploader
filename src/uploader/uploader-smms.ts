@@ -1,6 +1,6 @@
 import { request, RequestUrlParam } from 'obsidian'
 import { SmmsParms } from '../parms/parms-smms'
-import { ReqFormData } from '../utils/req-formdata'
+import { EmoFormData } from '../utils/emo-formdata'
 import { EmoUploader } from '../base/emo-uploader'
 import { CONTENT_TYPE_FORMDATA } from '../base/constants'
 
@@ -12,10 +12,9 @@ export class SmmsUploader extends EmoUploader {
   }
 
   async upload (file: File): Promise<string> {
-    const formData = new ReqFormData()
+    const formData = new EmoFormData()
     await formData.add('format', 'json')
     await formData.add('smfile', file)
-    const form = formData.pack()
     const req: RequestUrlParam = {
       url: 'https://sm.ms/api/v2/upload',
       method: 'POST',
@@ -23,7 +22,7 @@ export class SmmsUploader extends EmoUploader {
         'Content-Type': CONTENT_TYPE_FORMDATA,
         Authorization: this.parms.required.token
       },
-      body: form
+      body: formData.getBody()
     }
 
     return await new Promise((resolve, reject) => {

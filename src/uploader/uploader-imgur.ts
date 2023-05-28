@@ -1,6 +1,6 @@
 import { request, RequestUrlParam } from 'obsidian'
 import { ImgurParms } from '../parms/parms-imgur'
-import { ReqFormData } from '../utils/req-formdata'
+import { EmoFormData } from '../utils/emo-formdata'
 import { EmoUploader } from '../base/emo-uploader'
 import { CONTENT_TYPE_FORMDATA, IMGUR_ACCESS_TOKEN_LOCALSTORAGE_KEY, IMGUR_DEFAULT_ID } from '../base/constants'
 import { t } from '../lang/helpers'
@@ -13,9 +13,8 @@ export class ImgurUploader extends EmoUploader {
   }
 
   async upload (file: File): Promise<string> {
-    const formData = new ReqFormData()
+    const formData = new EmoFormData()
     await formData.add('image', file)
-    const form = formData.pack()
     let req: RequestUrlParam
     if (this.parms.anonymous) { // anonymous upload
       let auth = 'Client-ID '
@@ -27,7 +26,7 @@ export class ImgurUploader extends EmoUploader {
           'Content-Type': CONTENT_TYPE_FORMDATA,
           Authorization: auth
         },
-        body: form
+        body: formData.getBody()
       }
     } else { // auth upload
       const accessToken = localStorage.getItem(IMGUR_ACCESS_TOKEN_LOCALSTORAGE_KEY)
@@ -39,7 +38,7 @@ export class ImgurUploader extends EmoUploader {
             'Content-Type': CONTENT_TYPE_FORMDATA,
             Authorization: `Bearer ${accessToken}`
           },
-          body: form
+          body: formData.getBody()
         }
       } else {
         return t('no sign in')

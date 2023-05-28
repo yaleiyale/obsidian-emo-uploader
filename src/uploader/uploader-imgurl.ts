@@ -1,6 +1,6 @@
 import { request, RequestUrlParam } from 'obsidian'
 import { ImgurlParms } from '../parms/parms-imgurl'
-import { ReqFormData } from '../utils/req-formdata'
+import { EmoFormData } from '../utils/emo-formdata'
 import { EmoUploader } from '../base/emo-uploader'
 import { CONTENT_TYPE_FORMDATA } from '../base/constants'
 
@@ -12,18 +12,17 @@ export class ImgurlUploader extends EmoUploader {
   }
 
   async upload (file: File): Promise<string> {
-    const formData = new ReqFormData()
+    const formData = new EmoFormData()
     await formData.add('uid', this.parms.required.uid)
     await formData.add('token', this.parms.required.token)
     await formData.add('file', file)
-    const form = formData.pack()
     const req: RequestUrlParam = {
       url: 'https://www.imgurl.org/api/v2/upload',
       method: 'POST',
       headers: {
         'Content-Type': CONTENT_TYPE_FORMDATA
       },
-      body: form
+      body: formData.getBody()
     }
 
     return await new Promise((resolve, reject) => {

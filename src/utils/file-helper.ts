@@ -1,5 +1,5 @@
 // file2ArrayBuffer
-export async function getArrayBuffer (file: File): Promise<any> {
+export async function getArrayBuffer (file: File): Promise<ArrayBuffer> {
   return await new Promise((resolve, reject) => {
     const reader = new FileReader()
     let fileResult: any

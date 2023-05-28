@@ -1,7 +1,7 @@
 import { request, RequestUrlParam } from 'obsidian'
 import { EmoUploader } from '../base/emo-uploader'
 import { CheveretoParms } from '../parms/parms-chevereto'
-import { ReqFormData } from '../utils/req-formdata'
+import { EmoFormData } from '../utils/emo-formdata'
 import { CONTENT_TYPE_FORMDATA } from '../base/constants'
 
 export class CheveretoUploader extends EmoUploader {
@@ -24,9 +24,8 @@ export class CheveretoUploader extends EmoUploader {
 
   async upload (file: File): Promise<string> {
     const domain = this.formatUrl(this.parms.required.domain)
-    const formData = new ReqFormData()
+    const formData = new EmoFormData()
     await formData.add('source', file)
-    const form = formData.pack()
     const req: RequestUrlParam = {
       url: domain,
       method: 'POST',
@@ -34,7 +33,7 @@ export class CheveretoUploader extends EmoUploader {
         'X-API-Key': this.parms.required.token,
         'Content-Type': CONTENT_TYPE_FORMDATA
       },
-      body: form
+      body: formData.getBody()
     }
     return await new Promise((resolve, reject) => {
       request(req).then((res) => {
