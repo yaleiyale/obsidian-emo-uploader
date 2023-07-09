@@ -26,6 +26,7 @@ export class CheveretoUploader extends EmoUploader {
     const domain = this.formatUrl(this.parms.required.domain)
     const formData = new EmoFormData()
     await formData.add('source', file)
+    await formData.add('key', this.parms.required.token)
     const req: RequestUrlParam = {
       url: domain,
       method: 'POST',
