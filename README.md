@@ -26,6 +26,11 @@ This plugin is for uploading **images** to hosting platform or **files** to Gith
 |                                      | [imgbb](https://imgbb.com/)       |                                                     |
 |                                      | [chevereto](https://chevereto.com/)   |                                                     |  
 
+### V2.16
+
+Adapted to chevereto v3
+
+
 ### V2.15
 
 support [chevereto](https://chevereto.com/)
