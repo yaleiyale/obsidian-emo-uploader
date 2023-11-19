@@ -68,7 +68,7 @@ export class AlistUploader extends EmoUploader {
       },
       body: JSON.stringify({
         username: this.parms.required.username,
-        password: sha256(this.parms.required.password + '-123123123123')
+        password: sha256(this.parms.required.password + '-https://github.com/alist-org/alist')
       })
     }
     // 发送请求并返回token
