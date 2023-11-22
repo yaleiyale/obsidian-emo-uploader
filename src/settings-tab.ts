@@ -17,6 +17,7 @@ import { ImgurFragment } from './fragment/fragment-imgur'
 import { CatboxFragment } from './fragment/fragment-catbox'
 import { IMGUR_ACCESS_TOKEN_LOCALSTORAGE_KEY } from './base/constants'
 import { CheveretoFragment } from './fragment/fragment-chevereto'
+import { AlistFragment } from './fragment/fragment-alist'
 
 export class EmoUploaderSettingTab extends PluginSettingTab {
   private readonly plugin: Emo
@@ -54,6 +55,7 @@ export class EmoUploaderSettingTab extends PluginSettingTab {
     fragmentList.push(new ImgbbFragment(containerEl, this.plugin))
     fragmentList.push(new CatboxFragment(containerEl, this.plugin))
     fragmentList.push(new CheveretoFragment(containerEl, this.plugin))
+    fragmentList.push(new AlistFragment(containerEl, this.plugin))
 
     // which one will show at the first time
     fragmentList.forEach(element => {
