@@ -13,10 +13,9 @@ interface Required {
 
 export const ALIST_DEFAULT_PARMS: AlistParms = {
   required: {
-    domain: 'https://alist.example.com',
+    domain: '',
     username: '',
     password: '',
-    uploadPath: '上传的相对路径',
+    uploadPath: ''
   }
 }
-

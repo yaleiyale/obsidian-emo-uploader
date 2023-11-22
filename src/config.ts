@@ -30,7 +30,7 @@ export enum HostingProvider { // target hosting
   ImgURL = 'ImgURL',
   Imgbb = 'imgbb',
   Chevereto = 'chevereto',
-  Alist = 'alist'
+  Alist = 'AList'
 }
 
 export const DEFAULT_SETTINGS: Config = {

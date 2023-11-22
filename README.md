@@ -18,18 +18,21 @@ This plugin is for uploading **images** to hosting platform or **files** to Gith
 
 ## State
 
-| file hosting                         | image hosting                     | Multi language support                              |
-| ------------------------------------ | --------------------------------- | --------------------------------------------------- |
-| [GitHub](https://github.com/)        | [Imgur](https://imgur.com/)       | 简体中文                                            |
-| [Clouinary](https://cloudinary.com/) | [SM.MS](https://smms.app/)        | 繁體中文 [@emisjerry](https://github.com/emisjerry) |
-| [Catbox](https://catbox.moe/)        | [ImgURL](https://www.imgurl.org/) | English                                             |
-|                                      | [imgbb](https://imgbb.com/)       |                                                     |
-|                                      | [chevereto](https://chevereto.com/)   |                                                     |  
+| file hosting                         | image hosting                       | Multi language support                              |
+| ------------------------------------ | ----------------------------------- | --------------------------------------------------- |
+| [GitHub](https://github.com/)        | [Imgur](https://imgur.com/)         | 简体中文                                            |
+| [Clouinary](https://cloudinary.com/) | [SM.MS](https://smms.app/)          | 繁體中文 [@emisjerry](https://github.com/emisjerry) |
+| [Catbox](https://catbox.moe/)        | [ImgURL](https://www.imgurl.org/)   | English                                             |
+| [AList](https://alist.nn.ci/zh/)     | [imgbb](https://imgbb.com/)         |                                                     |
+|                                      | [chevereto](https://chevereto.com/) |                                                     |
+
+### 2.17
+
+support [AList](https://alist.nn.ci/zh/), thanks to [Linnnkkk](https://github.com/Linnnkkk).
 
 ### V2.16
 
 Adapted to chevereto v3
-
 
 ### V2.15
 
@@ -141,4 +144,4 @@ Thank you!
 | [obsidian-cloudinary-uploader](https://github.com/jordanhandy/obsidian-cloudinary-uploader) | [Github REST API](https://docs.github.com/cn/rest) | [jsdelivr](https://www.jsdelivr.com/)                                    |
 | [SM.MS](https://smms.app/)                                                                  | [ImgURL](https://www.imgurl.org/)                  | [Clouinary](https://cloudinary.com/)                                     |
 | [Imgur](https://imgur.com/)                                                                 | [imgbb](https://imgbb.com/)                        | [obsidian-imgur-plugin](https://github.com/gavvvr/obsidian-imgur-plugin) |
-| [Catbox](https://catbox.moe/)                                                               | [chevereto](https://chevereto.com/)                                                   |                                                                          |
+| [Catbox](https://catbox.moe/)                                                               | [chevereto](https://chevereto.com/)                | [AList](https://alist.nn.ci/zh/)                                         |

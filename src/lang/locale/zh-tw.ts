@@ -54,5 +54,10 @@ export default {
   // fragment-catbox.ts
   'Catbox Settings': 'Catbox配置',
   // fragment-chevereto.ts
-  'Chevereto Settings': 'Chevereto配置'
+  'Chevereto Settings': 'Chevereto配置',
+  // fragment-alist.ts
+  'AList Settings': 'Alist配置',
+  username: '用戶名',
+  password: '密碼',
+  uploadPath: '上傳路徑'
 }

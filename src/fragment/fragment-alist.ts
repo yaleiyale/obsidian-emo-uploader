@@ -11,12 +11,13 @@ export class AlistFragment extends EmoFragment {
 
   display (el: HTMLElement, plugin: Emo): void {
     const parms = plugin.config.alist_parms
-    el.createEl('h3', { text: 'Alist Settings'})
+    el.createEl('h3', { text: t('AList Settings') })
 
     new Setting(el)
       .setName(t('domain'))
       .addText((text) => {
         text
+          .setPlaceholder('https://alist.example.com')
           .setValue(parms.required.domain)
           .onChange(async (value) => {
             parms.required.domain = value
@@ -25,7 +26,7 @@ export class AlistFragment extends EmoFragment {
       })
 
     new Setting(el)
-      .setName('username')
+      .setName(t('username'))
       .addText((text) => {
         text
           .setValue(parms.required.username)
@@ -36,7 +37,7 @@ export class AlistFragment extends EmoFragment {
       })
 
     new Setting(el)
-      .setName('password')
+      .setName(t('password'))
       .addText((text) => {
         text
           .setValue(parms.required.password)
@@ -47,7 +48,7 @@ export class AlistFragment extends EmoFragment {
       })
 
     new Setting(el)
-      .setName('uploadPath')
+      .setName(t('uploadPath'))
       .addText((text) => {
         text
           .setValue(parms.required.uploadPath)
@@ -56,6 +57,5 @@ export class AlistFragment extends EmoFragment {
             await plugin.saveSettings()
           })
       })
-
   }
 }

@@ -13,14 +13,13 @@ export class AlistUploader extends EmoUploader {
     this.parms = alistParms
   }
 
-
   async upload (file: File): Promise<string> {
     // 获取token
     const token = await this.getToken()
     // 新建文件夹
     const determine = await this.determine(file)
-    if (determine != 'success') {
-    await this.mkdirFile(file)
+    if (determine !== 'success') {
+      await this.mkdirFile(file)
     }
     // 上传文件
     await this.putFile(file)
@@ -28,17 +27,17 @@ export class AlistUploader extends EmoUploader {
     await this.refreshDir(file)
     // 重命名文件
     let newName = file.name
-    if (file.name == 'image.png'){
-    newName = await this.renameFile(file)
+    if (file.name === 'image.png') {
+      newName = await this.renameFile(file)
     }
-    
+
     const extension = await this.getFileExtension(file)
     const req: RequestUrlParam = {
       url: `${this.parms.required.domain}/api/fs/get`,
       method: 'POST',
       headers: {
-        'Authorization': token ,
-        'Content-Type': 'application/json',
+        Authorization: token,
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         path: `/${this.parms.required.uploadPath}/${extension}/${newName}`
@@ -49,7 +48,7 @@ export class AlistUploader extends EmoUploader {
       request(req).then(async res => {
         const json = JSON.parse(res)
         // 赋给markdownText
-        const markdownText = `![${newName}](${json.data.raw_url})` 
+        const markdownText = `![${newName}](${json.data.raw_url})`
         resolve(markdownText)
       }).catch(err => {
         reject(err)
@@ -57,8 +56,8 @@ export class AlistUploader extends EmoUploader {
     })
   }
 
-  //第二部分
-  //获取token
+  // 第二部分
+  // 获取token
   async getToken (): Promise<string> {
     const req: RequestUrlParam = {
       url: `${this.parms.required.domain}/api/auth/login/hash`,
@@ -82,23 +81,22 @@ export class AlistUploader extends EmoUploader {
     })
   }
 
-
-  //文件类型
-  async getFileExtension(file: File): Promise<string> {
+  // 文件类型
+  async getFileExtension (file: File): Promise<string> {
     const filename = file.name
     const match = filename.match(/\.([^.]+)$/)
-    return match ? match[1] : ""
+    return (match != null) ? match[1] : ''
   }
 
-  //判断文件夹是否存在
+  // 判断文件夹是否存在
   async determine (file: File): Promise<string> {
     const extension = await this.getFileExtension(file)
     const req: RequestUrlParam = {
       url: `${this.parms.required.domain}/api/fs/get`,
       method: 'POST',
       headers: {
-        'Authorization': await this.getToken(),
-        'Content-Type': 'application/json',
+        Authorization: await this.getToken(),
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         path: `/${this.parms.required.uploadPath}/${extension}`
@@ -114,23 +112,21 @@ export class AlistUploader extends EmoUploader {
     })
   }
 
-    async mkdirFile (file: File): Promise<void> {
-        const extension = await this.getFileExtension(file)
-        const req: RequestUrlParam = {
-          url: `${this.parms.required.domain}/api/fs/mkdir`,
-          method: 'POST',
-          headers: {
-            'Authorization': await this.getToken(),
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            path: `/${this.parms.required.uploadPath}/${extension}`,
-          })
-        }
-        await request(req) // 发送请求并返回链接
-      }
-
-
+  async mkdirFile (file: File): Promise<void> {
+    const extension = await this.getFileExtension(file)
+    const req: RequestUrlParam = {
+      url: `${this.parms.required.domain}/api/fs/mkdir`,
+      method: 'POST',
+      headers: {
+        Authorization: await this.getToken(),
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        path: `/${this.parms.required.uploadPath}/${extension}`
+      })
+    }
+    await request(req) // 发送请求并返回链接
+  }
 
   // 上传文件
   async putFile (file: File): Promise<void> {
@@ -141,7 +137,7 @@ export class AlistUploader extends EmoUploader {
       url: `${this.parms.required.domain}/api/fs/form`,
       method: 'PUT',
       headers: {
-        'Authorization': await this.getToken(),
+        Authorization: await this.getToken(),
         'Content-Type': CONTENT_TYPE_FORMDATA,
         'File-Path': encodeURIComponent(`/${this.parms.required.uploadPath}/${extension}/${file.name}`),
         'As-Task': 'true'
@@ -151,7 +147,7 @@ export class AlistUploader extends EmoUploader {
     await request(req) // 发送请求并返回链接
   }
 
-  //第三部分
+  // 第三部分
   // 刷新目录
   async refreshDir (file: File): Promise<void> {
     const extension = await this.getFileExtension(file)
@@ -159,19 +155,18 @@ export class AlistUploader extends EmoUploader {
       url: `${this.parms.required.domain}/api/fs/list`,
       method: 'POST',
       headers: {
-        'Authorization': await this.getToken(),
-        'Content-Type': 'application/json',
+        Authorization: await this.getToken(),
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         path: `/${this.parms.required.uploadPath}/${extension}`,
         page: 1,
-        password: "",
+        password: '',
         per_page: 0,
-        refresh: true,
+        refresh: true
       })
     }
     await request(req)
-
   }
 
   // 重命名文件
@@ -188,8 +183,8 @@ export class AlistUploader extends EmoUploader {
       url: `${this.parms.required.domain}/api/fs/rename`,
       method: 'POST',
       headers: {
-        'Authorization': await this.getToken(),
-        'Content-Type': 'application/json',
+        Authorization: await this.getToken(),
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         name: newName,
@@ -200,6 +195,4 @@ export class AlistUploader extends EmoUploader {
     await request(req)
     return newName
   }
-
 }
-
