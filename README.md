@@ -26,7 +26,7 @@ This plugin is for uploading **images** to hosting platform or **files** to Gith
 | [AList](https://alist.nn.ci/zh/)     | [imgbb](https://imgbb.com/)         |                                                     |
 |                                      | [chevereto](https://chevereto.com/) |                                                     |
 
-### 2.17
+### V2.17
 
 support [AList](https://alist.nn.ci/zh/), thanks to [Linnnkkk](https://github.com/Linnnkkk).
 
