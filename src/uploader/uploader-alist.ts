@@ -48,7 +48,7 @@ export class AlistUploader extends EmoUploader {
       request(req).then(async res => {
         const json = JSON.parse(res)
         // 赋给markdownText
-        const markdownText = `![${newName}](${json.data.raw_url})`
+        const markdownText = `![${newName}](${json.data.raw_url as string})`
         resolve(markdownText)
       }).catch(err => {
         reject(err)
@@ -175,9 +175,9 @@ export class AlistUploader extends EmoUploader {
     // 获取当前时间
     const now = new Date()
     // 格式化时间
-    const formatTime = (n: number) => n.toString().padStart(2, '0')
+    const formatTime = (n: number): string => n.toString().padStart(2, '0')
     // 生成新文件名
-    const newName = `${now.getFullYear()}${formatTime(now.getMonth() + 1)}${formatTime(now.getDate())}-${formatTime(now.getHours())}:${formatTime(now.getMinutes())}:${formatTime(now.getSeconds())}.${extension}`
+    const newName = `${now.getFullYear()}${formatTime((now.getMonth() + 1))}${formatTime(now.getDate())}-${formatTime(now.getHours())}:${formatTime(now.getMinutes())}:${formatTime(now.getSeconds())}.${extension}`
     // 构造请求参数
     const req: RequestUrlParam = {
       url: `${this.parms.required.domain}/api/fs/rename`,
