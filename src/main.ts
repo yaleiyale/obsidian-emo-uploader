@@ -60,38 +60,18 @@ export default class Emo extends Plugin {
   startUpload (files: FileList, evt: Event, editor: Editor): void {
     let uploader: EmoUploader
     if (files.length > 0) {
-      switch (this.config.choice) {
-        case HostingProvider.Github:
-          uploader = new GithubUploader(this.config.github_parms)
-          break
-        case HostingProvider.ImgURL:
-          uploader = new ImgurlUploader(this.config.imgurl_parms)
-          break
-        case HostingProvider.Cloudinary:
-          uploader = new CloudinaryUploader(this.config.cloudinary_parms)
-          break
-        case HostingProvider.Smms:
-          uploader = new SmmsUploader(this.config.smms_parms)
-          break
-        case HostingProvider.Imgbb:
-          uploader = new ImgbbUploader(this.config.imgbb_parms)
-          break
-        case HostingProvider.Imgur:
-          uploader = new ImgurUploader(this.config.imgur_parms)
-          break
-        case HostingProvider.Catbox:
-          uploader = new CatboxUploader(this.config.catbox_parms)
-          break
-        case HostingProvider.Chevereto:
-          uploader = new CheveretoUploader(this.config.chevereto_parms)
-          break
-        case HostingProvider.Alist:
-          uploader = new AlistUploader(this.config.alist_parms)
-          break
-        default:
-          console.log(new Notice(t('broken'), 2000))
-          return
+      const UploaderMap = {
+        [HostingProvider.Github]: () => new GithubUploader(this.config.github_parms),
+        [HostingProvider.ImgURL]: () => new ImgurlUploader(this.config.imgurl_parms),
+        [HostingProvider.Cloudinary]: () => new CloudinaryUploader(this.config.cloudinary_parms),
+        [HostingProvider.Smms]: () => new SmmsUploader(this.config.smms_parms),
+        [HostingProvider.Imgbb]: () => new ImgbbUploader(this.config.imgbb_parms),
+        [HostingProvider.Imgur]: () => new ImgurUploader(this.config.imgur_parms),
+        [HostingProvider.Catbox]: () => new CatboxUploader(this.config.catbox_parms),
+        [HostingProvider.Chevereto]: () => new CheveretoUploader(this.config.chevereto_parms),
+        [HostingProvider.Alist]: () => new AlistUploader(this.config.alist_parms)
       }
+      uploader = UploaderMap[this.config.choice]()
       if (uploader.isValid()) { // check the necessary parameters
         evt.preventDefault()
         for (const file of files) {

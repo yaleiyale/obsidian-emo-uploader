@@ -58,7 +58,7 @@ Want to support more platforms? If you want to contribute and don't want to make
 - Use your *parms* interface. In `config.ts`, add parameter configurations about your *uploader* to provide choices and act as constructors for *uploader* at run time.
 - Implement your *uploader* and *settings panel* by adding files to `src/Uploader, src/Fragment`.
 - In `settings-tab.ts`,add your *fragment* to show and set parameters in the setting-tab.
-- Add your *uploader* to the switch judgment block in `main.ts`.
+- Add your *uploader* to the *UploaderMap* in `main.ts`.
 - Test it.
 
 It's done! 😽
