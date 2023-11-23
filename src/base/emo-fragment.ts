@@ -1,5 +1,5 @@
-import { HostingProvider } from '../config'
-import Emo from '../main'
+import type { HostingProvider } from '../config'
+import type Emo from '../main'
 
 export abstract class EmoFragment {
   kind: HostingProvider

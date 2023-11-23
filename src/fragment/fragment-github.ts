@@ -1,5 +1,5 @@
 import { Setting } from 'obsidian'
-import Emo from '../main'
+import type Emo from '../main'
 import { EmoFragment } from '../base/emo-fragment'
 import { HostingProvider } from '../config'
 import { t } from '../lang/helpers'

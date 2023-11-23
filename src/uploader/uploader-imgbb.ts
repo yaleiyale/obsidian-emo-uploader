@@ -1,5 +1,6 @@
-import { request, RequestUrlParam } from 'obsidian'
-import { ImgbbParms } from '../parms/parms-imgbb'
+import type { RequestUrlParam } from 'obsidian'
+import { request } from 'obsidian'
+import type { ImgbbParms } from '../parms/parms-imgbb'
 import { EmoFormData } from '../utils/emo-formdata'
 import { EmoUploader } from '../base/emo-uploader'
 import { CONTENT_TYPE_FORMDATA } from '../base/constants'

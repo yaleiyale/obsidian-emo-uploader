@@ -1,4 +1,4 @@
-import { EmoParms } from './emo-parms'
+import type { EmoParms } from './emo-parms'
 
 export abstract class EmoUploader {
   parms!: EmoParms

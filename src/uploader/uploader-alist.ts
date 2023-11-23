@@ -1,9 +1,10 @@
 // 第一部分
-import { request, RequestUrlParam } from 'obsidian'
+import type { RequestUrlParam } from 'obsidian'
+import { request } from 'obsidian'
 import { EmoFormData } from '../utils/emo-formdata'
 import { EmoUploader } from '../base/emo-uploader'
 import { CONTENT_TYPE_FORMDATA } from '../base/constants'
-import { AlistParms } from '../parms/parms-alist'
+import type { AlistParms } from '../parms/parms-alist'
 import { sha256 } from 'js-sha256'
 
 export class AlistUploader extends EmoUploader {

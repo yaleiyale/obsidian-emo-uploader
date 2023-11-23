@@ -1,13 +1,13 @@
+import type { App } from 'obsidian'
 import {
-  App,
   Notice,
   PluginSettingTab,
   Setting
 } from 'obsidian'
 import { HostingProvider } from './config'
-import Emo from './main'
+import type Emo from './main'
 import { t } from './lang/helpers'
-import { EmoFragment } from './base/emo-fragment'
+import type { EmoFragment } from './base/emo-fragment'
 import { CloudinaryFragment } from './fragment/fragment-cloudinary'
 import { GithubFragment } from './fragment/fragment-github'
 import { ImgbbFragment } from './fragment/fragment-imgbb'

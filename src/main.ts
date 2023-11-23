@@ -1,12 +1,13 @@
+import type { Editor } from 'obsidian'
 import {
   Plugin,
-  Editor,
   Notice
 } from 'obsidian'
 import { t } from './lang/helpers'
 import { EmoUploaderSettingTab } from './settings-tab'
-import { Config, DEFAULT_SETTINGS, HostingProvider } from './config'
-import { EmoUploader } from './base/emo-uploader'
+import type { Config } from './config'
+import { DEFAULT_SETTINGS, HostingProvider } from './config'
+import type { EmoUploader } from './base/emo-uploader'
 import { GithubUploader } from './uploader/uploader-github'
 import { ImgurlUploader } from './uploader/uploader-imgurl'
 import { CloudinaryUploader } from './uploader/uploader-cloudinary'

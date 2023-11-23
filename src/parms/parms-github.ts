@@ -1,4 +1,4 @@
-import { EmoParms } from '../base/emo-parms'
+import type { EmoParms } from '../base/emo-parms'
 export enum CDNprovider { // Github CDN
   jsdelivr = 'jsdelivr',
   statically = 'statically',

@@ -1,6 +1,7 @@
-import { request, RequestUrlParam } from 'obsidian'
+import type { RequestUrlParam } from 'obsidian'
+import { request } from 'obsidian'
 import { EmoUploader } from '../base/emo-uploader'
-import { CheveretoParms } from '../parms/parms-chevereto'
+import type { CheveretoParms } from '../parms/parms-chevereto'
 import { EmoFormData } from '../utils/emo-formdata'
 import { CONTENT_TYPE_FORMDATA } from '../base/constants'
 

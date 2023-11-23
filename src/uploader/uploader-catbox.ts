@@ -1,8 +1,9 @@
-import { request, RequestUrlParam } from 'obsidian'
+import type { RequestUrlParam } from 'obsidian'
+import { request } from 'obsidian'
 import { EmoFormData } from '../utils/emo-formdata'
 import { EmoUploader } from '../base/emo-uploader'
 import { CONTENT_TYPE_FORMDATA } from '../base/constants'
-import { CatboxParms } from '../parms/parms-catbox'
+import type { CatboxParms } from '../parms/parms-catbox'
 
 export class CatboxUploader extends EmoUploader {
   parms!: CatboxParms

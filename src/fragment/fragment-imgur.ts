@@ -1,5 +1,6 @@
-import { ButtonComponent, Notice, request, RequestUrlParam, Setting } from 'obsidian'
-import Emo from '../main'
+import type { ButtonComponent, RequestUrlParam } from 'obsidian'
+import { Notice, request, Setting } from 'obsidian'
+import type Emo from '../main'
 import { EmoFragment } from '../base/emo-fragment'
 import { HostingProvider } from '../config'
 import { IMGUR_ACCESS_TOKEN_LOCALSTORAGE_KEY, IMGUR_DEFAULT_ID } from '../base/constants'

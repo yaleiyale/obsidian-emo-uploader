@@ -1,5 +1,7 @@
-import { request, RequestUrlParam } from 'obsidian'
-import { CDNprovider, GithubParms } from '../parms/parms-github'
+import type { RequestUrlParam } from 'obsidian'
+import { request } from 'obsidian'
+import type { GithubParms } from '../parms/parms-github'
+import { CDNprovider } from '../parms/parms-github'
 import { getBase64, getRandomFileName } from '../utils/file-helper'
 import { EmoUploader } from '../base/emo-uploader'
 

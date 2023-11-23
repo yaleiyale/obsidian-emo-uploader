@@ -1,5 +1,6 @@
-import { request, RequestUrlParam } from 'obsidian'
-import { ImgurParms } from '../parms/parms-imgur'
+import type { RequestUrlParam } from 'obsidian'
+import { request } from 'obsidian'
+import type { ImgurParms } from '../parms/parms-imgur'
 import { EmoFormData } from '../utils/emo-formdata'
 import { EmoUploader } from '../base/emo-uploader'
 import { CONTENT_TYPE_FORMDATA, IMGUR_ACCESS_TOKEN_LOCALSTORAGE_KEY, IMGUR_DEFAULT_ID } from '../base/constants'

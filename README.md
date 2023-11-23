@@ -3,6 +3,7 @@
 <p align="center">
 		<img src="https://img.shields.io/github/release-date/yaleiyale/obsidian-emo-uploader?style=for-the-badge">
       <img src="https://img.shields.io/github/downloads/yaleiyale/obsidian-emo-uploader/total?style=for-the-badge">
+      <img src="https://img.shields.io/codefactor/grade/github/yaleiyale/obsidian-emo-uploader/main?style=for-the-badge">
 </p>
 
 Embed markdown online file/image links.  

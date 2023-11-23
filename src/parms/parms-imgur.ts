@@ -1,4 +1,4 @@
-import { EmoParms } from '../base/emo-parms'
+import type { EmoParms } from '../base/emo-parms'
 
 export interface ImgurParms extends EmoParms {
   required: Required

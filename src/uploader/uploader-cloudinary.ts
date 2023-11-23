@@ -1,5 +1,6 @@
-import { request, RequestUrlParam } from 'obsidian'
-import { CloudinaryParms } from '../parms/parms-cloudinary'
+import type { RequestUrlParam } from 'obsidian'
+import { request } from 'obsidian'
+import type { CloudinaryParms } from '../parms/parms-cloudinary'
 import { EmoFormData } from '../utils/emo-formdata'
 import { EmoUploader } from '../base/emo-uploader'
 import { CONTENT_TYPE_FORMDATA } from '../base/constants'
