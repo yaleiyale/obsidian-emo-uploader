@@ -22,7 +22,7 @@ export class EmoFormData {
         this.body.push(data.charCodeAt(i))
       }
     } else if (value instanceof File) { // add files
-      data += 'Content-Disposition: form-data; name="' + name + '"; filename="' + value.name + '"\r\n'
+      data += 'Content-Disposition: form-data; name="' + name + '"; filename="' + encodeURIComponent(value.name) + '"\r\n'
       data += 'Content-Type: ' + value.type + '\r\n\r\n'
       for (let i = 0; i < data.length; i++) {
         this.body.push(data.charCodeAt(i))
