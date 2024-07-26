@@ -1,15 +1,15 @@
 import type { RequestUrlParam } from 'obsidian'
 import { request } from 'obsidian'
-import type { SmmsParms } from '../parms/parms-smms'
+import type { EasyImageParms } from '../parms/parms-easyimage'
 import { EmoFormData } from '../utils/emo-formdata'
 import { EmoUploader } from '../base/emo-uploader'
 import { CONTENT_TYPE_FORMDATA } from '../base/constants'
 
-export class SmmsUploader extends EmoUploader {
-  parms!: SmmsParms
-  constructor (smmsParms: SmmsParms) {
+export class EasyImageUploader extends EmoUploader {
+  parms!: EasyImageParms
+  constructor (easyimageParms: EasyImageParms) {
     super()
-    this.parms = smmsParms
+    this.parms = easyimageParms
   }
 
   async upload (file: File): Promise<string> {
