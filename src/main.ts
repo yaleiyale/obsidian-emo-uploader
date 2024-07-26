@@ -17,6 +17,7 @@ import { ImgurUploader } from './uploader/uploader-imgur'
 import { CatboxUploader } from './uploader/uploader-catbox'
 import { CheveretoUploader } from './uploader/uploader-chevereto'
 import { AlistUploader } from './uploader/uploader-alist'
+import { EasyImageUploader } from './uploader/uploader-easyimage'
 
 export default class Emo extends Plugin {
   config!: Config
@@ -69,7 +70,8 @@ export default class Emo extends Plugin {
         [HostingProvider.Imgur]: () => new ImgurUploader(this.config.imgur_parms),
         [HostingProvider.Catbox]: () => new CatboxUploader(this.config.catbox_parms),
         [HostingProvider.Chevereto]: () => new CheveretoUploader(this.config.chevereto_parms),
-        [HostingProvider.Alist]: () => new AlistUploader(this.config.alist_parms)
+        [HostingProvider.Alist]: () => new AlistUploader(this.config.alist_parms),
+        [HostingProvider.EasgyImage]: () => new EasyImageUploader(this.config.easyimage_parms)
       }
       uploader = UploaderMap[this.config.choice]()
       if (uploader.isValid()) { // check the necessary parameters
