@@ -13,29 +13,25 @@ export class EasyImageUploader extends EmoUploader {
   }
 
   async upload (file: File): Promise<string> {
+    const domain = this.parms.required.domain
     const formData = new EmoFormData()
-    await formData.add('format', 'json')
-    await formData.add('smfile', file)
+    await formData.add('image', file)
+    await formData.add('token', this.parms.required.token)
     const req: RequestUrlParam = {
-      url: 'https://sm.ms/api/v2/upload',
+      url: domain,
       method: 'POST',
       headers: {
-        'Content-Type': CONTENT_TYPE_FORMDATA,
-        Authorization: this.parms.required.token
+        // 'X-API-Key': this.parms.required.token,
+        'Content-Type': CONTENT_TYPE_FORMDATA
       },
       body: formData.getBody()
     }
-
     return await new Promise((resolve, reject) => {
       request(req).then((res) => {
         const json = JSON.parse(res)
         let url = ''
-        try {
-          url = json.data.url
-        } catch (error) {
-          url = json.images // Image upload repeated limit, this image exists at here
-        }
-        const markdownText = `![SMMS](${url})`
+        url = json.url
+        const markdownText = `![EasyImage](${url})`
         resolve(markdownText)
       }).catch(err => {
         reject(err)

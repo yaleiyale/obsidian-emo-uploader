@@ -26,13 +26,13 @@ export class CheveretoUploader extends EmoUploader {
   async upload (file: File): Promise<string> {
     const domain = this.formatUrl(this.parms.required.domain)
     const formData = new EmoFormData()
-    await formData.add('image', file)
-    await formData.add('token', this.parms.required.token)
+    await formData.add('source', file)
+    await formData.add('key', this.parms.required.token)
     const req: RequestUrlParam = {
       url: domain,
       method: 'POST',
       headers: {
-        // 'X-API-Key': this.parms.required.token,
+        'X-API-Key': this.parms.required.token,
         'Content-Type': CONTENT_TYPE_FORMDATA
       },
       body: formData.getBody()
@@ -41,8 +41,8 @@ export class CheveretoUploader extends EmoUploader {
       request(req).then((res) => {
         const json = JSON.parse(res)
         let url = ''
-        url = json.url
-        const markdownText = `![EasyImage](${url})`
+        url = json.image.url
+        const markdownText = `![Chevereto](${url})`
         resolve(markdownText)
       }).catch(err => {
         reject(err)
