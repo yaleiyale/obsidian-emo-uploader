@@ -16,6 +16,8 @@ import type { SmmsParms } from './parms/parms-smms'
 import { SMMS_DEFAULT_PARMS } from './parms/parms-smms'
 import type { AlistParms } from './parms/parms-alist'
 import { ALIST_DEFAULT_PARMS } from './parms/parms-alist'
+import { EasyImageParms } from './parms/parms-easyimage'
+import { EASYIMAGE_DEFAULT_PARMS } from './parms/parms-easyimage'
 
 export interface Config { // data from data.json
   choice: HostingProvider
@@ -28,6 +30,7 @@ export interface Config { // data from data.json
   catbox_parms: CatboxParms
   chevereto_parms: CheveretoParms
   alist_parms: AlistParms
+  easyimage_parms: EasyImageParms
 }
 
 export enum HostingProvider { // target hosting
@@ -39,7 +42,8 @@ export enum HostingProvider { // target hosting
   ImgURL = 'ImgURL',
   Imgbb = 'imgbb',
   Chevereto = 'chevereto',
-  Alist = 'AList'
+  Alist = 'AList',
+  EasgyImage = 'EasyImage'
 }
 
 export const DEFAULT_SETTINGS: Config = {
@@ -52,5 +56,6 @@ export const DEFAULT_SETTINGS: Config = {
   imgbb_parms: IMGBB_DEFAULT_PARMS,
   catbox_parms: CATBOX_DEFAULT_PARMS,
   chevereto_parms: CHEVERETO_DEFAULT_PARMS,
-  alist_parms: ALIST_DEFAULT_PARMS
+  alist_parms: ALIST_DEFAULT_PARMS,
+  easyimage_parms: EASYIMAGE_DEFAULT_PARMS
 }
