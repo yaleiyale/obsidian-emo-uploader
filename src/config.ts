@@ -16,7 +16,7 @@ import type { SmmsParms } from './parms/parms-smms'
 import { SMMS_DEFAULT_PARMS } from './parms/parms-smms'
 import type { AlistParms } from './parms/parms-alist'
 import { ALIST_DEFAULT_PARMS } from './parms/parms-alist'
-import { EasyImageParms } from './parms/parms-easyimage'
+import type { EasyImageParms } from './parms/parms-easyimage'
 import { EASYIMAGE_DEFAULT_PARMS } from './parms/parms-easyimage'
 
 export interface Config { // data from data.json

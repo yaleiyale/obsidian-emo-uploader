@@ -1,17 +1,23 @@
+
 # Obsidian Emo Uploader
 
 <p align="center">
-		<img src="https://img.shields.io/github/release-date/yaleiyale/obsidian-emo-uploader?style=for-the-badge">
-      <img src="https://img.shields.io/github/downloads/yaleiyale/obsidian-emo-uploader/total?style=for-the-badge">
-      <img src="https://img.shields.io/codefactor/grade/github/yaleiyale/obsidian-emo-uploader/main?style=for-the-badge">
+
+      <img src="https://img.shields.io/github/release-date/yaleiyale/obsidian-emo-uploader?style=for-the-badge">
+
+      <img src="https://img.shields.io/github/downloads/yaleiyale/obsidian-emo-uploader/total?style=for-the-badge">
+
+      <img src="https://img.shields.io/codefactor/grade/github/yaleiyale/obsidian-emo-uploader/main?style=for-the-badge">
+
 </p>
 
-Embed markdown online file/image links.  
-This plugin is for uploading **images** to hosting platform or **files** to Github(more, now) in Obsidian.  
+Embed markdown online file/image links.  
+
+This plugin is for uploading **images** to hosting platform or **files** to Github(more, now) in Obsidian.  
 
 **图床聚合 & 文件上传器** : *Imgur SM.MS Github Cloudinary Catbox ……*
 
-🚩[中文](https://lestua.eu.org/notes/2022/10/16/172318)  
+🚩[中文](https://lestua.eu.org/notes/2022/10/16/172318)  
 
 ## How it Works
 
@@ -19,13 +25,18 @@ This plugin is for uploading **images** to hosting platform or **files** to Gith
 
 ## State
 
-| file hosting                         | image hosting                       | Multi language support                              |
-| ------------------------------------ | ----------------------------------- | --------------------------------------------------- |
-| [GitHub](https://github.com/)        | [Imgur](https://imgur.com/)         | 简体中文                                            |
-| [Clouinary](https://cloudinary.com/) | [SM.MS](https://smms.app/)          | 繁體中文 [@emisjerry](https://github.com/emisjerry) |
-| [Catbox](https://catbox.moe/)        | [ImgURL](https://www.imgurl.org/)   | English                                             |
-| [AList](https://alist.nn.ci/zh/)     | [imgbb](https://imgbb.com/)         |                                                     |
-|                                      | [chevereto](https://chevereto.com/) |                                                     |
+| file hosting                          | image hosting                                       | Multi language support                               |
+| ------------------------------------- | --------------------------------------------------- | ---------------------------------------------------- |
+| [GitHub](https://github.com/)         | [Imgur](https://imgur.com/)                         | 简体中文                                                 |
+| [Clouinary](https://cloudinary.com/)  | [SM.MS](https://smms.app/)                          | 繁體中文 [@emisjerry](https://github.com/emisjerry)      |
+| [Catbox](https://catbox.moe/)         | [ImgURL](https://www.imgurl.org/)                   | English                                              |
+| [AList](https://alist.nn.ci/zh/)      | [imgbb](https://imgbb.com/)                         |                                                      |
+|                                       | [chevereto](https://chevereto.com/)                 |                                                      |
+|                                       | [EasyImages](https://icret.github.io/EasyImages2.0) |                                                      |
+
+### V2.19
+
+support [EasyImages](https://icret.github.io/EasyImages2.0), thanks to [anxinJ](https://github.com/anxinJ).
 
 ### V2.17
 
@@ -45,14 +56,15 @@ Add Github cdn switch
 
 ## Tips
 
-If you want to create your own client-ID In Imgur, Redirect: `obsidian://emo-imgur-oauth`.  
+If you want to create your own client-ID In Imgur, Redirect: `obsidian://emo-imgur-oauth`.  
+
 Remember your username when registering **catbox**.🤨
 
 Starting from version 2.6, clipboard and drag files are supported; Non-image files will appear as links without "!" at the beginning by default after being embed in markdown.
 
 ## How to Extend
 
-Want to support more platforms? If you want to contribute and don't want to make too much effort on reading old code, you can extend it in the following ways.  
+Want to support more platforms? If you want to contribute and don't want to make too much effort on reading old code, you can extend it in the following ways.  
 
 - Refer to existing *parms* files, and add the parameters required by your new *uploader* by adding files to `src/Parms`.
 - Use your *parms* interface. In `config.ts`, add parameter configurations about your *uploader* to provide choices and act as constructors for *uploader* at run time.
@@ -67,34 +79,48 @@ It's done! 😽
 
 1. Disable Obsidian Safe Mode
 2. Install the Plugin
-   - Install from the Obsidian Community Plugins tab
-   - use Release
-      - download **main.js manifest.json or zip file** in the latest Release
-      - move **main.js manifest.json** in a folder in your obsidian vault's plugin folder
-   - Manual install
-      - Clone this repo
-      - Install dependencies with `yarn` or `npm` like `npm install`
-      - `yarn run dev` will start compilation
+
+   - Install from the Obsidian Community Plugins tab
+
+   - use Release
+
+      - download **main.js manifest.json or zip file** in the latest Release
+
+      - move **main.js manifest.json** in a folder in your obsidian vault's plugin folder
+
+   - Manual install
+
+      - Clone this repo
+
+      - Install dependencies with `yarn` or `npm` like `npm install`
+
+      - `yarn run dev` will start compilation
+
 3. Enable the Plugin
 4. Configure the settings 👉 [some datails: take configuring github as an example](https://lestua.eu.org/notes/2022/10/16/172318#english)
 5. Enjoy convenience 🌟
 
 ## About Uploading to Github
 
-For uninitiated visitors from outside the code world, Github is a famous internet hosting service for software development and version control using Git.  
+For uninitiated visitors from outside the code world, Github is a famous internet hosting service for software development and version control using Git.  
+
 If you need more help on hosting **images**, go to [the other parts](https://github.com/yaleiyale/obsidian-emo-uploader#about-the-other). These services are more focused on this.
 
 ### What is It?
 
-This part allows you to automatically upload **files** pasted to Obsidian directly into your Github repository ( instead of stored locally ). It's useful when you want to mention a file in your note which you think is good for sharing like script, config-file or anything.  
-Of course, it can be a simple image uploader. It does a good job of embedding images into markdown files.  
-But more than a image uploader, You can upload **various types of files**, as long as Github accepts them.  
-Whether the file link can be rendered in obsidian or not depends on the support of obsidian itself. It doesn't matter, even if they can't be rendered, they can still be used as links. 🍭 Just remove the exclamation point at the beginning.  
+This part allows you to automatically upload **files** pasted to Obsidian directly into your Github repository ( instead of stored locally ). It's useful when you want to mention a file in your note which you think is good for sharing like script, config-file or anything.  
+
+Of course, it can be a simple image uploader. It does a good job of embedding images into markdown files.  
+
+But more than a image uploader, You can upload **various types of files**, as long as Github accepts them.  
+
+Whether the file link can be rendered in obsidian or not depends on the support of obsidian itself. It doesn't matter, even if they can't be rendered, they can still be used as links. 🍭 Just remove the exclamation point at the beginning.  
 
 ### About Use Policy
 
-[GitHub terms-of-service](https://docs.github.com/cn/site-policy/github-terms/github-terms-of-service)  
-[jsdelivr Use Policy](https://www.jsdelivr.com/terms/acceptable-use-policy-jsdelivr-net)  
+[GitHub terms-of-service](https://docs.github.com/cn/site-policy/github-terms/github-terms-of-service)  
+
+[jsdelivr Use Policy](https://www.jsdelivr.com/terms/acceptable-use-policy-jsdelivr-net)  
 
 ⚠️ **Note that**
 
@@ -106,9 +132,9 @@ Whether the file link can be rendered in obsidian or not depends on the support 
 
 ## About the Other
 
-Except for github, all the others here are purely hosting platforms. Register an account and find parameters you need. Just put your parameters to the correct positions. Then you can use it just like the way in the video.  
+Except for github, all the others here are purely hosting platforms. Register an account and find parameters you need. Just put your parameters to the correct positions. Then you can use it just like the way in the video.  
 
-[ImgURL](https://www.imgurl.org/), [SM.MS](https://smms.app/) are cloud storage platforms that allows you to upload **images** to a storage account. For users living in China, they are easier to access than Github and Cloudinary.  
+[ImgURL](https://www.imgurl.org/), [SM.MS](https://smms.app/) are cloud storage platforms that allows you to upload **images** to a storage account. For users living in China, they are easier to access than Github and Cloudinary.  
 
 About [Cloudinary](https://cloudinary.com/), please refer to [obsidian-cloudinary-uploader/README.md](https://github.com/jordanhandy/obsidian-cloudinary-uploader/blob/main/README.md). Of course, Cloudinary is supported here. If you find that Cloudinary is enough to meet your needs, you can just use it. ( In fact, my plugin is smaller on size. 😳 )
 
@@ -126,13 +152,13 @@ Due to the different range of files supported by different platforms, there are 
 
 If you need to embed the file as an attachment, please close the plugin temporarily.
 
-In general, **Github, Cloudinary, Catbox** supports **any** file type, **SM.MS, ImgURL** supports common **image** types.  
+In general, **Github, Cloudinary, Catbox** supports **any** file type, **SM.MS, ImgURL** supports common **image** types.  
 
-Trying to upload a file that the platform does not support or volume exceeds the upper limit may result in a string like `![](undefined)`. Notice it, don't just wait.  
+Trying to upload a file that the platform does not support or volume exceeds the upper limit may result in a string like `![](undefined)`. Notice it, don't just wait.  
 
 ---
 
-If you are enjoying the plugin then you can support my work and enthusiasm by buying me a cola:  
+If you are enjoying the plugin then you can support my work and enthusiasm by buying me a cola:  
 
 <a id="cola" href="https://lestua.eu.org/donate/"><img src="https://i.imgur.com/lEvIedR.png" alt="BuyMeACola" width="180" style="margin:auto"></a>
 
@@ -140,9 +166,10 @@ Thank you!
 
 ## Thanks
 
-|                                                                                             | Thanks                                              |                                                                          |
-| ------------------------------------------------------------------------------------------- | -------------------------------------------------- | ------------------------------------------------------------------------ |
-| [obsidian-cloudinary-uploader](https://github.com/jordanhandy/obsidian-cloudinary-uploader) | [Github REST API](https://docs.github.com/cn/rest) | [jsdelivr](https://www.jsdelivr.com/)                                    |
-| [SM.MS](https://smms.app/)                                                                  | [ImgURL](https://www.imgurl.org/)                  | [Clouinary](https://cloudinary.com/)                                     |
-| [Imgur](https://imgur.com/)                                                                 | [imgbb](https://imgbb.com/)                        | [obsidian-imgur-plugin](https://github.com/gavvvr/obsidian-imgur-plugin) |
-| [Catbox](https://catbox.moe/)                                                               | [chevereto](https://chevereto.com/)                | [AList](https://alist.nn.ci/zh/)                                         |
+|                                                                                              | Thanks                                               |                                                                           |
+| -------------------------------------------------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------------------- |
+| [obsidian-cloudinary-uploader](https://github.com/jordanhandy/obsidian-cloudinary-uploader)  | [Github REST API](https://docs.github.com/cn/rest)   | [jsdelivr](https://www.jsdelivr.com/)                                     |
+| [SM.MS](https://smms.app/)                                                                   | [ImgURL](https://www.imgurl.org/)                    | [Clouinary](https://cloudinary.com/)                                      |
+| [Imgur](https://imgur.com/)                                                                  | [imgbb](https://imgbb.com/)                          | [obsidian-imgur-plugin](https://github.com/gavvvr/obsidian-imgur-plugin)  |
+| [Catbox](https://catbox.moe/)                                                                | [chevereto](https://chevereto.com/)                  | [AList](https://alist.nn.ci/zh/)                                          |
+| [EasyImages](https://icret.github.io/EasyImages2.0)                                          |                                                      |                                                                           |
