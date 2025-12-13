@@ -14,14 +14,19 @@
     "js-sha256": "^0.10.1"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.37.0",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
-    "eslint": "^8.54.0",
-    "eslint-config-standard-with-typescript": "^24.0.0",
+    "eslint": "^9.35.0",
+    "eslint-config-love": "^133.0.0",
     "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-n": "^15.7.0",
     "eslint-plugin-promise": "^6.1.1",
+    "globals": "^16.4.0",
+    "jiti": "^2.6.1",
     "obsidian": "1.1.1",
     "obsidian-plugin-cli": "^0.8.3",
-    "typescript": "^4.9.5"
+    "typescript": "*",
+    "typescript-eslint": "^8.46.1"
   }
 }

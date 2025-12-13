@@ -13,7 +13,7 @@ export class EasyImageUploader extends EmoUploader {
   }
 
   async upload (file: File): Promise<string> {
-    const domain = this.parms.required.domain
+    const {domain} = this.parms.required
     const formData = new EmoFormData()
     await formData.add('image', file)
     await formData.add('token', this.parms.required.token)

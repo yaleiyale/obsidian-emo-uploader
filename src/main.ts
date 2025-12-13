@@ -48,12 +48,12 @@ export default class Emo extends Plugin {
   setupPasteHandler (): void {
     // get files from drag or drop
     this.registerEvent(this.app.workspace.on('editor-drop', async (evt: DragEvent, editor: Editor) => {
-      const { files } = evt.dataTransfer as DataTransfer
+      const { files } = evt.dataTransfer!
       this.startUpload(files, evt, editor)
     }))
     // get files from clipboard
     this.registerEvent(this.app.workspace.on('editor-paste', async (evt: ClipboardEvent, editor: Editor) => {
-      const { files } = evt.clipboardData as DataTransfer
+      const { files } = evt.clipboardData!
       this.startUpload(files, evt, editor)
     }))
   }

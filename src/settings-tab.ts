@@ -86,7 +86,7 @@ export class EmoUploaderSettingTab extends PluginSettingTab {
     // handle Imgur auth
     this.plugin.registerObsidianProtocolHandler('emo-imgur-oauth', async (params) => {
       if (params.error !== undefined) {
-        console.log(new Notice(t('auth error') + `${params.error}`))
+        console.log(new Notice(t('auth error') + params.error))
         return
       }
       const mappedData = params.hash.split('&').map((p) => {
@@ -96,7 +96,7 @@ export class EmoUploaderSettingTab extends PluginSettingTab {
       const map = new Map<string, string>(mappedData)
       localStorage.setItem(
         IMGUR_ACCESS_TOKEN_LOCALSTORAGE_KEY,
-        map.get('access_token') as string
+        map.get('access_token')!
       )
       this.display()
     })

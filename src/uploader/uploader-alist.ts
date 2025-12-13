@@ -85,7 +85,7 @@ export class AlistUploader extends EmoUploader {
   // 文件类型
   async getFileExtension (file: File): Promise<string> {
     const filename = file.name
-    const match = filename.match(/\.([^.]+)$/)
+    const match = /\.([^.]+)$/.exec(filename)
     return (match != null) ? match[1] : ''
   }
 
